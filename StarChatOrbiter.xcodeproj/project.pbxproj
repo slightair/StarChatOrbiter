@@ -1,597 +1,310 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-	<key>archiveVersion</key>
-	<string>1</string>
-	<key>classes</key>
-	<dict/>
-	<key>objectVersion</key>
-	<string>46</string>
-	<key>objects</key>
-	<dict>
-		<key>578BE6B415A69AFE008DB764</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>578BE6C915A69AFE008DB764</string>
-				<string>578BE6C215A69AFE008DB764</string>
-				<string>578BE6C015A69AFE008DB764</string>
-				<string>DB30AD68934F43CC8D641CAF</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>578BE6B615A69AFE008DB764</key>
-		<dict>
-			<key>attributes</key>
-			<dict>
-				<key>CLASSPREFIX</key>
-				<string>SCO</string>
-				<key>LastUpgradeCheck</key>
-				<string>0430</string>
-				<key>ORGANIZATIONNAME</key>
-				<string>slightair</string>
-			</dict>
-			<key>buildConfigurationList</key>
-			<string>578BE6B915A69AFE008DB764</string>
-			<key>compatibilityVersion</key>
-			<string>Xcode 3.2</string>
-			<key>developmentRegion</key>
-			<string>English</string>
-			<key>hasScannedForEncodings</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXProject</string>
-			<key>knownRegions</key>
-			<array>
-				<string>en</string>
-			</array>
-			<key>mainGroup</key>
-			<string>578BE6B415A69AFE008DB764</string>
-			<key>productRefGroup</key>
-			<string>578BE6C015A69AFE008DB764</string>
-			<key>projectDirPath</key>
-			<string></string>
-			<key>projectRoot</key>
-			<string></string>
-			<key>targets</key>
-			<array>
-				<string>578BE6BE15A69AFE008DB764</string>
-			</array>
-		</dict>
-		<key>578BE6B915A69AFE008DB764</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>578BE6D515A69AFE008DB764</string>
-				<string>578BE6D615A69AFE008DB764</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>defaultConfigurationName</key>
-			<string>Release</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>578BE6BB15A69AFE008DB764</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>578BE6D015A69AFE008DB764</string>
-				<string>578BE6D415A69AFE008DB764</string>
-			</array>
-			<key>isa</key>
-			<string>PBXSourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>578BE6BC15A69AFE008DB764</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>578BE6C415A69AFE008DB764</string>
-				<string>578BE6C615A69AFE008DB764</string>
-				<string>578BE6C815A69AFE008DB764</string>
-				<string>9BE21ACD076A4ECDB9B8F2D9</string>
-			</array>
-			<key>isa</key>
-			<string>PBXFrameworksBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>578BE6BD15A69AFE008DB764</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>578BE6CE15A69AFE008DB764</string>
-			</array>
-			<key>isa</key>
-			<string>PBXResourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>578BE6BE15A69AFE008DB764</key>
-		<dict>
-			<key>buildConfigurationList</key>
-			<string>578BE6D715A69AFE008DB764</string>
-			<key>buildPhases</key>
-			<array>
-				<string>578BE6BB15A69AFE008DB764</string>
-				<string>578BE6BC15A69AFE008DB764</string>
-				<string>578BE6BD15A69AFE008DB764</string>
-				<string>E730317764104CB5A694E9B9</string>
-			</array>
-			<key>buildRules</key>
-			<array/>
-			<key>dependencies</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXNativeTarget</string>
-			<key>name</key>
-			<string>StarChatOrbiter</string>
-			<key>productName</key>
-			<string>StarChatOrbiter</string>
-			<key>productReference</key>
-			<string>578BE6BF15A69AFE008DB764</string>
-			<key>productType</key>
-			<string>com.apple.product-type.application</string>
-		</dict>
-		<key>578BE6BF15A69AFE008DB764</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>wrapper.application</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>StarChatOrbiter.app</string>
-			<key>path</key>
-			<string>StarChatOrbiter.app</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>578BE6C015A69AFE008DB764</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>578BE6BF15A69AFE008DB764</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Products</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>578BE6C215A69AFE008DB764</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>578BE6C315A69AFE008DB764</string>
-				<string>578BE6C515A69AFE008DB764</string>
-				<string>578BE6C715A69AFE008DB764</string>
-				<string>95DE5E342AC34892BE65E85C</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Frameworks</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>578BE6C315A69AFE008DB764</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>UIKit.framework</string>
-			<key>path</key>
-			<string>System/Library/Frameworks/UIKit.framework</string>
-			<key>sourceTree</key>
-			<string>SDKROOT</string>
-		</dict>
-		<key>578BE6C415A69AFE008DB764</key>
-		<dict>
-			<key>fileRef</key>
-			<string>578BE6C315A69AFE008DB764</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>578BE6C515A69AFE008DB764</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>Foundation.framework</string>
-			<key>path</key>
-			<string>System/Library/Frameworks/Foundation.framework</string>
-			<key>sourceTree</key>
-			<string>SDKROOT</string>
-		</dict>
-		<key>578BE6C615A69AFE008DB764</key>
-		<dict>
-			<key>fileRef</key>
-			<string>578BE6C515A69AFE008DB764</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>578BE6C715A69AFE008DB764</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>CoreGraphics.framework</string>
-			<key>path</key>
-			<string>System/Library/Frameworks/CoreGraphics.framework</string>
-			<key>sourceTree</key>
-			<string>SDKROOT</string>
-		</dict>
-		<key>578BE6C815A69AFE008DB764</key>
-		<dict>
-			<key>fileRef</key>
-			<string>578BE6C715A69AFE008DB764</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>578BE6C915A69AFE008DB764</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>578BE6D215A69AFE008DB764</string>
-				<string>578BE6D315A69AFE008DB764</string>
-				<string>578BE6CA15A69AFE008DB764</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>StarChatOrbiter</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>578BE6CA15A69AFE008DB764</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>578BE6CB15A69AFE008DB764</string>
-				<string>578BE6CC15A69AFE008DB764</string>
-				<string>578BE6CF15A69AFE008DB764</string>
-				<string>578BE6D115A69AFE008DB764</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Supporting Files</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>578BE6CB15A69AFE008DB764</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.xml</string>
-			<key>path</key>
-			<string>StarChatOrbiter-Info.plist</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>578BE6CC15A69AFE008DB764</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>578BE6CD15A69AFE008DB764</string>
-			</array>
-			<key>isa</key>
-			<string>PBXVariantGroup</string>
-			<key>name</key>
-			<string>InfoPlist.strings</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>578BE6CD15A69AFE008DB764</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.strings</string>
-			<key>name</key>
-			<string>en</string>
-			<key>path</key>
-			<string>en.lproj/InfoPlist.strings</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>578BE6CE15A69AFE008DB764</key>
-		<dict>
-			<key>fileRef</key>
-			<string>578BE6CC15A69AFE008DB764</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>578BE6CF15A69AFE008DB764</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>main.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>578BE6D015A69AFE008DB764</key>
-		<dict>
-			<key>fileRef</key>
-			<string>578BE6CF15A69AFE008DB764</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>578BE6D115A69AFE008DB764</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>StarChatOrbiter-Prefix.pch</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>578BE6D215A69AFE008DB764</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>SCOAppDelegate.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>578BE6D315A69AFE008DB764</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>SCOAppDelegate.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>578BE6D415A69AFE008DB764</key>
-		<dict>
-			<key>fileRef</key>
-			<string>578BE6D315A69AFE008DB764</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>578BE6D515A69AFE008DB764</key>
-		<dict>
-			<key>buildSettings</key>
-			<dict>
-				<key>ALWAYS_SEARCH_USER_PATHS</key>
-				<string>NO</string>
-				<key>ARCHS</key>
-				<string>$(ARCHS_STANDARD_32_BIT)</string>
-				<key>CLANG_ENABLE_OBJC_ARC</key>
-				<string>YES</string>
-				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
-				<string>iPhone Developer</string>
-				<key>COPY_PHASE_STRIP</key>
-				<string>NO</string>
-				<key>GCC_C_LANGUAGE_STANDARD</key>
-				<string>gnu99</string>
-				<key>GCC_DYNAMIC_NO_PIC</key>
-				<string>NO</string>
-				<key>GCC_OPTIMIZATION_LEVEL</key>
-				<string>0</string>
-				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
-				<array>
-					<string>DEBUG=1</string>
-					<string>$(inherited)</string>
-				</array>
-				<key>GCC_SYMBOLS_PRIVATE_EXTERN</key>
-				<string>NO</string>
-				<key>GCC_VERSION</key>
-				<string>com.apple.compilers.llvm.clang.1_0</string>
-				<key>GCC_WARN_ABOUT_RETURN_TYPE</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNUSED_VARIABLE</key>
-				<string>YES</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>5.1</string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>TARGETED_DEVICE_FAMILY</key>
-				<string>1,2</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
-		<key>578BE6D615A69AFE008DB764</key>
-		<dict>
-			<key>buildSettings</key>
-			<dict>
-				<key>ALWAYS_SEARCH_USER_PATHS</key>
-				<string>NO</string>
-				<key>ARCHS</key>
-				<string>$(ARCHS_STANDARD_32_BIT)</string>
-				<key>CLANG_ENABLE_OBJC_ARC</key>
-				<string>YES</string>
-				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
-				<string>iPhone Developer</string>
-				<key>COPY_PHASE_STRIP</key>
-				<string>YES</string>
-				<key>GCC_C_LANGUAGE_STANDARD</key>
-				<string>gnu99</string>
-				<key>GCC_VERSION</key>
-				<string>com.apple.compilers.llvm.clang.1_0</string>
-				<key>GCC_WARN_ABOUT_RETURN_TYPE</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNUSED_VARIABLE</key>
-				<string>YES</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>5.1</string>
-				<key>OTHER_CFLAGS</key>
-				<string>-DNS_BLOCK_ASSERTIONS=1</string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>TARGETED_DEVICE_FAMILY</key>
-				<string>1,2</string>
-				<key>VALIDATE_PRODUCT</key>
-				<string>YES</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
-		<key>578BE6D715A69AFE008DB764</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>578BE6D815A69AFE008DB764</string>
-				<string>578BE6D915A69AFE008DB764</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>578BE6D815A69AFE008DB764</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>DB30AD68934F43CC8D641CAF</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
-				<string>YES</string>
-				<key>GCC_PREFIX_HEADER</key>
-				<string>StarChatOrbiter/StarChatOrbiter-Prefix.pch</string>
-				<key>INFOPLIST_FILE</key>
-				<string>StarChatOrbiter/StarChatOrbiter-Info.plist</string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>WRAPPER_EXTENSION</key>
-				<string>app</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
-		<key>578BE6D915A69AFE008DB764</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>DB30AD68934F43CC8D641CAF</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
-				<string>YES</string>
-				<key>GCC_PREFIX_HEADER</key>
-				<string>StarChatOrbiter/StarChatOrbiter-Prefix.pch</string>
-				<key>INFOPLIST_FILE</key>
-				<string>StarChatOrbiter/StarChatOrbiter-Info.plist</string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>WRAPPER_EXTENSION</key>
-				<string>app</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
-		<key>95DE5E342AC34892BE65E85C</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>archive.ar</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>libPods.a</string>
-			<key>path</key>
-			<string>libPods.a</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>9BE21ACD076A4ECDB9B8F2D9</key>
-		<dict>
-			<key>fileRef</key>
-			<string>95DE5E342AC34892BE65E85C</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>DB30AD68934F43CC8D641CAF</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>name</key>
-			<string>Pods.xcconfig</string>
-			<key>path</key>
-			<string>Pods/Pods.xcconfig</string>
-			<key>sourceTree</key>
-			<string>SOURCE_ROOT</string>
-		</dict>
-		<key>E730317764104CB5A694E9B9</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>inputPaths</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXShellScriptBuildPhase</string>
-			<key>name</key>
-			<string>Copy Pods Resources</string>
-			<key>outputPaths</key>
-			<array/>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-			<key>shellPath</key>
-			<string>/bin/sh</string>
-			<key>shellScript</key>
-			<string>"${SRCROOT}/Pods/Pods-resources.sh"
-</string>
-		</dict>
-	</dict>
-	<key>rootObject</key>
-	<string>578BE6B615A69AFE008DB764</string>
-</dict>
-</plist>
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		578BE6C415A69AFE008DB764 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 578BE6C315A69AFE008DB764 /* UIKit.framework */; };
+		578BE6C615A69AFE008DB764 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 578BE6C515A69AFE008DB764 /* Foundation.framework */; };
+		578BE6C815A69AFE008DB764 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 578BE6C715A69AFE008DB764 /* CoreGraphics.framework */; };
+		578BE6CE15A69AFE008DB764 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 578BE6CC15A69AFE008DB764 /* InfoPlist.strings */; };
+		578BE6D015A69AFE008DB764 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 578BE6CF15A69AFE008DB764 /* main.m */; };
+		578BE6D415A69AFE008DB764 /* SCOAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 578BE6D315A69AFE008DB764 /* SCOAppDelegate.m */; };
+		578BE6E915A6A1FC008DB764 /* applicationIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 578BE6E715A6A1FC008DB764 /* applicationIcon.png */; };
+		578BE6EA15A6A1FC008DB764 /* applicationIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 578BE6E815A6A1FC008DB764 /* applicationIcon@2x.png */; };
+		9BE21ACD076A4ECDB9B8F2D9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 95DE5E342AC34892BE65E85C /* libPods.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		578BE6BF15A69AFE008DB764 /* StarChatOrbiter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StarChatOrbiter.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		578BE6C315A69AFE008DB764 /* UIKit.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		578BE6C515A69AFE008DB764 /* Foundation.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		578BE6C715A69AFE008DB764 /* CoreGraphics.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		578BE6CB15A69AFE008DB764 /* StarChatOrbiter-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "StarChatOrbiter-Info.plist"; sourceTree = "<group>"; };
+		578BE6CD15A69AFE008DB764 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		578BE6CF15A69AFE008DB764 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		578BE6D115A69AFE008DB764 /* StarChatOrbiter-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "StarChatOrbiter-Prefix.pch"; sourceTree = "<group>"; };
+		578BE6D215A69AFE008DB764 /* SCOAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SCOAppDelegate.h; sourceTree = "<group>"; };
+		578BE6D315A69AFE008DB764 /* SCOAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SCOAppDelegate.m; sourceTree = "<group>"; };
+		578BE6E715A6A1FC008DB764 /* applicationIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = applicationIcon.png; sourceTree = "<group>"; };
+		578BE6E815A6A1FC008DB764 /* applicationIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "applicationIcon@2x.png"; sourceTree = "<group>"; };
+		95DE5E342AC34892BE65E85C /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		DB30AD68934F43CC8D641CAF /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		578BE6BC15A69AFE008DB764 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				578BE6C415A69AFE008DB764 /* UIKit.framework in Frameworks */,
+				578BE6C615A69AFE008DB764 /* Foundation.framework in Frameworks */,
+				578BE6C815A69AFE008DB764 /* CoreGraphics.framework in Frameworks */,
+				9BE21ACD076A4ECDB9B8F2D9 /* libPods.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		578BE6B415A69AFE008DB764 = {
+			isa = PBXGroup;
+			children = (
+				578BE6C915A69AFE008DB764 /* StarChatOrbiter */,
+				578BE6C215A69AFE008DB764 /* Frameworks */,
+				578BE6C015A69AFE008DB764 /* Products */,
+				DB30AD68934F43CC8D641CAF /* Pods.xcconfig */,
+			);
+			sourceTree = "<group>";
+		};
+		578BE6C015A69AFE008DB764 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				578BE6BF15A69AFE008DB764 /* StarChatOrbiter.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		578BE6C215A69AFE008DB764 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				578BE6C315A69AFE008DB764 /* UIKit.framework */,
+				578BE6C515A69AFE008DB764 /* Foundation.framework */,
+				578BE6C715A69AFE008DB764 /* CoreGraphics.framework */,
+				95DE5E342AC34892BE65E85C /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		578BE6C915A69AFE008DB764 /* StarChatOrbiter */ = {
+			isa = PBXGroup;
+			children = (
+				578BE6D215A69AFE008DB764 /* SCOAppDelegate.h */,
+				578BE6D315A69AFE008DB764 /* SCOAppDelegate.m */,
+				578BE6E515A6A1E7008DB764 /* Resources */,
+				578BE6CA15A69AFE008DB764 /* Supporting Files */,
+			);
+			path = StarChatOrbiter;
+			sourceTree = "<group>";
+		};
+		578BE6CA15A69AFE008DB764 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				578BE6CB15A69AFE008DB764 /* StarChatOrbiter-Info.plist */,
+				578BE6CC15A69AFE008DB764 /* InfoPlist.strings */,
+				578BE6CF15A69AFE008DB764 /* main.m */,
+				578BE6D115A69AFE008DB764 /* StarChatOrbiter-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		578BE6E515A6A1E7008DB764 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				578BE6E715A6A1FC008DB764 /* applicationIcon.png */,
+				578BE6E815A6A1FC008DB764 /* applicationIcon@2x.png */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		578BE6BE15A69AFE008DB764 /* StarChatOrbiter */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 578BE6D715A69AFE008DB764 /* Build configuration list for PBXNativeTarget "StarChatOrbiter" */;
+			buildPhases = (
+				578BE6BB15A69AFE008DB764 /* Sources */,
+				578BE6BC15A69AFE008DB764 /* Frameworks */,
+				578BE6BD15A69AFE008DB764 /* Resources */,
+				E730317764104CB5A694E9B9 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = StarChatOrbiter;
+			productName = StarChatOrbiter;
+			productReference = 578BE6BF15A69AFE008DB764 /* StarChatOrbiter.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		578BE6B615A69AFE008DB764 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = SCO;
+				LastUpgradeCheck = 0430;
+				ORGANIZATIONNAME = slightair;
+			};
+			buildConfigurationList = 578BE6B915A69AFE008DB764 /* Build configuration list for PBXProject "StarChatOrbiter" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 578BE6B415A69AFE008DB764;
+			productRefGroup = 578BE6C015A69AFE008DB764 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				578BE6BE15A69AFE008DB764 /* StarChatOrbiter */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		578BE6BD15A69AFE008DB764 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				578BE6CE15A69AFE008DB764 /* InfoPlist.strings in Resources */,
+				578BE6E915A6A1FC008DB764 /* applicationIcon.png in Resources */,
+				578BE6EA15A6A1FC008DB764 /* applicationIcon@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		E730317764104CB5A694E9B9 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		578BE6BB15A69AFE008DB764 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				578BE6D015A69AFE008DB764 /* main.m in Sources */,
+				578BE6D415A69AFE008DB764 /* SCOAppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		578BE6CC15A69AFE008DB764 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				578BE6CD15A69AFE008DB764 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		578BE6D515A69AFE008DB764 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		578BE6D615A69AFE008DB764 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		578BE6D815A69AFE008DB764 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DB30AD68934F43CC8D641CAF /* Pods.xcconfig */;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "StarChatOrbiter/StarChatOrbiter-Prefix.pch";
+				INFOPLIST_FILE = "StarChatOrbiter/StarChatOrbiter-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		578BE6D915A69AFE008DB764 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DB30AD68934F43CC8D641CAF /* Pods.xcconfig */;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "StarChatOrbiter/StarChatOrbiter-Prefix.pch";
+				INFOPLIST_FILE = "StarChatOrbiter/StarChatOrbiter-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		578BE6B915A69AFE008DB764 /* Build configuration list for PBXProject "StarChatOrbiter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				578BE6D515A69AFE008DB764 /* Debug */,
+				578BE6D615A69AFE008DB764 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		578BE6D715A69AFE008DB764 /* Build configuration list for PBXNativeTarget "StarChatOrbiter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				578BE6D815A69AFE008DB764 /* Debug */,
+				578BE6D915A69AFE008DB764 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 578BE6B615A69AFE008DB764 /* Project object */;
+}
