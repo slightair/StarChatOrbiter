@@ -7,23 +7,23 @@
 //
 
 #import "SCOAppDelegate.h"
+#import "SCOChatLogViewController.h"
 
 @implementation SCOAppDelegate
 
 @synthesize window = _window;
-@synthesize chatLogViewController = _chatLogViewController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    self.chatLogViewController = [[SCOChatLogViewController alloc] init];
-    self.chatLogViewController.view.frame = [[UIScreen mainScreen] bounds];
+    SCOChatLogViewController *chatLogViewController = [[SCOChatLogViewController alloc] init];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:chatLogViewController];
+    navigationController.navigationBar.barStyle = UIBarStyleBlack;
+    self.window.rootViewController = navigationController;
     
     [self.window makeKeyAndVisible];
-    [self.window addSubview:self.chatLogViewController.view];
-    
-    [self.chatLogViewController performSelectorInBackground:@selector(prepareApplication) withObject:nil];
+    [chatLogViewController performSelectorInBackground:@selector(prepareApplication) withObject:nil];
     
     return YES;
 }
@@ -43,7 +43,6 @@
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-    self.chatLogViewController.view.frame = [[UIScreen mainScreen] bounds];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application

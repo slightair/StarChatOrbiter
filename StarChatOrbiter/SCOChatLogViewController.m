@@ -8,21 +8,27 @@
 
 #import "SCOChatLogViewController.h"
 #import "SCOChatLogView.h"
+#import "SCOChannelListViewController.h"
+
+#define kSideBarWidth 270
 
 @interface SCOChatLogViewController ()
 
-@property (strong, nonatomic) UINavigationBar *navigationBar;
+- (void)revealLeftSidebar:(id)sender;
+
+@property (strong, nonatomic) UIViewController *leftSidebarViewController;
 
 @end
 
 @implementation SCOChatLogViewController
 
-@synthesize navigationBar = _navigationBar;
+@synthesize leftSidebarViewController = _leftSidebarViewController;
 
 - (id)init
 {
     self = [super init];
     if (self) {
+        self.title = @"hoge";
     }
     return self;
 }
@@ -36,6 +42,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"aaa" style:UIBarButtonItemStyleBordered target:self action:@selector(revealLeftSidebar:)];
     
     self.navigationItem.revealSidebarDelegate = self;
 }
@@ -54,6 +62,25 @@
 - (void)prepareApplication
 {
     
+}
+
+- (void)revealLeftSidebar:(id)sender {
+    [self.navigationController toggleRevealState:JTRevealedStateLeft];
+}
+
+#pragma mark -
+#pragma mark JTRevealSidebarDelegate
+
+- (UIView *)viewForLeftSidebar {
+    CGRect viewFrame = self.navigationController.applicationViewFrame;
+    SCOChannelListViewController *viewController = (SCOChannelListViewController *)self.leftSidebarViewController;
+    if (!viewController) {
+        viewController = [[SCOChannelListViewController alloc] init];
+        self.leftSidebarViewController = viewController;
+    }
+    viewController.view.frame = CGRectMake(0, viewFrame.origin.y, kSideBarWidth, viewFrame.size.height);
+    viewController.view.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleHeight;
+    return viewController.view;
 }
 
 @end

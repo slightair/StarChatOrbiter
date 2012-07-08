@@ -10,8 +10,4 @@
 
 @interface SCOChatLogView : UIView
 
-@property (strong, nonatomic) UINavigationBar *navigationBar;
-
-- (void)setTitle:(NSString *)title;
-
 @end
