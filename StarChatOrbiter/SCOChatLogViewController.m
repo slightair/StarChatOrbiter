@@ -9,20 +9,24 @@
 #import "SCOChatLogViewController.h"
 #import "SCOChatLogView.h"
 #import "SCOChannelListViewController.h"
+#import "SCOChannelInfoViewController.h"
 
 #define kSideBarWidth 270
 
 @interface SCOChatLogViewController ()
 
 - (void)revealLeftSidebar:(id)sender;
+- (void)revealRightSidebar:(id)sender;
 
 @property (strong, nonatomic) UIViewController *leftSidebarViewController;
+@property (strong, nonatomic) UIViewController *rightSidebarViewController;
 
 @end
 
 @implementation SCOChatLogViewController
 
 @synthesize leftSidebarViewController = _leftSidebarViewController;
+@synthesize rightSidebarViewController = _rightSidebarViewController;
 
 - (id)init
 {
@@ -44,6 +48,7 @@
 	// Do any additional setup after loading the view.
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"aaa" style:UIBarButtonItemStyleBordered target:self action:@selector(revealLeftSidebar:)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"bbb" style:UIBarButtonItemStyleBordered target:self action:@selector(revealRightSidebar:)];
     
     self.navigationItem.revealSidebarDelegate = self;
 }
@@ -68,6 +73,10 @@
     [self.navigationController toggleRevealState:JTRevealedStateLeft];
 }
 
+- (void)revealRightSidebar:(id)sender {
+    [self.navigationController toggleRevealState:JTRevealedStateRight];
+}
+
 #pragma mark -
 #pragma mark JTRevealSidebarDelegate
 
@@ -78,8 +87,26 @@
         viewController = [[SCOChannelListViewController alloc] init];
         self.leftSidebarViewController = viewController;
     }
-    viewController.view.frame = CGRectMake(0, viewFrame.origin.y, kSideBarWidth, viewFrame.size.height);
+    viewController.view.frame = CGRectMake(0,
+                                           viewFrame.origin.y,
+                                           kSideBarWidth,
+                                           viewFrame.size.height);
     viewController.view.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleHeight;
+    return viewController.view;
+}
+
+- (UIView *)viewForRightSidebar {
+    CGRect viewFrame = self.navigationController.applicationViewFrame;
+    SCOChannelInfoViewController *viewController = (SCOChannelInfoViewController *)self.rightSidebarViewController;
+    if (!viewController) {
+        viewController = [[SCOChannelInfoViewController alloc] init];
+        self.rightSidebarViewController = viewController;
+    }
+    viewController.view.frame = CGRectMake(self.navigationController.view.frame.size.width - kSideBarWidth,
+                                           viewFrame.origin.y,
+                                           kSideBarWidth,
+                                           viewFrame.size.height);
+    viewController.view.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleHeight;
     return viewController.view;
 }
 
