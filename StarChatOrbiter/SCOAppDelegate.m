@@ -7,6 +7,7 @@
 //
 
 #import "SCOAppDelegate.h"
+#import "SCOChatLogViewController.h"
 
 @implementation SCOAppDelegate
 
@@ -16,8 +17,14 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    self.window.backgroundColor = [UIColor whiteColor];
+    SCOChatLogViewController *chatLogViewController = [[SCOChatLogViewController alloc] init];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:chatLogViewController];
+    navigationController.navigationBar.barStyle = UIBarStyleBlack;
+    self.window.rootViewController = navigationController;
+    
     [self.window makeKeyAndVisible];
+    [chatLogViewController performSelectorInBackground:@selector(prepareApplication) withObject:nil];
+    
     return YES;
 }
 
