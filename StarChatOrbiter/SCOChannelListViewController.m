@@ -7,6 +7,7 @@
 //
 
 #import "SCOChannelListViewController.h"
+#import "SCOChannelListView.h"
 
 @interface SCOChannelListViewController ()
 
@@ -22,11 +23,15 @@
     return self;
 }
 
+- (void)loadView
+{
+    self.view = [[SCOChannelListView alloc] initWithFrame:CGRectZero];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    self.view.backgroundColor = [UIColor greenColor];
 }
 
 - (void)viewDidUnload
