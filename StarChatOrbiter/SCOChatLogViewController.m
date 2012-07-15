@@ -10,6 +10,7 @@
 #import "SCOChatLogView.h"
 #import "SCOChannelListViewController.h"
 #import "SCOChannelInfoViewController.h"
+#import "SCOPreferencesViewController.h"
 
 #define kSideBarWidth 270
 
@@ -66,7 +67,7 @@
 
 - (void)prepareApplication
 {
-    
+    [self presentModalViewController:[SCOPreferencesViewController sharedViewController] animated:YES];
 }
 
 - (void)revealLeftSidebar:(id)sender {

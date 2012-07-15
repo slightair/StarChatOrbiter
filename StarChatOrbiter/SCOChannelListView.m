@@ -8,7 +8,17 @@
 
 #import "SCOChannelListView.h"
 
+#define kAccountInfoViewHeight 44
+
+@interface SCOChannelListView ()
+
+@property (strong, nonatomic, readwrite) SCOAccountInfoView *accountInfoView;
+
+@end
+
 @implementation SCOChannelListView
+
+@synthesize accountInfoView = _accountInfoView;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -16,17 +26,19 @@
     if (self) {
         // Initialization code
         self.backgroundColor = [UIColor grayColor];
+        
+        self.accountInfoView = [[SCOAccountInfoView alloc] initWithFrame:CGRectZero];
+        
+        [self addSubview:self.accountInfoView];
     }
     return self;
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
+- (void)layoutSubviews
 {
-    // Drawing code
+    CGSize viewSize = self.bounds.size;
+    
+    self.accountInfoView.frame = CGRectMake(0, 0, viewSize.width, kAccountInfoViewHeight);
 }
-*/
 
 @end
