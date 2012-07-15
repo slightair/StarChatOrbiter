@@ -7,7 +7,7 @@
 //
 
 #import "SCORootViewController.h"
-#import "SCOPreferencesViewController.h"
+#import "SCOPreferencesRootViewController.h"
 
 @interface SCORootViewController ()
 
@@ -63,7 +63,7 @@
     double delayInSeconds = 0.1;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        [self presentModalViewController:[SCOPreferencesViewController sharedViewController] animated:YES];
+        [self presentModalViewController:[SCOPreferencesRootViewController sharedViewController] animated:YES];
     });
 }
 

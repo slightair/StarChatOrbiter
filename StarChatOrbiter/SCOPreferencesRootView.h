@@ -1,5 +1,5 @@
 //
-//  SCOPreferencesView.h
+//  SCOPreferencesRootView.h
 //  StarChatOrbiter
 //
 //  Created by slightair on 12/07/09.
@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SCOPreferencesView : UIView
+@interface SCOPreferencesRootView : UIView
 
 @property (strong, nonatomic, readonly) UINavigationBar *navigationBar;
+@property (strong, nonatomic) UIView *preferencesView;
 
 @end

@@ -12,8 +12,6 @@
 		576E369D15AA7A6A003D255D /* SCOChannelListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 576E369C15AA7A6A003D255D /* SCOChannelListView.m */; };
 		576E36A015AA7B35003D255D /* SCOChannelInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 576E369F15AA7B35003D255D /* SCOChannelInfoViewController.m */; };
 		576E36A315AA7B68003D255D /* SCOChannelInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 576E36A215AA7B68003D255D /* SCOChannelInfoView.m */; };
-		576E36AA15AA7F1E003D255D /* SCOPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 576E36A915AA7F1E003D255D /* SCOPreferencesViewController.m */; };
-		576E36AE15AA81B1003D255D /* SCOPreferencesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 576E36AD15AA81B1003D255D /* SCOPreferencesView.m */; };
 		578BE6C415A69AFE008DB764 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 578BE6C315A69AFE008DB764 /* UIKit.framework */; };
 		578BE6C615A69AFE008DB764 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 578BE6C515A69AFE008DB764 /* Foundation.framework */; };
 		578BE6C815A69AFE008DB764 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 578BE6C715A69AFE008DB764 /* CoreGraphics.framework */; };
@@ -25,6 +23,9 @@
 		578BE78C15A925E2008DB764 /* SCOChatLogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 578BE78B15A925E2008DB764 /* SCOChatLogViewController.m */; };
 		5796B12715B15F8A00D694B3 /* SCOAccountInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5796B12615B15F8A00D694B3 /* SCOAccountInfoView.m */; };
 		5796B13A15B2F32F00D694B3 /* SCORootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5796B13915B2F32E00D694B3 /* SCORootViewController.m */; };
+		5796B15215B310AC00D694B3 /* SCOPreferencesRootView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5796B14F15B310AC00D694B3 /* SCOPreferencesRootView.m */; };
+		5796B15315B310AC00D694B3 /* SCOPreferencesRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5796B15115B310AC00D694B3 /* SCOPreferencesRootViewController.m */; };
+		5796B15615B310E300D694B3 /* SCOPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5796B15515B310E300D694B3 /* SCOPreferencesViewController.m */; };
 		9BE21ACD076A4ECDB9B8F2D9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 95DE5E342AC34892BE65E85C /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -39,10 +40,6 @@
 		576E369F15AA7B35003D255D /* SCOChannelInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCOChannelInfoViewController.m; sourceTree = "<group>"; };
 		576E36A115AA7B68003D255D /* SCOChannelInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCOChannelInfoView.h; sourceTree = "<group>"; };
 		576E36A215AA7B68003D255D /* SCOChannelInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCOChannelInfoView.m; sourceTree = "<group>"; };
-		576E36A815AA7F1E003D255D /* SCOPreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCOPreferencesViewController.h; sourceTree = "<group>"; };
-		576E36A915AA7F1E003D255D /* SCOPreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCOPreferencesViewController.m; sourceTree = "<group>"; };
-		576E36AC15AA81B1003D255D /* SCOPreferencesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCOPreferencesView.h; sourceTree = "<group>"; };
-		576E36AD15AA81B1003D255D /* SCOPreferencesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCOPreferencesView.m; sourceTree = "<group>"; };
 		578BE6BF15A69AFE008DB764 /* StarChatOrbiter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StarChatOrbiter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		578BE6C315A69AFE008DB764 /* UIKit.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		578BE6C515A69AFE008DB764 /* Foundation.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -62,6 +59,12 @@
 		5796B13015B28B6100D694B3 /* GCDSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GCDSingleton.h; path = Frameworks/GCDSingleton.h; sourceTree = "<group>"; };
 		5796B13815B2F32E00D694B3 /* SCORootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCORootViewController.h; sourceTree = "<group>"; };
 		5796B13915B2F32E00D694B3 /* SCORootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCORootViewController.m; sourceTree = "<group>"; };
+		5796B14E15B310AC00D694B3 /* SCOPreferencesRootView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCOPreferencesRootView.h; sourceTree = "<group>"; };
+		5796B14F15B310AC00D694B3 /* SCOPreferencesRootView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCOPreferencesRootView.m; sourceTree = "<group>"; };
+		5796B15015B310AC00D694B3 /* SCOPreferencesRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCOPreferencesRootViewController.h; sourceTree = "<group>"; };
+		5796B15115B310AC00D694B3 /* SCOPreferencesRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCOPreferencesRootViewController.m; sourceTree = "<group>"; };
+		5796B15415B310E300D694B3 /* SCOPreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCOPreferencesViewController.h; sourceTree = "<group>"; };
+		5796B15515B310E300D694B3 /* SCOPreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCOPreferencesViewController.m; sourceTree = "<group>"; };
 		95DE5E342AC34892BE65E85C /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB30AD68934F43CC8D641CAF /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -134,10 +137,12 @@
 				576E369F15AA7B35003D255D /* SCOChannelInfoViewController.m */,
 				576E36A115AA7B68003D255D /* SCOChannelInfoView.h */,
 				576E36A215AA7B68003D255D /* SCOChannelInfoView.m */,
-				576E36A815AA7F1E003D255D /* SCOPreferencesViewController.h */,
-				576E36A915AA7F1E003D255D /* SCOPreferencesViewController.m */,
-				576E36AC15AA81B1003D255D /* SCOPreferencesView.h */,
-				576E36AD15AA81B1003D255D /* SCOPreferencesView.m */,
+				5796B14E15B310AC00D694B3 /* SCOPreferencesRootView.h */,
+				5796B14F15B310AC00D694B3 /* SCOPreferencesRootView.m */,
+				5796B15015B310AC00D694B3 /* SCOPreferencesRootViewController.h */,
+				5796B15115B310AC00D694B3 /* SCOPreferencesRootViewController.m */,
+				5796B15415B310E300D694B3 /* SCOPreferencesViewController.h */,
+				5796B15515B310E300D694B3 /* SCOPreferencesViewController.m */,
 			);
 			path = StarChatOrbiter;
 			sourceTree = "<group>";
@@ -255,10 +260,11 @@
 				576E369D15AA7A6A003D255D /* SCOChannelListView.m in Sources */,
 				576E36A015AA7B35003D255D /* SCOChannelInfoViewController.m in Sources */,
 				576E36A315AA7B68003D255D /* SCOChannelInfoView.m in Sources */,
-				576E36AA15AA7F1E003D255D /* SCOPreferencesViewController.m in Sources */,
-				576E36AE15AA81B1003D255D /* SCOPreferencesView.m in Sources */,
 				5796B12715B15F8A00D694B3 /* SCOAccountInfoView.m in Sources */,
 				5796B13A15B2F32F00D694B3 /* SCORootViewController.m in Sources */,
+				5796B15215B310AC00D694B3 /* SCOPreferencesRootView.m in Sources */,
+				5796B15315B310AC00D694B3 /* SCOPreferencesRootViewController.m in Sources */,
+				5796B15615B310E300D694B3 /* SCOPreferencesViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -336,6 +342,7 @@
 					"\"${PODS_ROOT}/Headers/GHUnitIOS\"",
 					"\"${PODS_ROOT}/Headers/JTRevealSidebarDemo\"",
 					"\"${PODS_ROOT}/Headers/SBJson\"",
+					"\"${PODS_ROOT}/Headers/QuickDialog\"",
 					"\"$(SRCROOT)/Frameworks\"",
 				);
 				INFOPLIST_FILE = "StarChatOrbiter/StarChatOrbiter-Info.plist";
@@ -358,6 +365,7 @@
 					"\"${PODS_ROOT}/Headers/GHUnitIOS\"",
 					"\"${PODS_ROOT}/Headers/JTRevealSidebarDemo\"",
 					"\"${PODS_ROOT}/Headers/SBJson\"",
+					"\"${PODS_ROOT}/Headers/QuickDialog\"",
 					"\"$(SRCROOT)/Frameworks\"",
 				);
 				INFOPLIST_FILE = "StarChatOrbiter/StarChatOrbiter-Info.plist";

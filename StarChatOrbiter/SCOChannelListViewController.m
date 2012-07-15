@@ -9,7 +9,7 @@
 #import "SCOAppDelegate.h"
 #import "SCOChannelListViewController.h"
 #import "SCOChannelListView.h"
-#import "SCOPreferencesViewController.h"
+#import "SCOPreferencesRootViewController.h"
 
 #import "SCOChatLogViewController.h"
 
@@ -61,11 +61,11 @@
 {
     UIViewController *rootViewController = [(SCOAppDelegate *)[UIApplication sharedApplication].delegate rootViewController];
     
-    UIViewController *preferencesViewController = (UIViewController *)[SCOPreferencesViewController sharedViewController];
-    preferencesViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-    preferencesViewController.modalPresentationStyle = UIModalPresentationFullScreen;
+    UIViewController *preferencesRootViewController = (UIViewController *)[SCOPreferencesRootViewController sharedViewController];
+    preferencesRootViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    preferencesRootViewController.modalPresentationStyle = UIModalPresentationFullScreen;
     
-    [rootViewController presentViewController:preferencesViewController
+    [rootViewController presentViewController:preferencesRootViewController
                                      animated:YES
                                    completion:^{
                                    }];

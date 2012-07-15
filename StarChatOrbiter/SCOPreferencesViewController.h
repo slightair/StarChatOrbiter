@@ -2,14 +2,12 @@
 //  SCOPreferencesViewController.h
 //  StarChatOrbiter
 //
-//  Created by slightair on 12/07/09.
+//  Created by slightair on 12/07/15.
 //  Copyright (c) 2012年 slightair. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "QuickDialog.h"
 
-@interface SCOPreferencesViewController : UIViewController
-
-+ (id)sharedViewController;
+@interface SCOPreferencesViewController : QuickDialogController
 
 @end
