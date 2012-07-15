@@ -59,7 +59,16 @@
 
 - (void)didPushedPreferencesButton:(id)sender
 {
+    UIViewController *rootViewController = [(SCOAppDelegate *)[UIApplication sharedApplication].delegate rootViewController];
     
+    UIViewController *preferencesViewController = (UIViewController *)[SCOPreferencesViewController sharedViewController];
+    preferencesViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    preferencesViewController.modalPresentationStyle = UIModalPresentationFullScreen;
+    
+    [rootViewController presentViewController:preferencesViewController
+                                     animated:YES
+                                   completion:^{
+                                   }];
 }
 
 @end

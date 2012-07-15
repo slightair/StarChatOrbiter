@@ -13,6 +13,4 @@
 
 @interface SCOChatLogViewController : UIViewController <JTRevealSidebarV2Delegate>
 
-- (void)prepareApplication;
-
 @end

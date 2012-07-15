@@ -7,23 +7,28 @@
 //
 
 #import "SCOAppDelegate.h"
-#import "SCOChatLogViewController.h"
+
+@interface SCOAppDelegate ()
+
+@property (strong, nonatomic, readwrite) SCORootViewController *rootViewController;
+
+@end
 
 @implementation SCOAppDelegate
 
 @synthesize window = _window;
+@synthesize rootViewController = _rootViewController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
     // Override point for customization after application launch.
-    SCOChatLogViewController *chatLogViewController = [[SCOChatLogViewController alloc] init];
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:chatLogViewController];
-    navigationController.navigationBar.barStyle = UIBarStyleBlack;
-    self.window.rootViewController = navigationController;
+    self.rootViewController = [[SCORootViewController alloc] init];
+    self.window.rootViewController = self.rootViewController;
     
     [self.window makeKeyAndVisible];
-    [chatLogViewController performSelectorInBackground:@selector(prepareApplication) withObject:nil];
+    [self.rootViewController performSelectorInBackground:@selector(prepareApplication) withObject:nil];
     
     return YES;
 }

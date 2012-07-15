@@ -24,6 +24,7 @@
 		578BE6EA15A6A1FC008DB764 /* applicationIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 578BE6E815A6A1FC008DB764 /* applicationIcon@2x.png */; };
 		578BE78C15A925E2008DB764 /* SCOChatLogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 578BE78B15A925E2008DB764 /* SCOChatLogViewController.m */; };
 		5796B12715B15F8A00D694B3 /* SCOAccountInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5796B12615B15F8A00D694B3 /* SCOAccountInfoView.m */; };
+		5796B13A15B2F32F00D694B3 /* SCORootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5796B13915B2F32E00D694B3 /* SCORootViewController.m */; };
 		9BE21ACD076A4ECDB9B8F2D9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 95DE5E342AC34892BE65E85C /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -59,6 +60,8 @@
 		5796B12515B15F8A00D694B3 /* SCOAccountInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCOAccountInfoView.h; sourceTree = "<group>"; };
 		5796B12615B15F8A00D694B3 /* SCOAccountInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCOAccountInfoView.m; sourceTree = "<group>"; };
 		5796B13015B28B6100D694B3 /* GCDSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GCDSingleton.h; path = Frameworks/GCDSingleton.h; sourceTree = "<group>"; };
+		5796B13815B2F32E00D694B3 /* SCORootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCORootViewController.h; sourceTree = "<group>"; };
+		5796B13915B2F32E00D694B3 /* SCORootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCORootViewController.m; sourceTree = "<group>"; };
 		95DE5E342AC34892BE65E85C /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB30AD68934F43CC8D641CAF /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -82,6 +85,8 @@
 			isa = PBXGroup;
 			children = (
 				578BE6C915A69AFE008DB764 /* StarChatOrbiter */,
+				578BE6E515A6A1E7008DB764 /* Resources */,
+				578BE6CA15A69AFE008DB764 /* Supporting Files */,
 				578BE6C215A69AFE008DB764 /* Frameworks */,
 				578BE6C015A69AFE008DB764 /* Products */,
 				DB30AD68934F43CC8D641CAF /* Pods.xcconfig */,
@@ -113,8 +118,8 @@
 			children = (
 				578BE6D215A69AFE008DB764 /* SCOAppDelegate.h */,
 				578BE6D315A69AFE008DB764 /* SCOAppDelegate.m */,
-				578BE6E515A6A1E7008DB764 /* Resources */,
-				578BE6CA15A69AFE008DB764 /* Supporting Files */,
+				5796B13815B2F32E00D694B3 /* SCORootViewController.h */,
+				5796B13915B2F32E00D694B3 /* SCORootViewController.m */,
 				578BE78A15A925E2008DB764 /* SCOChatLogViewController.h */,
 				578BE78B15A925E2008DB764 /* SCOChatLogViewController.m */,
 				576E369215A92E01003D255D /* SCOChatLogView.h */,
@@ -146,6 +151,7 @@
 				578BE6D115A69AFE008DB764 /* StarChatOrbiter-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			path = StarChatOrbiter;
 			sourceTree = "<group>";
 		};
 		578BE6E515A6A1E7008DB764 /* Resources */ = {
@@ -155,6 +161,7 @@
 				578BE6E815A6A1FC008DB764 /* applicationIcon@2x.png */,
 			);
 			name = Resources;
+			path = StarChatOrbiter;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -251,6 +258,7 @@
 				576E36AA15AA7F1E003D255D /* SCOPreferencesViewController.m in Sources */,
 				576E36AE15AA81B1003D255D /* SCOPreferencesView.m in Sources */,
 				5796B12715B15F8A00D694B3 /* SCOAccountInfoView.m in Sources */,
+				5796B13A15B2F32F00D694B3 /* SCORootViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

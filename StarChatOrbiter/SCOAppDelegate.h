@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SCORootViewController.h"
 
 @interface SCOAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic, readonly) SCORootViewController *rootViewController;
 
 @end

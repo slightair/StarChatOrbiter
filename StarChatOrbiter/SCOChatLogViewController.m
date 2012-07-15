@@ -10,7 +10,6 @@
 #import "SCOChatLogView.h"
 #import "SCOChannelListViewController.h"
 #import "SCOChannelInfoViewController.h"
-#import "SCOPreferencesViewController.h"
 
 #define kSideBarWidth 270
 
@@ -63,11 +62,6 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
-- (void)prepareApplication
-{
-    [self presentModalViewController:[SCOPreferencesViewController sharedViewController] animated:YES];
 }
 
 - (void)revealLeftSidebar:(id)sender {
