@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SCOChannelListViewController : UIViewController
+@interface SCOChannelListViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+
+@property (strong, nonatomic) NSArray *channels;
 
 @end

@@ -10,8 +10,10 @@
 #import "SCOChannelListViewController.h"
 #import "SCOChannelListView.h"
 #import "SCOPreferencesRootViewController.h"
+#import "SCOChannelCell.h"
 
-#import "SCOChatLogViewController.h"
+#import "SBJson.h"
+#import "CLVStarChatChannelInfo.h"
 
 @interface SCOChannelListViewController ()
 
@@ -21,10 +23,19 @@
 
 @implementation SCOChannelListViewController
 
+@synthesize channels = _channels;
+
 - (id)init
 {
     self = [super init];
     if (self) {
+#warning debug
+        NSString *jsonString = @"[{\"name\":\"はひふへほ\",\"privacy\":\"public\",\"user_num\":2},{\"name\":\"Lobby\",\"privacy\":\"public\",\"user_num\":3,\"topic\":{\"id\":6,\"created_at\":1339939789,\"user_name\":\"foo\",\"channel_name\":\"Lobby\",\"body\":\"nice topic\"}},{\"name\":\"test\",\"privacy\":\"private\",\"user_num\":2,\"topic\":{\"id\":4,\"created_at\":1339832042,\"user_name\":\"hoge\",\"channel_name\":\"test\",\"body\":\"topic topic\"}}]";
+        NSMutableArray *channelInfoList = [NSMutableArray array];
+        for (NSDictionary *channelInfo in [jsonString JSONValue]) {
+            [channelInfoList addObject:[CLVStarChatChannelInfo channelInfoWithDictionary:channelInfo]];
+        }
+        self.channels = channelInfoList;
     }
     return self;
 }
@@ -40,10 +51,14 @@
 	// Do any additional setup after loading the view.
     
     SCOChannelListView *channelListView = (SCOChannelListView *)self.view;
+    
     UIButton *preferencesButton = channelListView.accountInfoView.preferencesButton;
     [preferencesButton addTarget:self
                           action:@selector(didPushedPreferencesButton:)
                 forControlEvents:UIControlEventTouchDown];
+    
+    channelListView.tableView.dataSource = self;
+    channelListView.tableView.delegate = self;
 }
 
 - (void)viewDidUnload
@@ -69,6 +84,49 @@
                                      animated:YES
                                    completion:^{
                                    }];
+}
+
+- (void)setChannels:(NSArray *)channels
+{
+    _channels = channels;
+    
+    SCOChannelListView *channelListView = (SCOChannelListView *)self.view;
+    [channelListView.tableView reloadData];
+}
+
+#pragma mark -
+#pragma mark Table view data source
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    // Return the number of sections.
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    // Return the number of rows in the section.
+    return [self.channels count];
+}
+
+// Customize the appearance of table view cells.
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    SCOChannelCell *cell = (SCOChannelCell *)[tableView dequeueReusableCellWithIdentifier:kSCOChannelCellIdentifier];
+    if (cell == nil) {
+        cell = [[SCOChannelCell alloc] init];
+    }
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    
+    cell.channelInfo = [self.channels objectAtIndex:indexPath.row];
+    
+    return cell;
+}
+
+#pragma mark -
+#pragma mark Table view delegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
 }
 
 @end

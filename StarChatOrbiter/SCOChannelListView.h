@@ -12,5 +12,6 @@
 @interface SCOChannelListView : UIView
 
 @property (strong, nonatomic, readonly) SCOAccountInfoView *accountInfoView;
+@property (strong, nonatomic, readonly) UITableView *tableView;
 
 @end
