@@ -10,13 +10,16 @@
 
 @interface SCOPreferencesViewController ()
 
-+ (QRootElement *)rootElement;
+- (QRootElement *)rootElement;
+- (QSection *)serverSettingSection;
+- (QSection *)accountSettingSection;
+- (QSection *)loginButtonSection;
 
 @end
 
 @implementation SCOPreferencesViewController
 
-+ (QRootElement *)rootElement
+- (QRootElement *)rootElement
 {
     QRootElement *root = [[QRootElement alloc] init];
     root.grouped = YES;
@@ -28,7 +31,7 @@
     return root;
 }
 
-+ (QSection *)serverSettingSection
+- (QSection *)serverSettingSection
 {
     QSection *serverSettingSection = [[QSection alloc] initWithTitle:@"Server"];
     
@@ -41,7 +44,7 @@
     return serverSettingSection;
 }
 
-+ (QSection *)accountSettingSection
+- (QSection *)accountSettingSection
 {
     QSection *accountSettingSection = [[QSection alloc] initWithTitle:@"Account"];
     
@@ -61,13 +64,26 @@
     return accountSettingSection;
 }
 
-+ (QSection *)loginButtonSection
+- (QSection *)loginButtonSection
 {
     QSection *loginButtonSection = [[QSection alloc] init];
     
     QButtonElement *loginButtonElement = [[QButtonElement alloc] initWithTitle:@"Log in"];
     loginButtonElement.onSelected = ^{
-        NSLog(@"log in");
+        [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+        [self loading:YES];
+        
+        double delayInSeconds = 2.0;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                                message:@"not implemented."
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"OK"
+                                                      otherButtonTitles:nil];
+            [alertView show];
+            [self loading:NO];
+        });
     };
     
     [loginButtonSection addElement:loginButtonElement];
@@ -76,7 +92,7 @@
 
 - (id)init
 {
-    self = [super initWithRoot:[SCOPreferencesViewController rootElement]];
+    self = [super initWithRoot:[self rootElement]];
     if (self) {
         
     }
