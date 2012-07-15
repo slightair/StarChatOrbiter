@@ -64,11 +64,6 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-- (void)prepareApplication
-{
-    
-}
-
 - (void)revealLeftSidebar:(id)sender {
     [self.navigationController toggleRevealState:JTRevealedStateLeft];
 }

@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SCOAccountInfoView.h"
 
 @interface SCOChannelListView : UIView
+
+@property (strong, nonatomic, readonly) SCOAccountInfoView *accountInfoView;
 
 @end

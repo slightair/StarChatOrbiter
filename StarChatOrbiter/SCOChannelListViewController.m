@@ -6,10 +6,16 @@
 //  Copyright (c) 2012年 slightair. All rights reserved.
 //
 
+#import "SCOAppDelegate.h"
 #import "SCOChannelListViewController.h"
 #import "SCOChannelListView.h"
+#import "SCOPreferencesRootViewController.h"
+
+#import "SCOChatLogViewController.h"
 
 @interface SCOChannelListViewController ()
+
+- (void)didPushedPreferencesButton:(id)sender;
 
 @end
 
@@ -32,6 +38,12 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    SCOChannelListView *channelListView = (SCOChannelListView *)self.view;
+    UIButton *preferencesButton = channelListView.accountInfoView.preferencesButton;
+    [preferencesButton addTarget:self
+                          action:@selector(didPushedPreferencesButton:)
+                forControlEvents:UIControlEventTouchDown];
 }
 
 - (void)viewDidUnload
@@ -43,6 +55,20 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+- (void)didPushedPreferencesButton:(id)sender
+{
+    UIViewController *rootViewController = [(SCOAppDelegate *)[UIApplication sharedApplication].delegate rootViewController];
+    
+    UIViewController *preferencesRootViewController = (UIViewController *)[SCOPreferencesRootViewController sharedViewController];
+    preferencesRootViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    preferencesRootViewController.modalPresentationStyle = UIModalPresentationFullScreen;
+    
+    [rootViewController presentViewController:preferencesRootViewController
+                                     animated:YES
+                                   completion:^{
+                                   }];
 }
 
 @end
