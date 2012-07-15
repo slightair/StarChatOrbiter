@@ -6,12 +6,14 @@
 //  Copyright (c) 2012年 slightair. All rights reserved.
 //
 
+#import <QuartzCore/QuartzCore.h>
 #import "SCOChatLogViewController.h"
 #import "SCOChatLogView.h"
 #import "SCOChannelListViewController.h"
 #import "SCOChannelInfoViewController.h"
 
 #define kSideBarWidth 270
+#define kMainViewHorizontalShadowOffset 3.0
 
 @interface SCOChatLogViewController ()
 
@@ -46,6 +48,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    self.navigationController.view.layer.shadowOpacity = 0.5;
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"aaa" style:UIBarButtonItemStyleBordered target:self action:@selector(revealLeftSidebar:)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"bbb" style:UIBarButtonItemStyleBordered target:self action:@selector(revealRightSidebar:)];
@@ -65,10 +68,14 @@
 }
 
 - (void)revealLeftSidebar:(id)sender {
+    self.navigationController.view.layer.shadowOffset = CGSizeMake(-kMainViewHorizontalShadowOffset, 0.0);
+    
     [self.navigationController toggleRevealState:JTRevealedStateLeft];
 }
 
 - (void)revealRightSidebar:(id)sender {
+    self.navigationController.view.layer.shadowOffset = CGSizeMake(kMainViewHorizontalShadowOffset, 0.0);
+    
     [self.navigationController toggleRevealState:JTRevealedStateRight];
 }
 
