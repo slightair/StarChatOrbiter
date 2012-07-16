@@ -6,3 +6,4 @@ dependency 'CLVStarChatAPIClient', :git => 'git://github.com/slightair/CLVStarCh
 dependency 'GHUnitIOS'
 dependency 'JTRevealSidebarDemo'
 dependency 'QuickDialog'
+dependency 'TTTAttributedLabel'
