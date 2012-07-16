@@ -19,7 +19,7 @@
 		578BE6D015A69AFE008DB764 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 578BE6CF15A69AFE008DB764 /* main.m */; };
 		578BE6D415A69AFE008DB764 /* SCOAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 578BE6D315A69AFE008DB764 /* SCOAppDelegate.m */; };
 		578BE78C15A925E2008DB764 /* SCOChatLogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 578BE78B15A925E2008DB764 /* SCOChatLogViewController.m */; };
-		5796B12715B15F8A00D694B3 /* SCOAccountInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5796B12615B15F8A00D694B3 /* SCOAccountInfoView.m */; };
+		5796B12715B15F8A00D694B3 /* SCOSidebarHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5796B12615B15F8A00D694B3 /* SCOSidebarHeaderView.m */; };
 		5796B13A15B2F32F00D694B3 /* SCORootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5796B13915B2F32E00D694B3 /* SCORootViewController.m */; };
 		5796B15215B310AC00D694B3 /* SCOPreferencesRootView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5796B14F15B310AC00D694B3 /* SCOPreferencesRootView.m */; };
 		5796B15315B310AC00D694B3 /* SCOPreferencesRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5796B15115B310AC00D694B3 /* SCOPreferencesRootViewController.m */; };
@@ -54,8 +54,8 @@
 		578BE6D315A69AFE008DB764 /* SCOAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SCOAppDelegate.m; sourceTree = "<group>"; };
 		578BE78A15A925E2008DB764 /* SCOChatLogViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCOChatLogViewController.h; sourceTree = "<group>"; };
 		578BE78B15A925E2008DB764 /* SCOChatLogViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCOChatLogViewController.m; sourceTree = "<group>"; };
-		5796B12515B15F8A00D694B3 /* SCOAccountInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCOAccountInfoView.h; sourceTree = "<group>"; };
-		5796B12615B15F8A00D694B3 /* SCOAccountInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCOAccountInfoView.m; sourceTree = "<group>"; };
+		5796B12515B15F8A00D694B3 /* SCOSidebarHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCOSidebarHeaderView.h; sourceTree = "<group>"; };
+		5796B12615B15F8A00D694B3 /* SCOSidebarHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCOSidebarHeaderView.m; sourceTree = "<group>"; };
 		5796B13015B28B6100D694B3 /* GCDSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GCDSingleton.h; path = Frameworks/GCDSingleton.h; sourceTree = "<group>"; };
 		5796B13815B2F32E00D694B3 /* SCORootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCORootViewController.h; sourceTree = "<group>"; };
 		5796B13915B2F32E00D694B3 /* SCORootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCORootViewController.m; sourceTree = "<group>"; };
@@ -178,12 +178,12 @@
 		5796B16415B3385300D694B3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				5796B12515B15F8A00D694B3 /* SCOSidebarHeaderView.h */,
+				5796B12615B15F8A00D694B3 /* SCOSidebarHeaderView.m */,
 				576E369215A92E01003D255D /* SCOChatLogView.h */,
 				576E369315A92E01003D255D /* SCOChatLogView.m */,
 				576E369B15AA7A6A003D255D /* SCOChannelListView.h */,
 				576E369C15AA7A6A003D255D /* SCOChannelListView.m */,
-				5796B12515B15F8A00D694B3 /* SCOAccountInfoView.h */,
-				5796B12615B15F8A00D694B3 /* SCOAccountInfoView.m */,
 				576E36A115AA7B68003D255D /* SCOChannelInfoView.h */,
 				576E36A215AA7B68003D255D /* SCOChannelInfoView.m */,
 				5796B14E15B310AC00D694B3 /* SCOPreferencesRootView.h */,
@@ -294,7 +294,7 @@
 				576E369D15AA7A6A003D255D /* SCOChannelListView.m in Sources */,
 				576E36A015AA7B35003D255D /* SCOChannelInfoViewController.m in Sources */,
 				576E36A315AA7B68003D255D /* SCOChannelInfoView.m in Sources */,
-				5796B12715B15F8A00D694B3 /* SCOAccountInfoView.m in Sources */,
+				5796B12715B15F8A00D694B3 /* SCOSidebarHeaderView.m in Sources */,
 				5796B13A15B2F32F00D694B3 /* SCORootViewController.m in Sources */,
 				5796B15215B310AC00D694B3 /* SCOPreferencesRootView.m in Sources */,
 				5796B15315B310AC00D694B3 /* SCOPreferencesRootViewController.m in Sources */,

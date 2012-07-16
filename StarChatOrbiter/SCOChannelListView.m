@@ -6,21 +6,18 @@
 //  Copyright (c) 2012年 slightair. All rights reserved.
 //
 
-#import <QuartzCore/QuartzCore.h>
 #import "SCOChannelListView.h"
-
-#define kAccountInfoViewHeight 44
 
 @interface SCOChannelListView ()
 
-@property (strong, nonatomic, readwrite) SCOAccountInfoView *accountInfoView;
+@property (strong, nonatomic, readwrite) SCOSidebarHeaderView *headerView;
 @property (strong, nonatomic, readwrite) UITableView *tableView;
 
 @end
 
 @implementation SCOChannelListView
 
-@synthesize accountInfoView = _accountInfoView;
+@synthesize headerView = _headerView;
 @synthesize tableView = _tableView;
 
 - (id)initWithFrame:(CGRect)frame
@@ -28,14 +25,12 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-        self.accountInfoView = [[SCOAccountInfoView alloc] initWithFrame:CGRectZero];
-        self.accountInfoView.layer.shadowOpacity = 0.5;
-        self.accountInfoView.layer.shadowOffset = CGSizeMake(0.0, 1.0);
+        self.headerView = [[SCOSidebarHeaderView alloc] initWithFrame:CGRectZero];
         
         self.tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         
         [self addSubview:self.tableView];
-        [self addSubview:self.accountInfoView];
+        [self addSubview:self.headerView];
     }
     return self;
 }
@@ -46,8 +41,8 @@
     
     CGSize viewSize = self.bounds.size;
     
-    self.accountInfoView.frame = CGRectMake(0, 0, viewSize.width, kAccountInfoViewHeight);
-    self.tableView.frame = CGRectMake(0, kAccountInfoViewHeight, viewSize.width, viewSize.height - kAccountInfoViewHeight);
+    self.headerView.frame = CGRectMake(0, 0, viewSize.width, kSidebarHeaderViewHeight);
+    self.tableView.frame = CGRectMake(0, kSidebarHeaderViewHeight, viewSize.width, viewSize.height - kSidebarHeaderViewHeight);
 }
 
 @end

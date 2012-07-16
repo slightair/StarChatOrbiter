@@ -32,6 +32,10 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    SCOChannelInfoView *channelInfoView = (SCOChannelInfoView *)self.view;
+    
+    channelInfoView.headerView.headerTitleLabel.text = @"channelName";
 }
 
 - (void)viewDidUnload

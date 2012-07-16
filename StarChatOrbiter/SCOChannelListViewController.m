@@ -52,13 +52,15 @@
     
     SCOChannelListView *channelListView = (SCOChannelListView *)self.view;
     
-    UIButton *preferencesButton = channelListView.accountInfoView.preferencesButton;
+    UIButton *preferencesButton = channelListView.headerView.preferencesButton;
     [preferencesButton addTarget:self
                           action:@selector(didPushedPreferencesButton:)
                 forControlEvents:UIControlEventTouchDown];
     
     channelListView.tableView.dataSource = self;
     channelListView.tableView.delegate = self;
+    
+    channelListView.headerView.headerTitleLabel.text = @"userName";
 }
 
 - (void)viewDidUnload
