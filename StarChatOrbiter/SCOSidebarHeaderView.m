@@ -72,6 +72,8 @@
     
     CGSize viewSize = self.bounds.size;
     
+    self.layer.shadowPath = [UIBezierPath bezierPathWithRect:self.bounds].CGPath;
+    
     self.gradientLayer.frame = self.bounds;
     self.headerTitleLabel.frame = CGRectMake(kUserNameLabelMarginLeft,
                                              kAccountInfoViewPaddingVertical,

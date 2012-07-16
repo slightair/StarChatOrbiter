@@ -11,6 +11,8 @@
 #import "UIViewController+JTRevealSidebarV2.h"
 #import "JTRevealSidebarV2Delegate.h"
 
-@interface SCOChatLogViewController : UIViewController <JTRevealSidebarV2Delegate>
+@interface SCOChatLogViewController : UIViewController <JTRevealSidebarV2Delegate, UITableViewDataSource, UITableViewDelegate>
+
+@property (strong, nonatomic) NSArray *messages;
 
 @end

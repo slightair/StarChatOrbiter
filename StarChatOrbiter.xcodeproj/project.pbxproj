@@ -28,6 +28,7 @@
 		5796B16D15B3FFB600D694B3 /* applicationIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 5796B16A15B3FFB600D694B3 /* applicationIcon.png */; };
 		5796B16E15B3FFB600D694B3 /* applicationIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5796B16B15B3FFB600D694B3 /* applicationIcon@2x.png */; };
 		5796B17115B40B1F00D694B3 /* SCOPostMessageInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5796B17015B40B1F00D694B3 /* SCOPostMessageInputView.m */; };
+		5796B17415B4202900D694B3 /* SCOMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5796B17315B4202900D694B3 /* SCOMessageCell.m */; };
 		9BE21ACD076A4ECDB9B8F2D9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 95DE5E342AC34892BE65E85C /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -71,6 +72,8 @@
 		5796B16B15B3FFB600D694B3 /* applicationIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "applicationIcon@2x.png"; path = "Resources/applicationIcon@2x.png"; sourceTree = "<group>"; };
 		5796B16F15B40B1E00D694B3 /* SCOPostMessageInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCOPostMessageInputView.h; sourceTree = "<group>"; };
 		5796B17015B40B1F00D694B3 /* SCOPostMessageInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCOPostMessageInputView.m; sourceTree = "<group>"; };
+		5796B17215B4202900D694B3 /* SCOMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCOMessageCell.h; sourceTree = "<group>"; };
+		5796B17315B4202900D694B3 /* SCOMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCOMessageCell.m; sourceTree = "<group>"; };
 		95DE5E342AC34892BE65E85C /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB30AD68934F43CC8D641CAF /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -199,6 +202,8 @@
 			children = (
 				5796B16615B338BC00D694B3 /* SCOChannelCell.h */,
 				5796B16715B338BC00D694B3 /* SCOChannelCell.m */,
+				5796B17215B4202900D694B3 /* SCOMessageCell.h */,
+				5796B17315B4202900D694B3 /* SCOMessageCell.m */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -301,6 +306,7 @@
 				5796B15615B310E300D694B3 /* SCOPreferencesViewController.m in Sources */,
 				5796B16815B338BC00D694B3 /* SCOChannelCell.m in Sources */,
 				5796B17115B40B1F00D694B3 /* SCOPostMessageInputView.m in Sources */,
+				5796B17415B4202900D694B3 /* SCOMessageCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
