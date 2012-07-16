@@ -41,7 +41,7 @@
         self.title = @"hoge";
         
 #warning debug
-        NSString *jsonString = @"[{\"id\":461,\"user_name\":\"foo\",\"body\":\"あいうえお\",\"created_at\":1340372159,\"channel_name\":\"てすと\",\"notice\":false},{\"id\":462,\"user_name\":\"foo\",\"body\":\"かきくけこ\",\"created_at\":1340372162,\"channel_name\":\"てすと\",\"notice\":false},{\"id\":463,\"user_name\":\"foo\",\"body\":\"さしすせそ\",\"created_at\":1340372165,\"channel_name\":\"てすと\",\"notice\":false},{\"id\":464,\"user_name\":\"foo\",\"body\":\"ニャーン\",\"created_at\":1340372169,\"channel_name\":\"てすと\",\"notice\":false},{\"id\":465,\"user_name\":\"foo\",\"body\":\"ひろし\",\"created_at\":1340372199,\"channel_name\":\"てすと\",\"notice\":true}]";
+        NSString *jsonString = @"[{\"id\":461,\"user_name\":\"foo\",\"body\":\"あいうえお\",\"created_at\":1340372159,\"channel_name\":\"てすと\",\"notice\":false},{\"id\":462,\"user_name\":\"foo\",\"body\":\"かきくけこ\",\"created_at\":1340372162,\"channel_name\":\"てすと\",\"notice\":false},{\"id\":463,\"user_name\":\"foo\",\"body\":\"0.1.6 / 2012.07.13\\n30分おきに WebView をリロードするようにした（長時間起動しているとメモリ使用量が大変なことになる問題の対策です。ウインドウが表示されていない時、または1分間操作をしていない時に自動的にリロードします。）\\nメッセージのnickを解決できなかった時、再取得を試みるようにした\\nログアウトボタンが押された時の処理を修正した\",\"created_at\":1340372165,\"channel_name\":\"てすと\",\"notice\":false},{\"id\":464,\"user_name\":\"foo\",\"body\":\"ニャーン\",\"created_at\":1340372169,\"channel_name\":\"てすと\",\"notice\":false},{\"id\":465,\"user_name\":\"foo\",\"body\":\"ひろし\",\"created_at\":1340372199,\"channel_name\":\"てすと\",\"notice\":true}]";
         NSMutableArray *messageInfoList = [NSMutableArray array];
         for (NSDictionary *messageInfo in [jsonString JSONValue]) {
             [messageInfoList addObject:[CLVStarChatMessageInfo messageInfoWithDictionary:messageInfo]];
@@ -173,6 +173,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return [SCOMessageCell heightWithMessageInfo:[self.messages objectAtIndex:indexPath.row]];
 }
 
 @end

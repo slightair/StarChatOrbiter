@@ -26,6 +26,7 @@
     if (self) {
         // Initialization code
         self.tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         self.postMessageInputView = [[SCOPostMessageInputView alloc] initWithFrame:CGRectZero];
         
         [self addSubview:self.tableView];

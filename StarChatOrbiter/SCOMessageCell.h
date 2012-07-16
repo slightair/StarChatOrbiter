@@ -13,6 +13,8 @@
 
 @interface SCOMessageCell : UITableViewCell
 
++ (CGFloat)heightWithMessageInfo:(CLVStarChatMessageInfo *)messageInfo;
+
 @property (strong, nonatomic) CLVStarChatMessageInfo *messageInfo;
 
 @end

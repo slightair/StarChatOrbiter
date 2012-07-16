@@ -7,21 +7,28 @@
 //
 
 #import "SCOMessageCell.h"
+#import "TTTAttributedLabel.h"
 
 #define kCellPaddingHorizontal 8
-#define kNickLabelHeight 24
+#define kCellPaddingVertical 2
+
+#define kNameLabelHeight 16
+#define kNameFontSize 12
+
+#define kMessageBodyLabelMarginTop 2
+#define kMessageBodyFontSize 12
 
 @interface SCOMessageCell ()
 
-@property (strong, nonatomic) UILabel *nickLabel;
-@property (strong, nonatomic) UILabel *messageBodyLabel;
+@property (strong, nonatomic) TTTAttributedLabel *nameLabel;
+@property (strong, nonatomic) TTTAttributedLabel *messageBodyLabel;
 
 @end
 
 @implementation SCOMessageCell
 
 @synthesize messageInfo = _messageInfo;
-@synthesize nickLabel = _nickLabel;
+@synthesize nameLabel = _nameLabel;
 @synthesize messageBodyLabel = _messageBodyLabel;
 
 - (id)init
@@ -29,15 +36,17 @@
     self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kSCOMessageCellIdentifier];
     if (self) {
         // Initialization code
-        self.nickLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        self.nickLabel.textColor = [UIColor darkGrayColor];
-        self.nickLabel.backgroundColor = [UIColor cyanColor];
+        self.nameLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectZero];
+        self.nameLabel.textColor = [UIColor lightGrayColor];
+        self.nameLabel.font = [UIFont boldSystemFontOfSize:kNameFontSize];
         
-        self.messageBodyLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        self.messageBodyLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectZero];
         self.messageBodyLabel.textColor = [UIColor darkGrayColor];
-        self.messageBodyLabel.backgroundColor = [UIColor greenColor];
+        self.messageBodyLabel.lineBreakMode = UILineBreakModeCharacterWrap;
+        self.messageBodyLabel.numberOfLines = 0;
+        self.messageBodyLabel.font = [UIFont systemFontOfSize:kMessageBodyFontSize];
         
-        [self.contentView addSubview:self.nickLabel];
+        [self.contentView addSubview:self.nameLabel];
         [self.contentView addSubview:self.messageBodyLabel];
     }
     return self;
@@ -49,23 +58,55 @@
     
     CGSize contentViewSize = self.contentView.bounds.size;
     
-    self.nickLabel.frame = CGRectMake(kCellPaddingHorizontal,
-                                      0,
-                                      floor(contentViewSize.width - kCellPaddingHorizontal * 2),
-                                      kNickLabelHeight);
+    self.nameLabel.frame = CGRectMake(kCellPaddingHorizontal,
+                                      kCellPaddingVertical,
+                                      contentViewSize.width - kCellPaddingHorizontal * 2,
+                                      kNameLabelHeight);
     
     self.messageBodyLabel.frame = CGRectMake(kCellPaddingHorizontal,
-                                      kNickLabelHeight,
-                                      floor(contentViewSize.width - kCellPaddingHorizontal * 2),
-                                      kNickLabelHeight);
+                                      kCellPaddingVertical + kNameLabelHeight + kMessageBodyLabelMarginTop,
+                                      contentViewSize.width - kCellPaddingHorizontal * 2,
+                                      contentViewSize.height - (kCellPaddingVertical * 2 +
+                                                                kNameLabelHeight +
+                                                                kMessageBodyLabelMarginTop));
 }
 
 - (void)setMessageInfo:(CLVStarChatMessageInfo *)messageInfo
 {
     _messageInfo = messageInfo;
     
-    self.nickLabel.text = messageInfo.userName;
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
+    [dateFormatter setDateFormat:@"HH:mm:ss"];
+    
+    NSString *nameString = messageInfo.userName;
+    NSString *dateString = [dateFormatter stringFromDate:messageInfo.createdAt];
+    
+    [self.nameLabel setText:[NSString stringWithFormat:@"%@ %@:", dateString, nameString] afterInheritingLabelAttributesAndConfiguringWithBlock:^NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString){
+        
+        NSRange dateRange = [[mutableAttributedString string] rangeOfString:dateString];
+        NSRange nameRange = [[mutableAttributedString string] rangeOfString:nameString];
+        UIColor *nameColor = [UIColor colorWithRed:0.4 green:0.6 blue:1.0 alpha:1.0];
+        
+        [mutableAttributedString addAttribute:(NSString *)kCTForegroundColorAttributeName value:(id)[[UIColor grayColor] CGColor] range:dateRange];
+        [mutableAttributedString addAttribute:(NSString *)kCTForegroundColorAttributeName value:(id)[nameColor CGColor] range:nameRange];
+        
+        return mutableAttributedString;
+    }];
+    
+    
     self.messageBodyLabel.text = messageInfo.body;
+}
+
++ (CGFloat)heightWithMessageInfo:(CLVStarChatMessageInfo *)messageInfo
+{
+    CGFloat baseHeight = kCellPaddingVertical * 2 + kNameLabelHeight + kMessageBodyLabelMarginTop;
+    CGFloat messageBodyHeight = [messageInfo.body sizeWithFont:[UIFont systemFontOfSize:kMessageBodyFontSize]
+                                             constrainedToSize:CGSizeMake(320 - kCellPaddingHorizontal * 2, 1000)
+                                                 lineBreakMode:UILineBreakModeCharacterWrap].height;
+    CGFloat newLineBonus = ([[messageInfo.body componentsSeparatedByString:@"\n"] count] - 1) * kMessageBodyFontSize;
+    
+    return baseHeight + messageBodyHeight + newLineBonus;
 }
 
 @end

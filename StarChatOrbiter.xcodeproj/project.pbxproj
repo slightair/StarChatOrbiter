@@ -385,6 +385,7 @@
 					"\"${PODS_ROOT}/Headers/JTRevealSidebarDemo\"",
 					"\"${PODS_ROOT}/Headers/SBJson\"",
 					"\"${PODS_ROOT}/Headers/QuickDialog\"",
+					"\"${PODS_ROOT}/Headers/TTTAttributedLabel\"",
 					"\"$(SRCROOT)/Frameworks\"",
 				);
 				INFOPLIST_FILE = "StarChatOrbiter/StarChatOrbiter-Info.plist";
@@ -408,6 +409,7 @@
 					"\"${PODS_ROOT}/Headers/JTRevealSidebarDemo\"",
 					"\"${PODS_ROOT}/Headers/SBJson\"",
 					"\"${PODS_ROOT}/Headers/QuickDialog\"",
+					"\"${PODS_ROOT}/Headers/TTTAttributedLabel\"",
 					"\"$(SRCROOT)/Frameworks\"",
 				);
 				INFOPLIST_FILE = "StarChatOrbiter/StarChatOrbiter-Info.plist";
