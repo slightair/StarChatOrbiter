@@ -42,6 +42,8 @@
 
 - (void)layoutSubviews
 {
+    [super layoutSubviews];
+    
     CGSize viewSize = self.bounds.size;
     
     self.accountInfoView.frame = CGRectMake(0, 0, viewSize.width, kAccountInfoViewHeight);

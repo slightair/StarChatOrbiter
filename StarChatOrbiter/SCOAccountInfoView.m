@@ -66,6 +66,8 @@
 
 - (void)layoutSubviews
 {
+    [super layoutSubviews];
+    
     CGSize viewSize = self.bounds.size;
     
     self.gradientLayer.frame = self.bounds;
