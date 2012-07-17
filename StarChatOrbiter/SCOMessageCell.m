@@ -9,45 +9,35 @@
 #import "SCOMessageCell.h"
 #import "TTTAttributedLabel.h"
 
+#define kMessageFormat @"%@ %@: %@"
 #define kCellPaddingHorizontal 8
 #define kCellPaddingVertical 2
 
-#define kNameLabelHeight 16
-#define kNameFontSize 12
-
-#define kMessageBodyLabelMarginTop 2
-#define kMessageBodyFontSize 12
+#define kMessageFontSize 12
 
 @interface SCOMessageCell ()
 
-@property (strong, nonatomic) TTTAttributedLabel *nameLabel;
-@property (strong, nonatomic) TTTAttributedLabel *messageBodyLabel;
+@property (strong, nonatomic) TTTAttributedLabel *messageLabel;
 
 @end
 
 @implementation SCOMessageCell
 
 @synthesize messageInfo = _messageInfo;
-@synthesize nameLabel = _nameLabel;
-@synthesize messageBodyLabel = _messageBodyLabel;
+@synthesize messageLabel = _messageLabel;
 
 - (id)init
 {
     self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kSCOMessageCellIdentifier];
     if (self) {
         // Initialization code
-        self.nameLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectZero];
-        self.nameLabel.textColor = [UIColor lightGrayColor];
-        self.nameLabel.font = [UIFont boldSystemFontOfSize:kNameFontSize];
+        self.messageLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectZero];
+        self.messageLabel.textColor = [UIColor darkGrayColor];
+        self.messageLabel.lineBreakMode = UILineBreakModeCharacterWrap;
+        self.messageLabel.numberOfLines = 0;
+        self.messageLabel.font = [UIFont systemFontOfSize:kMessageFontSize];
         
-        self.messageBodyLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectZero];
-        self.messageBodyLabel.textColor = [UIColor darkGrayColor];
-        self.messageBodyLabel.lineBreakMode = UILineBreakModeCharacterWrap;
-        self.messageBodyLabel.numberOfLines = 0;
-        self.messageBodyLabel.font = [UIFont systemFontOfSize:kMessageBodyFontSize];
-        
-        [self.contentView addSubview:self.nameLabel];
-        [self.contentView addSubview:self.messageBodyLabel];
+        [self.contentView addSubview:self.messageLabel];
     }
     return self;
 }
@@ -58,17 +48,10 @@
     
     CGSize contentViewSize = self.contentView.bounds.size;
     
-    self.nameLabel.frame = CGRectMake(kCellPaddingHorizontal,
-                                      kCellPaddingVertical,
-                                      contentViewSize.width - kCellPaddingHorizontal * 2,
-                                      kNameLabelHeight);
-    
-    self.messageBodyLabel.frame = CGRectMake(kCellPaddingHorizontal,
-                                      kCellPaddingVertical + kNameLabelHeight + kMessageBodyLabelMarginTop,
-                                      contentViewSize.width - kCellPaddingHorizontal * 2,
-                                      contentViewSize.height - (kCellPaddingVertical * 2 +
-                                                                kNameLabelHeight +
-                                                                kMessageBodyLabelMarginTop));
+    self.messageLabel.frame = CGRectMake(kCellPaddingHorizontal,
+                                         kCellPaddingVertical,
+                                         contentViewSize.width - kCellPaddingHorizontal * 2,
+                                         contentViewSize.height - kCellPaddingVertical * 2);
 }
 
 - (void)setMessageInfo:(CLVStarChatMessageInfo *)messageInfo
@@ -82,31 +65,38 @@
     NSString *nameString = messageInfo.userName;
     NSString *dateString = [dateFormatter stringFromDate:messageInfo.createdAt];
     
-    [self.nameLabel setText:[NSString stringWithFormat:@"%@ %@:", dateString, nameString] afterInheritingLabelAttributesAndConfiguringWithBlock:^NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString){
+    [self.messageLabel setText:[NSString stringWithFormat:kMessageFormat, dateString, nameString, messageInfo.body] afterInheritingLabelAttributesAndConfiguringWithBlock:^NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString){
         
         NSRange dateRange = [[mutableAttributedString string] rangeOfString:dateString];
         NSRange nameRange = [[mutableAttributedString string] rangeOfString:nameString];
-        UIColor *nameColor = [UIColor colorWithRed:0.4 green:0.6 blue:1.0 alpha:1.0];
+        UIColor *dateColor = [UIColor colorWithRed:0.54 green:0.59 blue:0.67 alpha:1.0];
+        UIColor *nameColor = [UIColor colorWithRed:0.54 green:0.59 blue:0.67 alpha:1.0];
+        UIFont *boldFont = [UIFont boldSystemFontOfSize:kMessageFontSize];
+        CTFontRef boldFontRef = CTFontCreateWithName((__bridge CFStringRef)boldFont.fontName, boldFont.pointSize, NULL);
         
-        [mutableAttributedString addAttribute:(NSString *)kCTForegroundColorAttributeName value:(id)[[UIColor grayColor] CGColor] range:dateRange];
+        [mutableAttributedString addAttribute:(NSString *)kCTForegroundColorAttributeName value:(id)[dateColor CGColor] range:dateRange];
         [mutableAttributedString addAttribute:(NSString *)kCTForegroundColorAttributeName value:(id)[nameColor CGColor] range:nameRange];
+        if (boldFontRef) {
+            [mutableAttributedString addAttribute:(NSString *)kCTFontAttributeName value:(__bridge id)boldFontRef range:nameRange];
+            CFRelease(boldFontRef);
+        }
         
         return mutableAttributedString;
     }];
-    
-    
-    self.messageBodyLabel.text = messageInfo.body;
 }
 
 + (CGFloat)heightWithMessageInfo:(CLVStarChatMessageInfo *)messageInfo
 {
-    CGFloat baseHeight = kCellPaddingVertical * 2 + kNameLabelHeight + kMessageBodyLabelMarginTop;
-    CGFloat messageBodyHeight = [messageInfo.body sizeWithFont:[UIFont systemFontOfSize:kMessageBodyFontSize]
-                                             constrainedToSize:CGSizeMake(320 - kCellPaddingHorizontal * 2, 1000)
-                                                 lineBreakMode:UILineBreakModeCharacterWrap].height;
-    CGFloat newLineBonus = ([[messageInfo.body componentsSeparatedByString:@"\n"] count] - 1) * kMessageBodyFontSize;
+    NSString *nameString = messageInfo.userName;
+    NSString *text = [NSString stringWithFormat:kMessageFormat, @"XX:XX:XX", nameString, messageInfo.body];
     
-    return baseHeight + messageBodyHeight + newLineBonus;
+    CGFloat baseHeight = kCellPaddingVertical * 2;
+    CGFloat messageHeight = [text sizeWithFont:[UIFont systemFontOfSize:kMessageFontSize]
+                             constrainedToSize:CGSizeMake(320 - kCellPaddingHorizontal * 2, 1000)
+                                 lineBreakMode:UILineBreakModeCharacterWrap].height;
+    CGFloat newLineBonus = ([[text componentsSeparatedByString:@"\n"] count] - 1) * kMessageFontSize;
+    
+    return baseHeight + messageHeight + newLineBonus;
 }
 
 @end
