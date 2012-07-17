@@ -29,6 +29,8 @@
 		5796B16E15B3FFB600D694B3 /* applicationIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5796B16B15B3FFB600D694B3 /* applicationIcon@2x.png */; };
 		5796B17115B40B1F00D694B3 /* SCOPostMessageInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5796B17015B40B1F00D694B3 /* SCOPostMessageInputView.m */; };
 		5796B17415B4202900D694B3 /* SCOMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5796B17315B4202900D694B3 /* SCOMessageCell.m */; };
+		57AD743F15B591B9007CB536 /* SCOTopicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 57AD743E15B591B9007CB536 /* SCOTopicCell.m */; };
+		57AD744315B591D5007CB536 /* SCOUserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 57AD744215B591D5007CB536 /* SCOUserCell.m */; };
 		9BE21ACD076A4ECDB9B8F2D9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 95DE5E342AC34892BE65E85C /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -74,6 +76,10 @@
 		5796B17015B40B1F00D694B3 /* SCOPostMessageInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCOPostMessageInputView.m; sourceTree = "<group>"; };
 		5796B17215B4202900D694B3 /* SCOMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCOMessageCell.h; sourceTree = "<group>"; };
 		5796B17315B4202900D694B3 /* SCOMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCOMessageCell.m; sourceTree = "<group>"; };
+		57AD743D15B591B9007CB536 /* SCOTopicCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCOTopicCell.h; sourceTree = "<group>"; };
+		57AD743E15B591B9007CB536 /* SCOTopicCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCOTopicCell.m; sourceTree = "<group>"; };
+		57AD744115B591D5007CB536 /* SCOUserCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCOUserCell.h; sourceTree = "<group>"; };
+		57AD744215B591D5007CB536 /* SCOUserCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCOUserCell.m; sourceTree = "<group>"; };
 		95DE5E342AC34892BE65E85C /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB30AD68934F43CC8D641CAF /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -204,6 +210,10 @@
 				5796B16715B338BC00D694B3 /* SCOChannelCell.m */,
 				5796B17215B4202900D694B3 /* SCOMessageCell.h */,
 				5796B17315B4202900D694B3 /* SCOMessageCell.m */,
+				57AD743D15B591B9007CB536 /* SCOTopicCell.h */,
+				57AD743E15B591B9007CB536 /* SCOTopicCell.m */,
+				57AD744115B591D5007CB536 /* SCOUserCell.h */,
+				57AD744215B591D5007CB536 /* SCOUserCell.m */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -307,6 +317,8 @@
 				5796B16815B338BC00D694B3 /* SCOChannelCell.m in Sources */,
 				5796B17115B40B1F00D694B3 /* SCOPostMessageInputView.m in Sources */,
 				5796B17415B4202900D694B3 /* SCOMessageCell.m in Sources */,
+				57AD743F15B591B9007CB536 /* SCOTopicCell.m in Sources */,
+				57AD744315B591D5007CB536 /* SCOUserCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

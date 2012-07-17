@@ -8,7 +8,7 @@
 
 #import "SCOChannelCell.h"
 
-#define kCellPaddingHorizontal 8
+#define kCellPaddingHorizontal 12
 #define kChannelNameLabelHeight 24
 
 @interface SCOChannelCell ()

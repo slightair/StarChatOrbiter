@@ -10,7 +10,7 @@
 #import "TTTAttributedLabel.h"
 
 #define kMessageFormat @"%@ %@: %@"
-#define kCellPaddingHorizontal 8
+#define kCellPaddingHorizontal 12
 #define kCellPaddingVertical 2
 
 #define kMessageFontSize 12

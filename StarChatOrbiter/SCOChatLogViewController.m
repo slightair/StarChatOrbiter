@@ -32,14 +32,13 @@
 
 @synthesize leftSidebarViewController = _leftSidebarViewController;
 @synthesize rightSidebarViewController = _rightSidebarViewController;
+@synthesize channelInfo = _channelInfo;
 @synthesize messages = _messages;
 
 - (id)init
 {
     self = [super init];
     if (self) {
-        self.title = @"hoge";
-        
 #warning debug
         NSString *jsonString = @"[{\"id\":461,\"user_name\":\"foo\",\"body\":\"あいうえお\",\"created_at\":1340372159,\"channel_name\":\"てすと\",\"notice\":false},{\"id\":462,\"user_name\":\"foo\",\"body\":\"かきくけこ\",\"created_at\":1340372162,\"channel_name\":\"てすと\",\"notice\":false},{\"id\":463,\"user_name\":\"foo\",\"body\":\"0.1.6 / 2012.07.13\\n30分おきに WebView をリロードするようにした（長時間起動しているとメモリ使用量が大変なことになる問題の対策です。ウインドウが表示されていない時、または1分間操作をしていない時に自動的にリロードします。）\\nメッセージのnickを解決できなかった時、再取得を試みるようにした\\nログアウトボタンが押された時の処理を修正した\",\"created_at\":1340372165,\"channel_name\":\"てすと\",\"notice\":false},{\"id\":464,\"user_name\":\"foo\",\"body\":\"ニャーン\",\"created_at\":1340372169,\"channel_name\":\"てすと\",\"notice\":false},{\"id\":465,\"user_name\":\"foo\",\"body\":\"ひろし\",\"created_at\":1340372199,\"channel_name\":\"てすと\",\"notice\":true}]";
         NSMutableArray *messageInfoList = [NSMutableArray array];
@@ -47,6 +46,9 @@
             [messageInfoList addObject:[CLVStarChatMessageInfo messageInfoWithDictionary:messageInfo]];
         }
         self.messages = messageInfoList;
+        
+        jsonString = @"{\"name\":\"はひふへほ\",\"privacy\":\"public\",\"user_num\":3,\"topic\":{\"id\":6,\"created_at\":1339939789,\"user_name\":\"foo\",\"channel_name\":\"はひふへほ\",\"body\":\"nice topic\"}}";
+        self.channelInfo = [CLVStarChatChannelInfo channelInfoWithDictionary:[jsonString JSONValue]];
     }
     return self;
 }
@@ -105,6 +107,13 @@
     
     SCOChatLogView *chatLogView = (SCOChatLogView *)self.view;
     [chatLogView.tableView reloadData];
+}
+
+- (void)setChannelInfo:(CLVStarChatChannelInfo *)channelInfo
+{
+    _channelInfo = channelInfo;
+    
+    self.title = channelInfo.name;
 }
 
 #pragma mark -
