@@ -32,7 +32,7 @@ enum TableViewSections {
 {
     self = [super init];
     if (self) {
-        NSString *jsonString = @"{\"name\":\"はひふへほ\",\"privacy\":\"public\",\"user_num\":3,\"topic\":{\"id\":6,\"created_at\":1339939789,\"user_name\":\"foo\",\"channel_name\":\"はひふへほ\",\"body\":\"nice topic\"}}";
+        NSString *jsonString = @"{\"name\":\"はひふへほ\",\"privacy\":\"public\",\"user_num\":3,\"topic\":{\"id\":6,\"created_at\":1339939789,\"user_name\":\"foo\",\"channel_name\":\"はひふへほ\",\"body\":\"じゅげむ　じゅげむ　ごこうのすりきれ　かいじゃりすいぎょの　すいぎょうまつ　うんらいまつ　ふうらいまつ　くうねるところにすむところ　やぶらこうじのぶらこうじ　ぱいぽ　ぱいぽ　ぱいぽのしゅーりんがん　しゅーりんがんのぐーりんだい　ぐーりんだいのぽんぽこぴーの　ぽんぽこなーの　ちょうきゅうめいのちょうすけ\"}}";
         self.channelInfo = [CLVStarChatChannelInfo channelInfoWithDictionary:[jsonString JSONValue]];
         
         jsonString = @"[{\"name\":\"hoge\",\"nick\":\"hoge\"},{\"name\":\"foo\",\"nick\":\"foo\",\"keywords\":[\"nununu\"]}]";
@@ -159,16 +159,36 @@ enum TableViewSections {
         case kTopicSection:
             title = @"Topic";
             break;
-            
+        
         case kUsersSection:
             title = @"Users";
             break;
-            
+        
         default:
             break;
     }
     
     return title;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    CGFloat height = 0;
+    
+    switch (indexPath.section) {
+        case kTopicSection:
+            height = [SCOTopicCell heightWithTopicInfo:self.channelInfo.topic];
+            break;
+        
+        case kUsersSection:
+            height = 44;
+            break;
+        
+        default:
+            break;
+    }
+    
+    return height;
 }
 
 @end

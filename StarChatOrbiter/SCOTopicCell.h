@@ -13,6 +13,8 @@
 
 @interface SCOTopicCell : UITableViewCell
 
++ (CGFloat)heightWithTopicInfo:(CLVStarChatTopicInfo *)topicInfo;
+
 @property (strong, nonatomic) CLVStarChatTopicInfo *topicInfo;
 
 @end

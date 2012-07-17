@@ -15,6 +15,9 @@
 
 #define kMessageFontSize 12
 
+#define kCellWidth 320
+#define kMessageLabelHeightMax 1000
+
 @interface SCOMessageCell ()
 
 @property (strong, nonatomic) TTTAttributedLabel *messageLabel;
@@ -92,7 +95,7 @@
     
     CGFloat baseHeight = kCellPaddingVertical * 2;
     CGFloat messageHeight = [text sizeWithFont:[UIFont systemFontOfSize:kMessageFontSize]
-                             constrainedToSize:CGSizeMake(320 - kCellPaddingHorizontal * 2, 1000)
+                             constrainedToSize:CGSizeMake(kCellWidth - kCellPaddingHorizontal * 2, kMessageLabelHeightMax)
                                  lineBreakMode:UILineBreakModeCharacterWrap].height;
     CGFloat newLineBonus = ([[text componentsSeparatedByString:@"\n"] count] - 1) * kMessageFontSize;
     
