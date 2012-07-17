@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SCOSidebarHeaderView.h"
 
 @interface SCOChannelInfoView : UIView
+
+@property (strong, nonatomic, readonly) SCOSidebarHeaderView *headerView;
+@property (strong, nonatomic, readonly) UITableView *tableView;
 
 @end

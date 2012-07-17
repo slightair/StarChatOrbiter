@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SCOPostMessageInputView.h"
 
 @interface SCOChatLogView : UIView
+
+@property (strong, nonatomic, readonly) UITableView *tableView;
+@property (strong, nonatomic, readonly) SCOPostMessageInputView *postMessageInputView;
 
 @end

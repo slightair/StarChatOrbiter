@@ -1,5 +1,5 @@
 //
-//  SCOAccountInfoView.h
+//  SCOSidebarHeaderView.h
 //  StarChatOrbiter
 //
 //  Created by slightair on 12/07/14.
@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SCOAccountInfoView : UIView
+#define kSidebarHeaderViewHeight 44
 
-@property (strong, nonatomic, readonly) UILabel *userNameLabel;
+@interface SCOSidebarHeaderView : UIView
+
+@property (strong, nonatomic, readonly) UILabel *headerTitleLabel;
 @property (strong, nonatomic, readonly) UIButton *preferencesButton;
 
 @end

@@ -8,37 +8,41 @@
 
 #import "SCOChannelListView.h"
 
-#define kAccountInfoViewHeight 44
-
 @interface SCOChannelListView ()
 
-@property (strong, nonatomic, readwrite) SCOAccountInfoView *accountInfoView;
+@property (strong, nonatomic, readwrite) SCOSidebarHeaderView *headerView;
+@property (strong, nonatomic, readwrite) UITableView *tableView;
 
 @end
 
 @implementation SCOChannelListView
 
-@synthesize accountInfoView = _accountInfoView;
+@synthesize headerView = _headerView;
+@synthesize tableView = _tableView;
 
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-        self.backgroundColor = [UIColor grayColor];
+        self.headerView = [[SCOSidebarHeaderView alloc] initWithFrame:CGRectZero];
         
-        self.accountInfoView = [[SCOAccountInfoView alloc] initWithFrame:CGRectZero];
+        self.tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         
-        [self addSubview:self.accountInfoView];
+        [self addSubview:self.tableView];
+        [self addSubview:self.headerView];
     }
     return self;
 }
 
 - (void)layoutSubviews
 {
+    [super layoutSubviews];
+    
     CGSize viewSize = self.bounds.size;
     
-    self.accountInfoView.frame = CGRectMake(0, 0, viewSize.width, kAccountInfoViewHeight);
+    self.headerView.frame = CGRectMake(0, 0, viewSize.width, kSidebarHeaderViewHeight);
+    self.tableView.frame = CGRectMake(0, kSidebarHeaderViewHeight, viewSize.width, viewSize.height - kSidebarHeaderViewHeight);
 }
 
 @end

@@ -8,16 +8,41 @@
 
 #import "SCOChannelInfoView.h"
 
+@interface SCOChannelInfoView ()
+
+@property (strong, nonatomic, readwrite) SCOSidebarHeaderView *headerView;
+@property (strong, nonatomic, readwrite) UITableView *tableView;
+
+@end
+
 @implementation SCOChannelInfoView
+
+@synthesize headerView = _headerView;
+@synthesize tableView = _tableView;
 
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-        self.backgroundColor = [UIColor cyanColor];
+        self.headerView = [[SCOSidebarHeaderView alloc] initWithFrame:CGRectZero];
+        
+        self.tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+        
+        [self addSubview:self.tableView];
+        [self addSubview:self.headerView];
     }
     return self;
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+    CGSize viewSize = self.bounds.size;
+    
+    self.headerView.frame = CGRectMake(0, 0, viewSize.width, kSidebarHeaderViewHeight);
+    self.tableView.frame = CGRectMake(0, kSidebarHeaderViewHeight, viewSize.width, viewSize.height - kSidebarHeaderViewHeight);
 }
 
 @end

@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CLVStarChatChannelInfo.h"
 
-@interface SCOChannelInfoViewController : UIViewController
+@interface SCOChannelInfoViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+
+@property (strong, nonatomic) NSArray *users;
+@property (strong, nonatomic) CLVStarChatChannelInfo *channelInfo;
 
 @end

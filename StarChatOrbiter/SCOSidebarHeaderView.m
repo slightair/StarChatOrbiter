@@ -1,12 +1,12 @@
 //
-//  SCOAccountInfoView.m
+//  SCOSidebarHeaderView.m
 //  StarChatOrbiter
 //
 //  Created by slightair on 12/07/14.
 //  Copyright (c) 2012年 slightair. All rights reserved.
 //
 
-#import "SCOAccountInfoView.h"
+#import "SCOSidebarHeaderView.h"
 #import <QuartzCore/QuartzCore.h>
 
 #define kAccountInfoViewPaddingVertical 8
@@ -14,16 +14,16 @@
 #define kPreferencesButtonMarginRight 8
 #define kPreferencesButtonSize 28
 
-@interface SCOAccountInfoView ()
+@interface SCOSidebarHeaderView ()
 
-@property (strong, nonatomic, readwrite) UILabel *userNameLabel;
+@property (strong, nonatomic, readwrite) UILabel *headerTitleLabel;
 @property (strong, nonatomic, readwrite) UIButton *preferencesButton;
 @property (strong, nonatomic, readwrite) CAGradientLayer *gradientLayer;
 @end
 
-@implementation SCOAccountInfoView
+@implementation SCOSidebarHeaderView
 
-@synthesize userNameLabel = _userNameLabel;
+@synthesize headerTitleLabel = _headerTitleLabel;
 @synthesize preferencesButton = _preferencesButton;
 @synthesize gradientLayer = _gradientLayer;
 
@@ -34,10 +34,12 @@
         // Initialization code
         self.backgroundColor = [UIColor blackColor];
         
-        self.userNameLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        self.userNameLabel.backgroundColor = [UIColor clearColor];
-        self.userNameLabel.textColor = [UIColor whiteColor];
-        self.userNameLabel.text = @"userName";
+        self.layer.shadowOpacity = 0.5;
+        self.layer.shadowOffset = CGSizeMake(0.0, 1.0);
+        
+        self.headerTitleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        self.headerTitleLabel.backgroundColor = [UIColor clearColor];
+        self.headerTitleLabel.textColor = [UIColor whiteColor];
         
         self.preferencesButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [self.preferencesButton setImage:[UIImage imageNamed:@"applicationIcon"] forState:UIControlStateNormal];
@@ -58,7 +60,7 @@
                                      nil];
         
         [self.layer addSublayer:self.gradientLayer];
-        [self addSubview:self.userNameLabel];
+        [self addSubview:self.headerTitleLabel];
         [self addSubview:self.preferencesButton];
     }
     return self;
@@ -66,13 +68,17 @@
 
 - (void)layoutSubviews
 {
+    [super layoutSubviews];
+    
     CGSize viewSize = self.bounds.size;
     
+    self.layer.shadowPath = [UIBezierPath bezierPathWithRect:self.bounds].CGPath;
+    
     self.gradientLayer.frame = self.bounds;
-    self.userNameLabel.frame = CGRectMake(kUserNameLabelMarginLeft,
-                                          kAccountInfoViewPaddingVertical,
-                                          viewSize.width - (kUserNameLabelMarginLeft + kPreferencesButtonSize + kPreferencesButtonMarginRight),
-                                          viewSize.height - kAccountInfoViewPaddingVertical * 2);
+    self.headerTitleLabel.frame = CGRectMake(kUserNameLabelMarginLeft,
+                                             kAccountInfoViewPaddingVertical,
+                                             viewSize.width - (kUserNameLabelMarginLeft + kPreferencesButtonSize + kPreferencesButtonMarginRight),
+                                             viewSize.height - kAccountInfoViewPaddingVertical * 2);
     self.preferencesButton.frame = CGRectMake(viewSize.width - (kPreferencesButtonSize + kPreferencesButtonMarginRight),
                                               kAccountInfoViewPaddingVertical,
                                               kPreferencesButtonSize,

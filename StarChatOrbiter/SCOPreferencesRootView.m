@@ -37,6 +37,8 @@
 
 - (void)layoutSubviews
 {
+    [super layoutSubviews];
+    
     CGSize viewSize = self.bounds.size;
     
     self.navigationBar.frame = CGRectMake(0, 0, viewSize.width, kNavigationBarHeight);
