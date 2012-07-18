@@ -8,8 +8,10 @@
 
 #import "SCOAppDelegate.h"
 
+#ifdef TESTFLIGHT
 #import "TestFlight.h"
 #import "SCOTestFlightTeamToken.h"
+#endif
 
 @interface SCOAppDelegate ()
 
@@ -24,8 +26,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // TestFlight
+    
+#ifdef TESTFLIGHT
     [TestFlight takeOff:kTestFlightTeamToken];
+#endif
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
