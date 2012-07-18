@@ -8,6 +8,9 @@
 
 #import "SCOAppDelegate.h"
 
+#import "TestFlight.h"
+#import "SCOTestFlightTeamToken.h"
+
 @interface SCOAppDelegate ()
 
 @property (strong, nonatomic, readwrite) SCORootViewController *rootViewController;
@@ -21,6 +24,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    // TestFlight
+    [TestFlight takeOff:kTestFlightTeamToken];
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     // Override point for customization after application launch.
