@@ -55,7 +55,7 @@
     UIButton *preferencesButton = channelListView.headerView.preferencesButton;
     [preferencesButton addTarget:self
                           action:@selector(didPushedPreferencesButton:)
-                forControlEvents:UIControlEventTouchDown];
+                forControlEvents:UIControlEventTouchUpInside];
     
     channelListView.tableView.dataSource = self;
     channelListView.tableView.delegate = self;
