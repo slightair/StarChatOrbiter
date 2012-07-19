@@ -33,6 +33,7 @@
 		57AD744315B591D5007CB536 /* SCOUserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 57AD744215B591D5007CB536 /* SCOUserCell.m */; };
 		57AD744A15B65831007CB536 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 57AD744815B65831007CB536 /* libTestFlight.a */; };
 		57AD744D15B65868007CB536 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 57AD744C15B65868007CB536 /* libz.dylib */; };
+		57AD745515B66101007CB536 /* SCOStarChatContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 57AD745415B66101007CB536 /* SCOStarChatContext.m */; };
 		9BE21ACD076A4ECDB9B8F2D9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 95DE5E342AC34892BE65E85C /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -86,6 +87,8 @@
 		57AD744915B65831007CB536 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestFlight.h; path = Frameworks/TestFlight.h; sourceTree = "<group>"; };
 		57AD744C15B65868007CB536 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		57AD744E15B65A37007CB536 /* SCOTestFlightTeamToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCOTestFlightTeamToken.h; sourceTree = "<group>"; };
+		57AD745315B66101007CB536 /* SCOStarChatContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCOStarChatContext.h; sourceTree = "<group>"; };
+		57AD745415B66101007CB536 /* SCOStarChatContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCOStarChatContext.m; sourceTree = "<group>"; };
 		95DE5E342AC34892BE65E85C /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB30AD68934F43CC8D641CAF /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -151,6 +154,8 @@
 				5796B16515B3385C00D694B3 /* Cells */,
 				5796B16415B3385300D694B3 /* Views */,
 				5796B16215B3384600D694B3 /* ViewControllers */,
+				57AD745315B66101007CB536 /* SCOStarChatContext.h */,
+				57AD745415B66101007CB536 /* SCOStarChatContext.m */,
 			);
 			path = StarChatOrbiter;
 			sourceTree = "<group>";
@@ -331,6 +336,7 @@
 				5796B17415B4202900D694B3 /* SCOMessageCell.m in Sources */,
 				57AD743F15B591B9007CB536 /* SCOTopicCell.m in Sources */,
 				57AD744315B591D5007CB536 /* SCOUserCell.m in Sources */,
+				57AD745515B66101007CB536 /* SCOStarChatContext.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

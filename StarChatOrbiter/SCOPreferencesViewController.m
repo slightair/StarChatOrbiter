@@ -7,6 +7,7 @@
 //
 
 #import "SCOPreferencesViewController.h"
+#import "SCOStarChatContext.h"
 
 @interface SCOPreferencesViewController ()
 
@@ -39,6 +40,7 @@
                                                                           Value:nil
                                                                     Placeholder:@"Enter StarChat URL"];
     serverURLEntryElement.key = @"ServerURL";
+    serverURLEntryElement.autocapitalizationType = UITextAutocapitalizationTypeNone;
     
     [serverSettingSection addElement:serverURLEntryElement];
     return serverSettingSection;
@@ -52,11 +54,14 @@
                                                                          Value:nil
                                                                    Placeholder:@"Enter UserName"];
     userNameEntryElement.key = @"UserName";
+    userNameEntryElement.autocapitalizationType = UITextAutocapitalizationTypeNone;
     
     QEntryElement *passwordEntryElement = [[QEntryElement alloc] initWithTitle:@"Password"
                                                                          Value:nil
                                                                    Placeholder:@"Enter Password"];
     passwordEntryElement.key = @"Password";
+    passwordEntryElement.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    passwordEntryElement.secureTextEntry = YES;
     
     [accountSettingSection addElement:userNameEntryElement];
     [accountSettingSection addElement:passwordEntryElement];
@@ -73,17 +78,28 @@
         [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
         [self loading:YES];
         
-        double delayInSeconds = 2.0;
-        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                                message:@"not implemented."
-                                                               delegate:nil
-                                                      cancelButtonTitle:@"OK"
-                                                      otherButtonTitles:nil];
-            [alertView show];
-            [self loading:NO];
-        });
+        NSString *serverURLString = [(QEntryElement *)[self.root elementWithKey:@"ServerURL"] textValue];
+        NSString *userName = [(QEntryElement *)[self.root elementWithKey:@"UserName"] textValue];
+        NSString *password = [(QEntryElement *)[self.root elementWithKey:@"Password"] textValue];
+        
+        SCOStarChatContext *context = [SCOStarChatContext sharedContext];
+        context.baseURL = [NSURL URLWithString:serverURLString];;
+        [context loginUserName:userName
+                      password:password
+                    completion:^{
+                        NSLog(@"success!!");
+                    }
+                       failure:^(NSError *error){
+                           NSLog(@"%@", [error userInfo]);
+                           UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                                               message:@"Login failed."
+                                                                              delegate:nil
+                                                                     cancelButtonTitle:@"OK"
+                                                                     otherButtonTitles:nil];
+                           [alertView show];
+                       }];
+        
+        [self loading:NO];
     };
     
     [loginButtonSection addElement:loginButtonElement];
