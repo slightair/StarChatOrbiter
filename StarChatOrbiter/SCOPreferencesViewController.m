@@ -20,6 +20,8 @@
 
 @implementation SCOPreferencesViewController
 
+@synthesize loginDelegate = _loginDelegate;
+
 - (QRootElement *)rootElement
 {
     QRootElement *root = [[QRootElement alloc] init];
@@ -87,12 +89,13 @@
         [context loginUserName:userName
                       password:password
                     completion:^{
-                        NSLog(@"success!!");
+                        if ([self.loginDelegate respondsToSelector:@selector(preferencesViewControllerDidSuccessLoginProcess:)]) {
+                            [self.loginDelegate preferencesViewControllerDidSuccessLoginProcess:self];
+                        }
                     }
                        failure:^(NSError *error){
-                           NSLog(@"%@", [error userInfo]);
                            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                                               message:@"Login failed."
+                                                                               message:[NSString stringWithFormat:@"Login failed.\n(%@)", [error localizedDescription]]
                                                                               delegate:nil
                                                                      cancelButtonTitle:@"OK"
                                                                      otherButtonTitles:nil];

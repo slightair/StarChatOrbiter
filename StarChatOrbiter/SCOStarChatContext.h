@@ -21,6 +21,7 @@ enum SCOStarChatContextErrors {
              password:(NSString *)password
            completion:(void (^)(void))completion
               failure:(void (^)(NSError *error))failure;
+- (void)updateInformation;
 
 @property (strong, nonatomic) NSURL *baseURL;
 @property (strong, nonatomic, readonly) NSString *userName;

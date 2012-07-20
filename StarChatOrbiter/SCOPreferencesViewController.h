@@ -8,6 +8,16 @@
 
 #import "QuickDialog.h"
 
+@class SCOPreferencesViewController;
+
+@protocol SCOPreferencesViewControllerLoginDelegate <NSObject>
+
+- (void)preferencesViewControllerDidSuccessLoginProcess:(SCOPreferencesViewController *)controller;
+
+@end
+
 @interface SCOPreferencesViewController : QuickDialogController
+
+@property (weak, nonatomic) id <SCOPreferencesViewControllerLoginDelegate> loginDelegate;
 
 @end

@@ -55,12 +55,18 @@
         self.password = password;
         
         [self resetContext];
+        [self updateInformation];
         
         completion();
     }
                      failure:^(NSError *error){
                          failure(error);
                      }];
+}
+
+- (void)updateInformation
+{
+    
 }
 
 - (void)setBaseURL:(NSURL *)baseURL

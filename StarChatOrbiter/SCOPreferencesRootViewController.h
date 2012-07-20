@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SCOPreferencesViewController.h"
 
-@interface SCOPreferencesRootViewController : UIViewController
+@interface SCOPreferencesRootViewController : UIViewController <SCOPreferencesViewControllerLoginDelegate>
 
 + (id)sharedViewController;
 
