@@ -8,13 +8,16 @@
 
 #import "GCDSingleton.h"
 #import "SCOStarChatContext.h"
-#import "CLVStarChatAPIClient.h"
 
 @interface SCOStarChatContext ()
 
 - (void)resetContext;
+- (void)updateInformation;
+- (void)postErrorNotification:(NSError *)error;
 
-@property (strong, nonatomic, readwrite) NSString *userName;
+@property (strong, nonatomic, readwrite) CLVStarChatUserInfo *userInfo;
+@property (strong, nonatomic, readwrite) NSArray *subscribedChannels;
+@property (strong, nonatomic) NSString *userName;
 @property (strong, nonatomic) NSString *password;
 @property (strong, nonatomic) CLVStarChatAPIClient *apiClient;
 
@@ -23,6 +26,8 @@
 @implementation SCOStarChatContext
 
 @synthesize baseURL = _baseURL;
+@synthesize userInfo = _userInfo;
+@synthesize subscribedChannels = _subscribedChannels;
 @synthesize userName = _userName;
 @synthesize password = _password;
 @synthesize apiClient = _apiClient;
@@ -36,7 +41,8 @@
 
 - (void)resetContext
 {
-    
+    self.userInfo = nil;
+    self.subscribedChannels = [NSArray array];
 }
 
 - (void)loginUserName:(NSString *)userName
@@ -45,7 +51,8 @@
               failure:(void (^)(NSError *error))failure
 {
     if (!self.apiClient) {
-        NSError *error = [NSError errorWithDomain:kSCOStarChatContextErrorDomain code:SCOStarChatContextErrorAPIClientNotReady userInfo:nil];
+        NSError *error = [NSError errorWithDomain:SCOStarChatContextErrorDomain code:SCOStarChatContextErrorAPIClientNotReady userInfo:nil];
+        [self postErrorNotification:error];
         failure(error);
     }
     
@@ -53,20 +60,52 @@
     [self.apiClient sendPing:^{
         self.userName = userName;
         self.password = password;
-        
         [self resetContext];
-        [self updateInformation];
         
-        completion();
+        [self.apiClient userInfoForName:self.userName
+                             completion:^(CLVStarChatUserInfo *userInfo){
+                                 self.userInfo = userInfo;
+                                 [[NSNotificationCenter defaultCenter] postNotificationName:SCOStarChatContextNotificationLoggedIn
+                                                                                     object:self];
+                                 [self updateInformation];
+                                 completion();
+                             }
+                                failure:^(NSError *error){
+                                    [self postErrorNotification:error];
+                                    failure(error);
+                                }];
     }
                      failure:^(NSError *error){
+                         [self postErrorNotification:error];
                          failure(error);
                      }];
 }
 
 - (void)updateInformation
 {
+    if (!self.apiClient) {
+        NSError *error = [NSError errorWithDomain:SCOStarChatContextErrorDomain code:SCOStarChatContextErrorAPIClientNotReady userInfo:nil];
+        [self postErrorNotification:error];
+        return;
+    }
     
+    [self.apiClient subscribedChannels:^(NSArray *channels){
+        self.subscribedChannels = channels;
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:SCOStarChatContextNotificationUpdateSubscribedChannels
+                                                            object:self];
+    }
+                               failure:^(NSError *error){
+                                   NSLog(@"%@", [error localizedDescription]);
+                                   [self postErrorNotification:error];
+                               }];
+}
+
+- (void)postErrorNotification:(NSError *)error
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:SCOStarChatContextNotificationErrorOccured
+                                                        object:self
+                                                      userInfo:[NSDictionary dictionaryWithObject:error forKey:@"error"]];
 }
 
 - (void)setBaseURL:(NSURL *)baseURL

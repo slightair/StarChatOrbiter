@@ -11,12 +11,12 @@
 #import "SCOChannelListView.h"
 #import "SCOPreferencesRootViewController.h"
 #import "SCOChannelCell.h"
-
-#import "SBJson.h"
-#import "CLVStarChatChannelInfo.h"
+#import "SCOStarChatContext.h"
 
 @interface SCOChannelListViewController ()
 
+- (void)didLogin:(NSNotification *)notification;
+- (void)didUpdateSubscribedChannels:(NSNotification *)notification;
 - (void)didPushedPreferencesButton:(id)sender;
 
 @end
@@ -29,13 +29,16 @@
 {
     self = [super init];
     if (self) {
-#warning debug
-        NSString *jsonString = @"[{\"name\":\"はひふへほ\",\"privacy\":\"public\",\"user_num\":2},{\"name\":\"Lobby\",\"privacy\":\"public\",\"user_num\":3,\"topic\":{\"id\":6,\"created_at\":1339939789,\"user_name\":\"foo\",\"channel_name\":\"Lobby\",\"body\":\"nice topic\"}},{\"name\":\"test\",\"privacy\":\"private\",\"user_num\":2,\"topic\":{\"id\":4,\"created_at\":1339832042,\"user_name\":\"hoge\",\"channel_name\":\"test\",\"body\":\"topic topic\"}}]";
-        NSMutableArray *channelInfoList = [NSMutableArray array];
-        for (NSDictionary *channelInfo in [jsonString JSONValue]) {
-            [channelInfoList addObject:[CLVStarChatChannelInfo channelInfoWithDictionary:channelInfo]];
-        }
-        self.channels = channelInfoList;
+        self.channels = [NSArray array];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(didLogin:)
+                                                     name:SCOStarChatContextNotificationLoggedIn
+                                                   object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(didUpdateSubscribedChannels:)
+                                                     name:SCOStarChatContextNotificationUpdateSubscribedChannels
+                                                   object:nil];
     }
     return self;
 }
@@ -72,6 +75,21 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+- (void)didLogin:(NSNotification *)notification
+{
+    SCOStarChatContext *context = [SCOStarChatContext sharedContext];
+    SCOChannelListView *channelListView = (SCOChannelListView *)self.view;
+    
+    channelListView.headerView.headerTitleLabel.text = context.userInfo.nick;
+}
+
+- (void)didUpdateSubscribedChannels:(NSNotification *)notification
+{
+    SCOStarChatContext *context = [SCOStarChatContext sharedContext];
+    
+    self.channels = context.subscribedChannels;
 }
 
 - (void)didPushedPreferencesButton:(id)sender
