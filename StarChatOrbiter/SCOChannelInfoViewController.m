@@ -10,6 +10,7 @@
 #import "SCOChannelInfoView.h"
 #import "SCOTopicCell.h"
 #import "SCOUserCell.h"
+#import "SCOStarChatContext.h"
 
 #import "SBJson.h"
 
@@ -32,15 +33,17 @@ enum TableViewSections {
 {
     self = [super init];
     if (self) {
-        NSString *jsonString = @"{\"name\":\"はひふへほ\",\"privacy\":\"public\",\"user_num\":3,\"topic\":{\"id\":6,\"created_at\":1339939789,\"user_name\":\"foo\",\"channel_name\":\"はひふへほ\",\"body\":\"じゅげむ　じゅげむ　ごこうのすりきれ　かいじゃりすいぎょの　すいぎょうまつ　うんらいまつ　ふうらいまつ　くうねるところにすむところ　やぶらこうじのぶらこうじ　ぱいぽ　ぱいぽ　ぱいぽのしゅーりんがん　しゅーりんがんのぐーりんだい　ぐーりんだいのぽんぽこぴーの　ぽんぽこなーの　ちょうきゅうめいのちょうすけ\"}}";
-        self.channelInfo = [CLVStarChatChannelInfo channelInfoWithDictionary:[jsonString JSONValue]];
-        
-        jsonString = @"[{\"name\":\"hoge\",\"nick\":\"hoge\"},{\"name\":\"foo\",\"nick\":\"foo\",\"keywords\":[\"nununu\"]}]";
+        NSString *jsonString = @"[{\"name\":\"hoge\",\"nick\":\"hoge\"},{\"name\":\"foo\",\"nick\":\"foo\",\"keywords\":[\"nununu\"]}]";
         NSMutableArray *users = [NSMutableArray array];
         for (NSDictionary *userInfo in [jsonString JSONValue]) {
             [users addObject:[CLVStarChatUserInfo userInfoWithDictionary:userInfo]];
         }
         self.users = users;
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(didChangeCurrentChannelInfo:)
+                                                     name:SCOStarChatContextNotificationChangeCurrentChannelInfo
+                                                   object:nil];
     }
     return self;
 }
@@ -72,6 +75,13 @@ enum TableViewSections {
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+- (void)didChangeCurrentChannelInfo:(NSNotification *)notification
+{
+    SCOStarChatContext *context = [SCOStarChatContext sharedContext];
+    
+    self.channelInfo = context.currentChannelInfo;
 }
 
 - (void)setChannelInfo:(CLVStarChatChannelInfo *)channelInfo

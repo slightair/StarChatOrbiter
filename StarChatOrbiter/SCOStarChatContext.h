@@ -14,6 +14,7 @@ NSString *const SCOStarChatContextErrorDomain;
 NSString *const SCOStarChatContextNotificationErrorOccured;
 NSString *const SCOStarChatContextNotificationLoggedIn;
 NSString *const SCOStarChatContextNotificationUpdateSubscribedChannels;
+NSString *const SCOStarChatContextNotificationChangeCurrentChannelInfo;
 
 enum SCOStarChatContextErrors {
     SCOStarChatContextErrorAPIClientNotReady = 1000,
@@ -30,5 +31,6 @@ enum SCOStarChatContextErrors {
 @property (strong, nonatomic) NSURL *baseURL;
 @property (strong, nonatomic, readonly) CLVStarChatUserInfo *userInfo;
 @property (strong, nonatomic, readonly) NSArray *subscribedChannels;
+@property (strong, nonatomic, readonly) CLVStarChatChannelInfo *currentChannelInfo;
 
 @end

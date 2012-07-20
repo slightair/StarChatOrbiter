@@ -17,6 +17,7 @@
 
 @property (strong, nonatomic, readwrite) CLVStarChatUserInfo *userInfo;
 @property (strong, nonatomic, readwrite) NSArray *subscribedChannels;
+@property (strong, nonatomic, readwrite) CLVStarChatChannelInfo *currentChannelInfo;
 @property (strong, nonatomic) NSString *userName;
 @property (strong, nonatomic) NSString *password;
 @property (strong, nonatomic) CLVStarChatAPIClient *apiClient;
@@ -28,6 +29,7 @@
 @synthesize baseURL = _baseURL;
 @synthesize userInfo = _userInfo;
 @synthesize subscribedChannels = _subscribedChannels;
+@synthesize currentChannelInfo = _currentChannelInfo;
 @synthesize userName = _userName;
 @synthesize password = _password;
 @synthesize apiClient = _apiClient;
@@ -91,9 +93,7 @@
     
     [self.apiClient subscribedChannels:^(NSArray *channels){
         self.subscribedChannels = channels;
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:SCOStarChatContextNotificationUpdateSubscribedChannels
-                                                            object:self];
+        self.currentChannelInfo = [self.subscribedChannels objectAtIndex:0];
     }
                                failure:^(NSError *error){
                                    NSLog(@"%@", [error localizedDescription]);
@@ -117,6 +117,23 @@
     
     self.apiClient = [[CLVStarChatAPIClient alloc] initWithBaseURL:self.baseURL];
     [self resetContext];
+}
+
+- (void)setSubscribedChannels:(NSArray *)subscribedChannels
+{
+    NSArray *sortDescriptors = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
+    _subscribedChannels = [subscribedChannels sortedArrayUsingDescriptors:sortDescriptors];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:SCOStarChatContextNotificationUpdateSubscribedChannels
+                                                        object:self];
+}
+
+- (void)setCurrentChannelInfo:(CLVStarChatChannelInfo *)currentChannelInfo
+{
+    _currentChannelInfo = currentChannelInfo;
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:SCOStarChatContextNotificationChangeCurrentChannelInfo
+                                                        object:self];
 }
 
 @end

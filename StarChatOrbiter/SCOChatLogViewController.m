@@ -12,6 +12,7 @@
 #import "SCOChannelListViewController.h"
 #import "SCOChannelInfoViewController.h"
 #import "SCOMessageCell.h"
+#import "SCOStarChatContext.h"
 
 #import "SBJson.h"
 
@@ -22,6 +23,7 @@
 
 - (void)revealLeftSidebar:(id)sender;
 - (void)revealRightSidebar:(id)sender;
+- (void)didChangeCurrentChannelInfo:(NSNotification *)notification;
 
 @property (strong, nonatomic) UIViewController *leftSidebarViewController;
 @property (strong, nonatomic) UIViewController *rightSidebarViewController;
@@ -47,8 +49,10 @@
         }
         self.messages = messageInfoList;
         
-        jsonString = @"{\"name\":\"はひふへほ\",\"privacy\":\"public\",\"user_num\":3,\"topic\":{\"id\":6,\"created_at\":1339939789,\"user_name\":\"foo\",\"channel_name\":\"はひふへほ\",\"body\":\"nice topic\"}}";
-        self.channelInfo = [CLVStarChatChannelInfo channelInfoWithDictionary:[jsonString JSONValue]];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(didChangeCurrentChannelInfo:)
+                                                     name:SCOStarChatContextNotificationChangeCurrentChannelInfo
+                                                   object:nil];
     }
     return self;
 }
@@ -99,6 +103,13 @@
     layer.shadowPath = [UIBezierPath bezierPathWithRect:layer.bounds].CGPath;
     
     [self.navigationController toggleRevealState:JTRevealedStateRight];
+}
+
+- (void)didChangeCurrentChannelInfo:(NSNotification *)notification
+{
+    SCOStarChatContext *context = [SCOStarChatContext sharedContext];
+    
+    self.channelInfo = context.currentChannelInfo;
 }
 
 - (void)setMessages:(NSArray *)messages
