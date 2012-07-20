@@ -16,6 +16,8 @@
 #define kCellWidth 270
 #define kTopicLabelHeightMax 1000
 
+#define kAlternativeTopicBody @"(No Topic)"
+
 @interface SCOTopicCell ()
 
 @property (strong, nonatomic) UILabel *topicLabel;
@@ -59,18 +61,23 @@
 {
     _topicInfo = topicInfo;
     
-    self.topicLabel.text = topicInfo.body;
+    self.topicLabel.text = topicInfo.body ? topicInfo.body : kAlternativeTopicBody;
 }
 
 + (CGFloat)heightWithTopicInfo:(CLVStarChatTopicInfo *)topicInfo
 {
-    CGFloat baseHeight = kCellPaddingVertical * 2;
-    CGFloat topicHeight = [topicInfo.body sizeWithFont:[UIFont systemFontOfSize:kTopicFontSize]
-                                     constrainedToSize:CGSizeMake(kCellWidth - kCellPaddingHorizontal * 2, kTopicLabelHeightMax)
-                                         lineBreakMode:UILineBreakModeCharacterWrap].height;
-    CGFloat newLineBonus = ([[topicInfo.body componentsSeparatedByString:@"\n"] count] - 1) * kTopicFontSize;
+    CGFloat height = kCellPaddingVertical * 2;
+    NSString *topicBody = topicInfo.body ? topicInfo.body : kAlternativeTopicBody;
     
-    return baseHeight + topicHeight + newLineBonus;
+    height += [topicBody sizeWithFont:[UIFont systemFontOfSize:kTopicFontSize]
+                                constrainedToSize:CGSizeMake(kCellWidth - kCellPaddingHorizontal * 2, kTopicLabelHeightMax)
+                                    lineBreakMode:UILineBreakModeCharacterWrap].height;
+    
+    if (topicInfo.body) {
+        height += ([[topicBody componentsSeparatedByString:@"\n"] count] - 1) * kTopicFontSize;
+    }
+    
+    return height;
 }
 
 @end
