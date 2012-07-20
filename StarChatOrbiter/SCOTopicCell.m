@@ -29,7 +29,7 @@
 
 - (id)init
 {
-    self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kSCOTopicCellIdentifier];
+    self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:SCOTopicCellIdentifier];
     if (self) {
         // Initialization code
         self.topicLabel = [[UILabel alloc] initWithFrame:CGRectZero];

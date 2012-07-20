@@ -24,7 +24,7 @@
 
 - (id)init
 {
-    self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kSCOUserCellIdentifier];
+    self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:SCOUserCellIdentifier];
     if (self) {
         // Initialization code
         self.userNameLabel = [[UILabel alloc] initWithFrame:CGRectZero];

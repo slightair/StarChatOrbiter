@@ -164,7 +164,7 @@
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    SCOMessageCell *cell = (SCOMessageCell *)[tableView dequeueReusableCellWithIdentifier:kSCOMessageCellIdentifier];
+    SCOMessageCell *cell = (SCOMessageCell *)[tableView dequeueReusableCellWithIdentifier:SCOMessageCellIdentifier];
     if (cell == nil) {
         cell = [[SCOMessageCell alloc] init];
     }

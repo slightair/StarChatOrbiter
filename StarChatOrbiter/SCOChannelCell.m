@@ -24,7 +24,7 @@
 
 - (id)init
 {
-    self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kSCOChannelCellIdentifier];
+    self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:SCOChannelCellIdentifier];
     if (self) {
         // Initialization code
         self.channelNameLabel = [[UILabel alloc] initWithFrame:CGRectZero];

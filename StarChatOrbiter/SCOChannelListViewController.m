@@ -111,7 +111,7 @@
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    SCOChannelCell *cell = (SCOChannelCell *)[tableView dequeueReusableCellWithIdentifier:kSCOChannelCellIdentifier];
+    SCOChannelCell *cell = (SCOChannelCell *)[tableView dequeueReusableCellWithIdentifier:SCOChannelCellIdentifier];
     if (cell == nil) {
         cell = [[SCOChannelCell alloc] init];
     }

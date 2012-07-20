@@ -31,7 +31,7 @@
 
 - (id)init
 {
-    self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kSCOMessageCellIdentifier];
+    self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:SCOMessageCellIdentifier];
     if (self) {
         // Initialization code
         self.messageLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectZero];

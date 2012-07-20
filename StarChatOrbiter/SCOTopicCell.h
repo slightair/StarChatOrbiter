@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "CLVStarChatTopicInfo.h"
 
-#define kSCOTopicCellIdentifier @"SCOTopicCell"
+NSString *const SCOTopicCellIdentifier;
 
 @interface SCOTopicCell : UITableViewCell
 

@@ -116,7 +116,7 @@ enum TableViewSections {
     
     switch (indexPath.section) {
         case kTopicSection:
-            cell = [tableView dequeueReusableCellWithIdentifier:kSCOTopicCellIdentifier];
+            cell = [tableView dequeueReusableCellWithIdentifier:SCOTopicCellIdentifier];
             if (cell == nil) {
                 cell = [[SCOTopicCell alloc] init];
             }
@@ -127,7 +127,7 @@ enum TableViewSections {
             
             break;
         case kUsersSection:
-            cell = [tableView dequeueReusableCellWithIdentifier:kSCOUserCellIdentifier];
+            cell = [tableView dequeueReusableCellWithIdentifier:SCOUserCellIdentifier];
             if (cell == nil) {
                 cell = [[SCOUserCell alloc] init];
             }
