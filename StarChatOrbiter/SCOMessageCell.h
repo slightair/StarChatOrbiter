@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "CLVStarChatMessageInfo.h"
 
-NSString *const SCOMessageCellIdentifier;
+#define kSCOMessageCellIdentifier @"SCOMessageCellIdentifier"
 
 @interface SCOMessageCell : UITableViewCell
 

@@ -42,7 +42,7 @@ enum TableViewSections {
         
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(didChangeCurrentChannelInfo:)
-                                                     name:SCOStarChatContextNotificationChangeCurrentChannelInfo
+                                                     name:kSCOStarChatContextNotificationChangeCurrentChannelInfo
                                                    object:nil];
     }
     return self;
@@ -126,7 +126,7 @@ enum TableViewSections {
     
     switch (indexPath.section) {
         case kTopicSection:
-            cell = [tableView dequeueReusableCellWithIdentifier:SCOTopicCellIdentifier];
+            cell = [tableView dequeueReusableCellWithIdentifier:kSCOTopicCellIdentifier];
             if (cell == nil) {
                 cell = [[SCOTopicCell alloc] init];
             }
@@ -137,7 +137,7 @@ enum TableViewSections {
             
             break;
         case kUsersSection:
-            cell = [tableView dequeueReusableCellWithIdentifier:SCOUserCellIdentifier];
+            cell = [tableView dequeueReusableCellWithIdentifier:kSCOUserCellIdentifier];
             if (cell == nil) {
                 cell = [[SCOUserCell alloc] init];
             }

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "CLVStarChatUserInfo.h"
 
-NSString *const SCOUserCellIdentifier;
+#define kSCOUserCellIdentifier @"SCOUserCellIdentifier"
 
 @interface SCOUserCell : UITableViewCell
 
