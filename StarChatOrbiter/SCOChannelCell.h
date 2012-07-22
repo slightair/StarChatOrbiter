@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "CLVStarChatChannelInfo.h"
 
-#define kSCOChannelCellIdentifier @"SCOChannelCell"
+#define kSCOChannelCellIdentifier @"SCOChannelCellIdentifier"
 
 @interface SCOChannelCell : UITableViewCell
 

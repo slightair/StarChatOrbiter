@@ -9,9 +9,8 @@
 #import <QuartzCore/QuartzCore.h>
 #import "SCOChatLogViewController.h"
 #import "SCOChatLogView.h"
-#import "SCOChannelListViewController.h"
-#import "SCOChannelInfoViewController.h"
 #import "SCOMessageCell.h"
+#import "SCOStarChatContext.h"
 
 #import "SBJson.h"
 
@@ -22,6 +21,7 @@
 
 - (void)revealLeftSidebar:(id)sender;
 - (void)revealRightSidebar:(id)sender;
+- (void)didChangeCurrentChannelInfo:(NSNotification *)notification;
 
 @property (strong, nonatomic) UIViewController *leftSidebarViewController;
 @property (strong, nonatomic) UIViewController *rightSidebarViewController;
@@ -47,8 +47,10 @@
         }
         self.messages = messageInfoList;
         
-        jsonString = @"{\"name\":\"はひふへほ\",\"privacy\":\"public\",\"user_num\":3,\"topic\":{\"id\":6,\"created_at\":1339939789,\"user_name\":\"foo\",\"channel_name\":\"はひふへほ\",\"body\":\"nice topic\"}}";
-        self.channelInfo = [CLVStarChatChannelInfo channelInfoWithDictionary:[jsonString JSONValue]];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(didChangeCurrentChannelInfo:)
+                                                     name:kSCOStarChatContextNotificationChangeCurrentChannelInfo
+                                                   object:nil];
     }
     return self;
 }
@@ -101,6 +103,13 @@
     [self.navigationController toggleRevealState:JTRevealedStateRight];
 }
 
+- (void)didChangeCurrentChannelInfo:(NSNotification *)notification
+{
+    SCOStarChatContext *context = [SCOStarChatContext sharedContext];
+    
+    self.channelInfo = context.currentChannelInfo;
+}
+
 - (void)setMessages:(NSArray *)messages
 {
     _messages = messages;
@@ -124,6 +133,7 @@
     SCOChannelListViewController *viewController = (SCOChannelListViewController *)self.leftSidebarViewController;
     if (!viewController) {
         viewController = [[SCOChannelListViewController alloc] init];
+        viewController.sidebarDelegate = self;
         self.leftSidebarViewController = viewController;
     }
     viewController.view.frame = CGRectMake(0,
@@ -147,6 +157,15 @@
                                            viewFrame.size.height);
     viewController.view.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleHeight;
     return viewController.view;
+}
+
+- (void)didChangeRevealedStateForViewController:(UIViewController *)viewController {
+    if (viewController.revealedState == JTRevealedStateNo) {
+        self.view.userInteractionEnabled = YES;
+    }
+    else {
+        self.view.userInteractionEnabled = NO;
+    }
 }
 
 #pragma mark -
@@ -187,6 +206,14 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return [SCOMessageCell heightWithMessageInfo:[self.messages objectAtIndex:indexPath.row]];
+}
+
+#pragma mark -
+#pragma mark SCOChannelListViewControllerSidebarDelegate
+
+- (void)channelListViewController:(SCOChannelListViewController *)viewController didSelectChannelName:(NSString *)channelName
+{
+    [self.navigationController setRevealedState:JTRevealedStateNo];
 }
 
 @end

@@ -11,12 +11,13 @@
 #import "SCOChannelListView.h"
 #import "SCOPreferencesRootViewController.h"
 #import "SCOChannelCell.h"
-
-#import "SBJson.h"
-#import "CLVStarChatChannelInfo.h"
+#import "SCOStarChatContext.h"
 
 @interface SCOChannelListViewController ()
 
+- (void)didLogin:(NSNotification *)notification;
+- (void)didUpdateSubscribedChannels:(NSNotification *)notification;
+- (void)didChangeCurrentChannelInfo:(NSNotification *)notification;
 - (void)didPushedPreferencesButton:(id)sender;
 
 @end
@@ -24,18 +25,24 @@
 @implementation SCOChannelListViewController
 
 @synthesize channels = _channels;
+@synthesize sidebarDelegate = _sidebarDelegate;
 
 - (id)init
 {
     self = [super init];
     if (self) {
-#warning debug
-        NSString *jsonString = @"[{\"name\":\"はひふへほ\",\"privacy\":\"public\",\"user_num\":2},{\"name\":\"Lobby\",\"privacy\":\"public\",\"user_num\":3,\"topic\":{\"id\":6,\"created_at\":1339939789,\"user_name\":\"foo\",\"channel_name\":\"Lobby\",\"body\":\"nice topic\"}},{\"name\":\"test\",\"privacy\":\"private\",\"user_num\":2,\"topic\":{\"id\":4,\"created_at\":1339832042,\"user_name\":\"hoge\",\"channel_name\":\"test\",\"body\":\"topic topic\"}}]";
-        NSMutableArray *channelInfoList = [NSMutableArray array];
-        for (NSDictionary *channelInfo in [jsonString JSONValue]) {
-            [channelInfoList addObject:[CLVStarChatChannelInfo channelInfoWithDictionary:channelInfo]];
-        }
-        self.channels = channelInfoList;
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(didLogin:)
+                                                     name:kSCOStarChatContextNotificationLoggedIn
+                                                   object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(didUpdateSubscribedChannels:)
+                                                     name:kSCOStarChatContextNotificationUpdateSubscribedChannels
+                                                   object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(didChangeCurrentChannelInfo:)
+                                                     name:kSCOStarChatContextNotificationChangeCurrentChannelInfo
+                                                   object:nil];
     }
     return self;
 }
@@ -55,12 +62,15 @@
     UIButton *preferencesButton = channelListView.headerView.preferencesButton;
     [preferencesButton addTarget:self
                           action:@selector(didPushedPreferencesButton:)
-                forControlEvents:UIControlEventTouchDown];
+                forControlEvents:UIControlEventTouchUpInside];
     
     channelListView.tableView.dataSource = self;
     channelListView.tableView.delegate = self;
     
-    channelListView.headerView.headerTitleLabel.text = @"userName";
+    SCOStarChatContext *context = [SCOStarChatContext sharedContext];
+    
+    self.channels = context.subscribedChannels;
+    channelListView.headerView.headerTitleLabel.text = context.userInfo.nick;
 }
 
 - (void)viewDidUnload
@@ -72,6 +82,34 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+- (void)didLogin:(NSNotification *)notification
+{
+    SCOStarChatContext *context = [SCOStarChatContext sharedContext];
+    SCOChannelListView *channelListView = (SCOChannelListView *)self.view;
+    
+    channelListView.headerView.headerTitleLabel.text = context.userInfo.nick;
+}
+
+- (void)didUpdateSubscribedChannels:(NSNotification *)notification
+{
+    SCOStarChatContext *context = [SCOStarChatContext sharedContext];
+    
+    self.channels = context.subscribedChannels;
+}
+
+- (void)didChangeCurrentChannelInfo:(NSNotification *)notification
+{
+    SCOChannelListView *channelListView = (SCOChannelListView *)self.view;
+    SCOStarChatContext *context = [SCOStarChatContext sharedContext];
+    
+    NSUInteger index = [self.channels indexOfObject:context.currentChannelInfo];
+    if (index != NSNotFound) {
+        [channelListView.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]
+                                               animated:YES
+                                         scrollPosition:UITableViewScrollPositionNone];
+    }
 }
 
 - (void)didPushedPreferencesButton:(id)sender
@@ -94,6 +132,14 @@
     
     SCOChannelListView *channelListView = (SCOChannelListView *)self.view;
     [channelListView.tableView reloadData];
+    
+    SCOStarChatContext *context = [SCOStarChatContext sharedContext];
+    NSUInteger index = [channels indexOfObject:context.currentChannelInfo];
+    if (index != NSNotFound) {
+        [channelListView.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]
+                                               animated:YES
+                                         scrollPosition:UITableViewScrollPositionNone];
+    }
 }
 
 #pragma mark -
@@ -116,9 +162,7 @@
         cell = [[SCOChannelCell alloc] init];
     }
     
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    
     cell.channelInfo = [self.channels objectAtIndex:indexPath.row];
     
     return cell;
@@ -128,7 +172,15 @@
 #pragma mark Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    SCOStarChatContext *context = [SCOStarChatContext sharedContext];
     
+    CLVStarChatChannelInfo *channelInfo = [self.channels objectAtIndex:indexPath.row];
+    
+    [context selectChannel:channelInfo.name];
+    
+    if ([self.sidebarDelegate respondsToSelector:@selector(channelListViewController:didSelectChannelName:)]) {
+        [self.sidebarDelegate channelListViewController:self didSelectChannelName:channelInfo.name];
+    }
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section

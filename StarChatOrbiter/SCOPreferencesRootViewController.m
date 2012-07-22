@@ -9,7 +9,6 @@
 #import "GCDSingleton.h"
 #import "SCOPreferencesRootViewController.h"
 #import "SCOPreferencesRootView.h"
-#import "SCOPreferencesViewController.h"
 
 @interface SCOPreferencesRootViewController ()
 
@@ -57,6 +56,7 @@
     [preferencesRootView.navigationBar pushNavigationItem:self.navigationItem animated:NO];
     
     self.preferencesViewController = [[SCOPreferencesViewController alloc] init];
+    self.preferencesViewController.loginDelegate = self;
     preferencesRootView.preferencesView = self.preferencesViewController.view;
 }
 
@@ -74,6 +74,11 @@
 - (void)closeView:(id)sender
 {
     [self dismissModalViewControllerAnimated:YES];
+}
+
+- (void)preferencesViewControllerDidSuccessLoginProcess:(SCOPreferencesViewController *)controller
+{
+    [self closeView:nil];
 }
 
 @end
