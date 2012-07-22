@@ -17,6 +17,7 @@
 
 - (void)didLogin:(NSNotification *)notification;
 - (void)didUpdateSubscribedChannels:(NSNotification *)notification;
+- (void)didChangeCurrentChannelInfo:(NSNotification *)notification;
 - (void)didPushedPreferencesButton:(id)sender;
 
 @end
@@ -24,20 +25,23 @@
 @implementation SCOChannelListViewController
 
 @synthesize channels = _channels;
+@synthesize sidebarDelegate = _sidebarDelegate;
 
 - (id)init
 {
     self = [super init];
     if (self) {
-        self.channels = [NSArray array];
-        
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(didLogin:)
-                                                     name:SCOStarChatContextNotificationLoggedIn
+                                                     name:kSCOStarChatContextNotificationLoggedIn
                                                    object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(didUpdateSubscribedChannels:)
-                                                     name:SCOStarChatContextNotificationUpdateSubscribedChannels
+                                                     name:kSCOStarChatContextNotificationUpdateSubscribedChannels
+                                                   object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(didChangeCurrentChannelInfo:)
+                                                     name:kSCOStarChatContextNotificationChangeCurrentChannelInfo
                                                    object:nil];
     }
     return self;
@@ -63,7 +67,10 @@
     channelListView.tableView.dataSource = self;
     channelListView.tableView.delegate = self;
     
-    channelListView.headerView.headerTitleLabel.text = @"userName";
+    SCOStarChatContext *context = [SCOStarChatContext sharedContext];
+    
+    self.channels = context.subscribedChannels;
+    channelListView.headerView.headerTitleLabel.text = context.userInfo.nick;
 }
 
 - (void)viewDidUnload
@@ -92,6 +99,19 @@
     self.channels = context.subscribedChannels;
 }
 
+- (void)didChangeCurrentChannelInfo:(NSNotification *)notification
+{
+    SCOChannelListView *channelListView = (SCOChannelListView *)self.view;
+    SCOStarChatContext *context = [SCOStarChatContext sharedContext];
+    
+    NSUInteger index = [self.channels indexOfObject:context.currentChannelInfo];
+    if (index != NSNotFound) {
+        [channelListView.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]
+                                               animated:YES
+                                         scrollPosition:UITableViewScrollPositionNone];
+    }
+}
+
 - (void)didPushedPreferencesButton:(id)sender
 {
     UIViewController *rootViewController = [(SCOAppDelegate *)[UIApplication sharedApplication].delegate rootViewController];
@@ -112,6 +132,14 @@
     
     SCOChannelListView *channelListView = (SCOChannelListView *)self.view;
     [channelListView.tableView reloadData];
+    
+    SCOStarChatContext *context = [SCOStarChatContext sharedContext];
+    NSUInteger index = [channels indexOfObject:context.currentChannelInfo];
+    if (index != NSNotFound) {
+        [channelListView.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]
+                                               animated:YES
+                                         scrollPosition:UITableViewScrollPositionNone];
+    }
 }
 
 #pragma mark -
@@ -129,14 +157,12 @@
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    SCOChannelCell *cell = (SCOChannelCell *)[tableView dequeueReusableCellWithIdentifier:SCOChannelCellIdentifier];
+    SCOChannelCell *cell = (SCOChannelCell *)[tableView dequeueReusableCellWithIdentifier:kSCOChannelCellIdentifier];
     if (cell == nil) {
         cell = [[SCOChannelCell alloc] init];
     }
     
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    
     cell.channelInfo = [self.channels objectAtIndex:indexPath.row];
     
     return cell;
@@ -146,7 +172,15 @@
 #pragma mark Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    SCOStarChatContext *context = [SCOStarChatContext sharedContext];
     
+    CLVStarChatChannelInfo *channelInfo = [self.channels objectAtIndex:indexPath.row];
+    
+    [context selectChannel:channelInfo.name];
+    
+    if ([self.sidebarDelegate respondsToSelector:@selector(channelListViewController:didSelectChannelName:)]) {
+        [self.sidebarDelegate channelListViewController:self didSelectChannelName:channelInfo.name];
+    }
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section

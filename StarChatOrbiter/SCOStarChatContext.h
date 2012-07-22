@@ -9,12 +9,12 @@
 #import <Foundation/Foundation.h>
 #import "CLVStarChatAPIClient.h"
 
-NSString *const SCOStarChatContextErrorDomain;
+#define kSCOStarChatContextErrorDomain @"SCOStarChatContextErrorDomain"
 
-NSString *const SCOStarChatContextNotificationErrorOccured;
-NSString *const SCOStarChatContextNotificationLoggedIn;
-NSString *const SCOStarChatContextNotificationUpdateSubscribedChannels;
-NSString *const SCOStarChatContextNotificationChangeCurrentChannelInfo;
+#define kSCOStarChatContextNotificationErrorOccured @"SCOStarChatContextNotificationErrorOccured"
+#define kSCOStarChatContextNotificationLoggedIn @"SCOStarChatContextNotificationLoggedIn"
+#define kSCOStarChatContextNotificationUpdateSubscribedChannels @"SCOStarChatContextNotificationUpdateSubscribedChannels"
+#define kSCOStarChatContextNotificationChangeCurrentChannelInfo @"SCOStarChatContextNotificationChangeCurrentChannelInfo"
 
 enum SCOStarChatContextErrors {
     SCOStarChatContextErrorAPIClientNotReady = 1000,
@@ -27,6 +27,7 @@ enum SCOStarChatContextErrors {
              password:(NSString *)password
            completion:(void (^)(void))completion
               failure:(void (^)(NSError *error))failure;
+- (void)selectChannel:(NSString *)channelName;
 
 @property (strong, nonatomic) NSURL *baseURL;
 @property (strong, nonatomic, readonly) CLVStarChatUserInfo *userInfo;

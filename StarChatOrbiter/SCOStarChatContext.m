@@ -53,7 +53,7 @@
               failure:(void (^)(NSError *error))failure
 {
     if (!self.apiClient) {
-        NSError *error = [NSError errorWithDomain:SCOStarChatContextErrorDomain code:SCOStarChatContextErrorAPIClientNotReady userInfo:nil];
+        NSError *error = [NSError errorWithDomain:kSCOStarChatContextErrorDomain code:SCOStarChatContextErrorAPIClientNotReady userInfo:nil];
         [self postErrorNotification:error];
         failure(error);
     }
@@ -67,7 +67,7 @@
         [self.apiClient userInfoForName:self.userName
                              completion:^(CLVStarChatUserInfo *userInfo){
                                  self.userInfo = userInfo;
-                                 [[NSNotificationCenter defaultCenter] postNotificationName:SCOStarChatContextNotificationLoggedIn
+                                 [[NSNotificationCenter defaultCenter] postNotificationName:kSCOStarChatContextNotificationLoggedIn
                                                                                      object:self];
                                  [self updateInformation];
                                  completion();
@@ -83,10 +83,24 @@
                      }];
 }
 
+- (void)selectChannel:(NSString *)channelName
+{
+    NSUInteger index = [self.subscribedChannels indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop){
+        return [[(CLVStarChatChannelInfo *)obj name] isEqualToString:channelName];
+    }];
+    
+    if (index == NSNotFound) {
+        return;
+    }
+    
+    CLVStarChatChannelInfo *channelInfo = [self.subscribedChannels objectAtIndex:index];
+    self.currentChannelInfo = channelInfo;
+}
+
 - (void)updateInformation
 {
     if (!self.apiClient) {
-        NSError *error = [NSError errorWithDomain:SCOStarChatContextErrorDomain code:SCOStarChatContextErrorAPIClientNotReady userInfo:nil];
+        NSError *error = [NSError errorWithDomain:kSCOStarChatContextErrorDomain code:SCOStarChatContextErrorAPIClientNotReady userInfo:nil];
         [self postErrorNotification:error];
         return;
     }
@@ -103,7 +117,7 @@
 
 - (void)postErrorNotification:(NSError *)error
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:SCOStarChatContextNotificationErrorOccured
+    [[NSNotificationCenter defaultCenter] postNotificationName:kSCOStarChatContextNotificationErrorOccured
                                                         object:self
                                                       userInfo:[NSDictionary dictionaryWithObject:error forKey:@"error"]];
 }
@@ -124,7 +138,7 @@
     NSArray *sortDescriptors = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
     _subscribedChannels = [subscribedChannels sortedArrayUsingDescriptors:sortDescriptors];
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:SCOStarChatContextNotificationUpdateSubscribedChannels
+    [[NSNotificationCenter defaultCenter] postNotificationName:kSCOStarChatContextNotificationUpdateSubscribedChannels
                                                         object:self];
 }
 
@@ -132,7 +146,7 @@
 {
     _currentChannelInfo = currentChannelInfo;
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:SCOStarChatContextNotificationChangeCurrentChannelInfo
+    [[NSNotificationCenter defaultCenter] postNotificationName:kSCOStarChatContextNotificationChangeCurrentChannelInfo
                                                         object:self];
 }
 

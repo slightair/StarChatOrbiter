@@ -10,9 +10,16 @@
 #import "UINavigationItem+JTRevealSidebarV2.h"
 #import "UIViewController+JTRevealSidebarV2.h"
 #import "JTRevealSidebarV2Delegate.h"
+#import "SCOChannelListViewController.h"
+#import "SCOChannelInfoViewController.h"
 #import "CLVStarChatChannelInfo.h"
 
-@interface SCOChatLogViewController : UIViewController <JTRevealSidebarV2Delegate, UITableViewDataSource, UITableViewDelegate>
+@interface SCOChatLogViewController : UIViewController <
+    JTRevealSidebarV2Delegate,
+    UITableViewDataSource,
+    UITableViewDelegate,
+    SCOChannelListViewControllerSidebarDelegate
+>
 
 @property (strong, nonatomic) CLVStarChatChannelInfo *channelInfo;
 @property (strong, nonatomic) NSArray *messages;

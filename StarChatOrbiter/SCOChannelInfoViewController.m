@@ -60,10 +60,12 @@ enum TableViewSections {
     
     SCOChannelInfoView *channelInfoView = (SCOChannelInfoView *)self.view;
     
-    channelInfoView.headerView.headerTitleLabel.text = @"channelName";
-    
     channelInfoView.tableView.dataSource = self;
     channelInfoView.tableView.delegate = self;
+    
+    SCOStarChatContext *context = [SCOStarChatContext sharedContext];
+    
+    self.channelInfo = context.currentChannelInfo;
 }
 
 - (void)viewDidUnload
@@ -90,6 +92,8 @@ enum TableViewSections {
     
     SCOChannelInfoView *channelInfoView = (SCOChannelInfoView *)self.view;
     channelInfoView.headerView.headerTitleLabel.text = channelInfo.name;
+    
+    [channelInfoView.tableView reloadData];
 }
    
 #pragma mark -

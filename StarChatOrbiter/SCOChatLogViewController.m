@@ -9,8 +9,6 @@
 #import <QuartzCore/QuartzCore.h>
 #import "SCOChatLogViewController.h"
 #import "SCOChatLogView.h"
-#import "SCOChannelListViewController.h"
-#import "SCOChannelInfoViewController.h"
 #import "SCOMessageCell.h"
 #import "SCOStarChatContext.h"
 
@@ -51,7 +49,7 @@
         
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(didChangeCurrentChannelInfo:)
-                                                     name:SCOStarChatContextNotificationChangeCurrentChannelInfo
+                                                     name:kSCOStarChatContextNotificationChangeCurrentChannelInfo
                                                    object:nil];
     }
     return self;
@@ -135,6 +133,7 @@
     SCOChannelListViewController *viewController = (SCOChannelListViewController *)self.leftSidebarViewController;
     if (!viewController) {
         viewController = [[SCOChannelListViewController alloc] init];
+        viewController.sidebarDelegate = self;
         self.leftSidebarViewController = viewController;
     }
     viewController.view.frame = CGRectMake(0,
@@ -160,6 +159,15 @@
     return viewController.view;
 }
 
+- (void)didChangeRevealedStateForViewController:(UIViewController *)viewController {
+    if (viewController.revealedState == JTRevealedStateNo) {
+        self.view.userInteractionEnabled = YES;
+    }
+    else {
+        self.view.userInteractionEnabled = NO;
+    }
+}
+
 #pragma mark -
 #pragma mark Table view data source
 
@@ -175,7 +183,7 @@
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    SCOMessageCell *cell = (SCOMessageCell *)[tableView dequeueReusableCellWithIdentifier:SCOMessageCellIdentifier];
+    SCOMessageCell *cell = (SCOMessageCell *)[tableView dequeueReusableCellWithIdentifier:kSCOMessageCellIdentifier];
     if (cell == nil) {
         cell = [[SCOMessageCell alloc] init];
     }
@@ -198,6 +206,14 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return [SCOMessageCell heightWithMessageInfo:[self.messages objectAtIndex:indexPath.row]];
+}
+
+#pragma mark -
+#pragma mark SCOChannelListViewControllerSidebarDelegate
+
+- (void)channelListViewController:(SCOChannelListViewController *)viewController didSelectChannelName:(NSString *)channelName
+{
+    [self.navigationController setRevealedState:JTRevealedStateNo];
 }
 
 @end
