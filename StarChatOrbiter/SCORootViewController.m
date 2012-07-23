@@ -8,8 +8,12 @@
 
 #import "SCORootViewController.h"
 #import "SCOPreferencesRootViewController.h"
+#import "SSKeychain.h"
+#import "SCOStarChatContext.h"
 
 @interface SCORootViewController ()
+
+- (void)showPreferencesView;
 
 @property (strong, nonatomic, readwrite) UINavigationController *navigationController;
 @property (strong, nonatomic, readwrite) SCOChatLogViewController *chatLogViewController;
@@ -59,6 +63,31 @@
 }
 
 - (void)prepareApplication
+{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSURL *savedStarChatURL = [userDefaults URLForKey:kUserDefaultsStarChatURL];
+    
+    if (savedStarChatURL) {
+        NSString *account = [userDefaults objectForKey:kUserDefaultsStarChatAccount];
+        NSString *password = [SSKeychain passwordForService:[savedStarChatURL absoluteString] account:account];
+        
+        SCOStarChatContext *context = [SCOStarChatContext sharedContext];
+        context.baseURL = savedStarChatURL;
+        [context loginUserName:account
+                      password:password
+                    completion:^{
+                        
+                    }
+                       failure:^(NSError *error){
+                           [self showPreferencesView];
+                       }];
+    }
+    else {
+        [self showPreferencesView];
+    }
+}
+
+- (void)showPreferencesView
 {
     double delayInSeconds = 0.1;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
