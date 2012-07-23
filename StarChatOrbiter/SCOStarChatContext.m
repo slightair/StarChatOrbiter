@@ -18,9 +18,12 @@
 @property (strong, nonatomic, readwrite) CLVStarChatUserInfo *userInfo;
 @property (strong, nonatomic, readwrite) NSArray *subscribedChannels;
 @property (strong, nonatomic, readwrite) CLVStarChatChannelInfo *currentChannelInfo;
+@property (strong, nonatomic, readwrite) NSArray *userKeywords;
 @property (strong, nonatomic) NSString *userName;
 @property (strong, nonatomic) NSString *password;
 @property (strong, nonatomic) CLVStarChatAPIClient *apiClient;
+@property (strong, nonatomic) NSMutableDictionary *channelUsers;
+@property (strong, nonatomic) NSMutableDictionary *userNickDictionary;
 
 @end
 
@@ -30,9 +33,12 @@
 @synthesize userInfo = _userInfo;
 @synthesize subscribedChannels = _subscribedChannels;
 @synthesize currentChannelInfo = _currentChannelInfo;
+@synthesize userKeywords = _userKeywords;
 @synthesize userName = _userName;
 @synthesize password = _password;
 @synthesize apiClient = _apiClient;
+@synthesize channelUsers = _channelUsers;
+@synthesize userNickDictionary = _userNickDictionary;
 
 + (id)sharedContext
 {
@@ -45,6 +51,9 @@
 {
     self.userInfo = nil;
     self.subscribedChannels = [NSArray array];
+    self.channelUsers = [NSMutableDictionary dictionary];
+    self.userNickDictionary = [NSMutableDictionary dictionary];
+    self.userKeywords = [NSArray array];
 }
 
 - (void)loginUserName:(NSString *)userName
@@ -97,6 +106,22 @@
     self.currentChannelInfo = channelInfo;
 }
 
+- (NSArray *)usersForChannelName:(NSString *)channelName
+{
+    return [self.channelUsers objectForKey:channelName];
+}
+
+- (NSString *)nickForUserName:(NSString *)userName
+{
+    NSString *nick = [self.userNickDictionary objectForKey:userName];
+    
+    if (!nick) {
+#warning 再取得
+    }
+    
+    return nick;
+}
+
 - (void)updateInformation
 {
     if (!self.apiClient) {
@@ -108,6 +133,54 @@
     [self.apiClient subscribedChannels:^(NSArray *channels){
         self.subscribedChannels = channels;
         self.currentChannelInfo = [self.subscribedChannels objectAtIndex:0];
+        
+        dispatch_queue_t globalQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        dispatch_source_t source = dispatch_source_create(DISPATCH_SOURCE_TYPE_DATA_ADD, 0, 0, globalQueue);
+        
+        __block NSInteger complete = 0;
+        dispatch_source_set_event_handler(source, ^{
+            complete += dispatch_source_get_data(source);
+            if (complete == [channels count]) {
+                dispatch_source_cancel(source);
+            }
+        });
+        
+        dispatch_source_set_cancel_handler(source, ^{
+            dispatch_release(source);
+        });
+        
+        for (CLVStarChatChannelInfo *channelInfo in channels) {
+            [self.apiClient usersForChannel:channelInfo.name
+                                 completion:^(NSArray *users){
+                                     [self.channelUsers setObject:users forKey:channelInfo.name];
+                                     
+                                     [[NSNotificationCenter defaultCenter] postNotificationName:kSCOStarChatContextNotificationUpdateChannelUsers
+                                                                                         object:self
+                                                                                       userInfo:[NSDictionary dictionaryWithObject:channelInfo.name forKey:@"channelName"]];
+                                     
+                                     for (CLVStarChatUserInfo *user in users) {
+                                         if ([user.name isEqualToString:self.userName] && !self.userKeywords) {
+                                             self.userKeywords = user.keywords;
+                                         }
+                                         
+                                         if (![self.userNickDictionary objectForKey:user.name]) {
+                                             [self.userNickDictionary setObject:user.nick forKey:user.name];
+                                         }
+                                     }
+                                     
+                                     dispatch_source_merge_data(source, 1);
+                                 }
+                                    failure:^(NSError *error){
+                                        NSLog(@"%@", [error localizedDescription]);
+                                        [self postErrorNotification:error];
+                                        dispatch_source_merge_data(source, 1);
+                                    }];
+        }
+        
+        dispatch_resume(source);
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:kSCOStarChatContextNotificationUpdateNickDictionary
+                                                      object:self];
     }
                                failure:^(NSError *error){
                                    NSLog(@"%@", [error localizedDescription]);
@@ -147,6 +220,14 @@
     _currentChannelInfo = currentChannelInfo;
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kSCOStarChatContextNotificationChangeCurrentChannelInfo
+                                                        object:self];
+}
+
+- (void)setUserKeywords:(NSArray *)userKeywords
+{
+    _userKeywords = userKeywords;
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kSCOStarChatContextNotificationUpdateUserKeywords
                                                         object:self];
 }
 
