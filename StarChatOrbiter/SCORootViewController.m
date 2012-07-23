@@ -13,6 +13,7 @@
 
 @interface SCORootViewController ()
 
+- (void)loading:(BOOL)value;
 - (void)showPreferencesView;
 
 @property (strong, nonatomic, readwrite) UINavigationController *navigationController;
@@ -73,12 +74,15 @@
         
         SCOStarChatContext *context = [SCOStarChatContext sharedContext];
         context.baseURL = savedStarChatURL;
+        
+        [self loading:YES];
         [context loginUserName:account
                       password:password
                     completion:^{
-                        
+                        [self loading:NO];
                     }
                        failure:^(NSError *error){
+                           [self loading:NO];
                            [self showPreferencesView];
                        }];
     }
@@ -94,6 +98,53 @@
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         [self presentModalViewController:[SCOPreferencesRootViewController sharedViewController] animated:YES];
     });
+}
+
+
+#pragma mark -
+#pragma mark copied from QuickDialogController+Loading
+
+- (UIView *)createLoadingView {
+    UIView *loading = [[UIView alloc] init];
+    loading.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.4];
+    loading.autoresizingMask = UIViewAutoresizingFlexibleWidth  | UIViewAutoresizingFlexibleHeight;
+    loading.tag = 1123002;
+    UIActivityIndicatorView *activity = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    [activity startAnimating];
+    [activity sizeToFit];
+    activity.center = CGPointMake(loading.center.x, loading.frame.size.height/3);
+    activity.autoresizingMask = UIViewAutoresizingFlexibleWidth  | UIViewAutoresizingFlexibleHeight;
+    
+    [loading addSubview:activity];
+    
+    [self.view addSubview:loading];
+    [self.view bringSubviewToFront:loading];
+    return loading;
+}
+
+- (void)loading:(BOOL)visible {
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = visible;
+    UIView *loadingView = [self.view viewWithTag:1123002];
+    if (loadingView==nil){
+        loadingView = [self createLoadingView];
+    }
+    loadingView.frame = self.view.bounds;
+    self.view.userInteractionEnabled = !visible;
+    
+    if (visible)
+        loadingView.hidden = NO;
+    
+    loadingView.alpha = visible ? 0 : 1;
+    [UIView animateWithDuration:0.3
+                     animations:^{
+                         loadingView.alpha = visible ? 1 : 0;
+                     }
+                     completion: ^(BOOL  finished) {
+                         if (!visible) {
+                             loadingView.hidden = YES;
+                             [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+                         }
+                     }];
 }
 
 @end

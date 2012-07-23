@@ -114,6 +114,8 @@
                         if ([self.loginDelegate respondsToSelector:@selector(preferencesViewControllerDidSuccessLoginProcess:)]) {
                             [self.loginDelegate preferencesViewControllerDidSuccessLoginProcess:self];
                         }
+                        
+                        [self loading:NO];
                     }
                        failure:^(NSError *error){
                            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error"
@@ -121,10 +123,10 @@
                                                                               delegate:nil
                                                                      cancelButtonTitle:@"OK"
                                                                      otherButtonTitles:nil];
+                           
+                           [self loading:NO];
                            [alertView show];
                        }];
-        
-        [self loading:NO];
     };
     
     [loginButtonSection addElement:loginButtonElement];
