@@ -8,6 +8,9 @@
 
 #import "QuickDialog.h"
 
+#define kUserDefaultsStarChatURL @"UserDefaultsStarChatURL"
+#define kUserDefaultsStarChatAccount @"UserDefaultsStarChatAccount"
+
 @class SCOPreferencesViewController;
 
 @protocol SCOPreferencesViewControllerLoginDelegate <NSObject>
