@@ -23,6 +23,7 @@
 @property (strong, nonatomic) NSString *password;
 @property (strong, nonatomic) CLVStarChatAPIClient *apiClient;
 @property (strong, nonatomic) NSMutableDictionary *channelUsers;
+@property (strong, nonatomic) NSMutableDictionary *channelMessages;
 @property (strong, nonatomic) NSMutableDictionary *userNickDictionary;
 
 @end
@@ -38,6 +39,7 @@
 @synthesize password = _password;
 @synthesize apiClient = _apiClient;
 @synthesize channelUsers = _channelUsers;
+@synthesize channelMessages = _channelMessages;
 @synthesize userNickDictionary = _userNickDictionary;
 
 + (id)sharedContext
@@ -52,6 +54,7 @@
     self.userInfo = nil;
     self.subscribedChannels = [NSArray array];
     self.channelUsers = [NSMutableDictionary dictionary];
+    self.channelMessages = [NSMutableDictionary dictionary];
     self.userNickDictionary = [NSMutableDictionary dictionary];
     self.userKeywords = [NSArray array];
 }
@@ -111,6 +114,11 @@
     return [self.channelUsers objectForKey:channelName];
 }
 
+- (NSArray *)messagesForChannelName:(NSString *)channelName
+{
+    return [self.channelMessages objectForKey:channelName];
+}
+
 - (NSString *)nickForUserName:(NSString *)userName
 {
     NSString *nick = [self.userNickDictionary objectForKey:userName];
@@ -157,8 +165,21 @@
             }
             
             [self.channelUsers setObject:users forKey:channelInfo.name];
-            
             [[NSNotificationCenter defaultCenter] postNotificationName:kSCOStarChatContextNotificationUpdateChannelUsers
+                                                                object:self
+                                                              userInfo:[NSDictionary dictionaryWithObject:channelInfo.name forKey:@"channelName"]];
+            
+            NSArray *messages = [self.apiClient recentMessagesForChannel:channelInfo.name error:&error];
+            
+            if (error) {
+                NSLog(@"%@", [error localizedDescription]);
+                [self postErrorNotification:error];
+                
+                return;
+            }
+            
+            [self.channelMessages setObject:messages forKey:channelInfo.name];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kSCOStarChatContextNotificationUpdateChannelMessages
                                                                 object:self
                                                               userInfo:[NSDictionary dictionaryWithObject:channelInfo.name forKey:@"channelName"]];
             
