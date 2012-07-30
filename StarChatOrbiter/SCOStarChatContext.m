@@ -116,7 +116,18 @@
     NSString *nick = [self.userNickDictionary objectForKey:userName];
     
     if (!nick) {
-#warning 再取得
+        NSError *error = nil;
+        CLVStarChatUserInfo *user = [self.apiClient userInfoForName:userName error:&error];
+        
+        if (error) {
+            NSLog(@"%@", [error localizedDescription]);
+            [self postErrorNotification:error];
+            
+            return nil;
+        }
+        
+        [self.userNickDictionary setObject:user.nick forKey:user.name];
+        nick = user.nick;
     }
     
     return nick;
@@ -134,50 +145,33 @@
         self.subscribedChannels = channels;
         self.currentChannelInfo = [self.subscribedChannels objectAtIndex:0];
         
-        dispatch_queue_t globalQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-        dispatch_source_t source = dispatch_source_create(DISPATCH_SOURCE_TYPE_DATA_ADD, 0, 0, globalQueue);
-        
-        __block NSInteger complete = 0;
-        dispatch_source_set_event_handler(source, ^{
-            complete += dispatch_source_get_data(source);
-            if (complete == [channels count]) {
-                dispatch_source_cancel(source);
-            }
-        });
-        
-        dispatch_source_set_cancel_handler(source, ^{
-            dispatch_release(source);
-        });
-        
         for (CLVStarChatChannelInfo *channelInfo in channels) {
-            [self.apiClient usersForChannel:channelInfo.name
-                                 completion:^(NSArray *users){
-                                     [self.channelUsers setObject:users forKey:channelInfo.name];
-                                     
-                                     [[NSNotificationCenter defaultCenter] postNotificationName:kSCOStarChatContextNotificationUpdateChannelUsers
-                                                                                         object:self
-                                                                                       userInfo:[NSDictionary dictionaryWithObject:channelInfo.name forKey:@"channelName"]];
-                                     
-                                     for (CLVStarChatUserInfo *user in users) {
-                                         if ([user.name isEqualToString:self.userName] && !self.userKeywords) {
-                                             self.userKeywords = user.keywords;
-                                         }
-                                         
-                                         if (![self.userNickDictionary objectForKey:user.name]) {
-                                             [self.userNickDictionary setObject:user.nick forKey:user.name];
-                                         }
-                                     }
-                                     
-                                     dispatch_source_merge_data(source, 1);
-                                 }
-                                    failure:^(NSError *error){
-                                        NSLog(@"%@", [error localizedDescription]);
-                                        [self postErrorNotification:error];
-                                        dispatch_source_merge_data(source, 1);
-                                    }];
+            NSError *error = nil;
+            NSArray *users = [self.apiClient usersForChannel:channelInfo.name error:&error];
+            
+            if (error) {
+                NSLog(@"%@", [error localizedDescription]);
+                [self postErrorNotification:error];
+
+                return;
+            }
+            
+            [self.channelUsers setObject:users forKey:channelInfo.name];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:kSCOStarChatContextNotificationUpdateChannelUsers
+                                                                object:self
+                                                              userInfo:[NSDictionary dictionaryWithObject:channelInfo.name forKey:@"channelName"]];
+            
+            for (CLVStarChatUserInfo *user in users) {
+                if ([user.name isEqualToString:self.userName] && !self.userKeywords) {
+                    self.userKeywords = user.keywords;
+                }
+                
+                if (![self.userNickDictionary objectForKey:user.name]) {
+                    [self.userNickDictionary setObject:user.nick forKey:user.name];
+                }
+            }
         }
-        
-        dispatch_resume(source);
         
         [[NSNotificationCenter defaultCenter] postNotificationName:kSCOStarChatContextNotificationUpdateNickDictionary
                                                       object:self];
