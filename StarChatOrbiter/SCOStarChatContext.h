@@ -15,6 +15,9 @@
 #define kSCOStarChatContextNotificationLoggedIn @"SCOStarChatContextNotificationLoggedIn"
 #define kSCOStarChatContextNotificationUpdateSubscribedChannels @"SCOStarChatContextNotificationUpdateSubscribedChannels"
 #define kSCOStarChatContextNotificationChangeCurrentChannelInfo @"SCOStarChatContextNotificationChangeCurrentChannelInfo"
+#define kSCOStarChatContextNotificationUpdateChannelUsers @"SCOStarChatContextNotificationUpdateChannelUsers"
+#define kSCOStarChatContextNotificationUpdateNickDictionary @"SCOStarChatContextNotificationUpdateNickDictionary"
+#define kSCOStarChatContextNotificationUpdateUserKeywords @"SCOStarChatContextNotificationUpdateUserKeywords"
 
 enum SCOStarChatContextErrors {
     SCOStarChatContextErrorAPIClientNotReady = 1000,
@@ -28,10 +31,13 @@ enum SCOStarChatContextErrors {
            completion:(void (^)(void))completion
               failure:(void (^)(NSError *error))failure;
 - (void)selectChannel:(NSString *)channelName;
+- (NSArray *)usersForChannelName:(NSString *)channelName;
+- (NSString *)nickForUserName:(NSString *)userName;
 
 @property (strong, nonatomic) NSURL *baseURL;
 @property (strong, nonatomic, readonly) CLVStarChatUserInfo *userInfo;
 @property (strong, nonatomic, readonly) NSArray *subscribedChannels;
 @property (strong, nonatomic, readonly) CLVStarChatChannelInfo *currentChannelInfo;
+@property (strong, nonatomic, readonly) NSArray *userKeywords;
 
 @end

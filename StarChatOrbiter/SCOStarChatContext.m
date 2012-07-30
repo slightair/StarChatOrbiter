@@ -18,9 +18,12 @@
 @property (strong, nonatomic, readwrite) CLVStarChatUserInfo *userInfo;
 @property (strong, nonatomic, readwrite) NSArray *subscribedChannels;
 @property (strong, nonatomic, readwrite) CLVStarChatChannelInfo *currentChannelInfo;
+@property (strong, nonatomic, readwrite) NSArray *userKeywords;
 @property (strong, nonatomic) NSString *userName;
 @property (strong, nonatomic) NSString *password;
 @property (strong, nonatomic) CLVStarChatAPIClient *apiClient;
+@property (strong, nonatomic) NSMutableDictionary *channelUsers;
+@property (strong, nonatomic) NSMutableDictionary *userNickDictionary;
 
 @end
 
@@ -30,9 +33,12 @@
 @synthesize userInfo = _userInfo;
 @synthesize subscribedChannels = _subscribedChannels;
 @synthesize currentChannelInfo = _currentChannelInfo;
+@synthesize userKeywords = _userKeywords;
 @synthesize userName = _userName;
 @synthesize password = _password;
 @synthesize apiClient = _apiClient;
+@synthesize channelUsers = _channelUsers;
+@synthesize userNickDictionary = _userNickDictionary;
 
 + (id)sharedContext
 {
@@ -45,6 +51,9 @@
 {
     self.userInfo = nil;
     self.subscribedChannels = [NSArray array];
+    self.channelUsers = [NSMutableDictionary dictionary];
+    self.userNickDictionary = [NSMutableDictionary dictionary];
+    self.userKeywords = [NSArray array];
 }
 
 - (void)loginUserName:(NSString *)userName
@@ -97,6 +106,33 @@
     self.currentChannelInfo = channelInfo;
 }
 
+- (NSArray *)usersForChannelName:(NSString *)channelName
+{
+    return [self.channelUsers objectForKey:channelName];
+}
+
+- (NSString *)nickForUserName:(NSString *)userName
+{
+    NSString *nick = [self.userNickDictionary objectForKey:userName];
+    
+    if (!nick) {
+        NSError *error = nil;
+        CLVStarChatUserInfo *user = [self.apiClient userInfoForName:userName error:&error];
+        
+        if (error) {
+            NSLog(@"%@", [error localizedDescription]);
+            [self postErrorNotification:error];
+            
+            return nil;
+        }
+        
+        [self.userNickDictionary setObject:user.nick forKey:user.name];
+        nick = user.nick;
+    }
+    
+    return nick;
+}
+
 - (void)updateInformation
 {
     if (!self.apiClient) {
@@ -108,6 +144,37 @@
     [self.apiClient subscribedChannels:^(NSArray *channels){
         self.subscribedChannels = channels;
         self.currentChannelInfo = [self.subscribedChannels objectAtIndex:0];
+        
+        for (CLVStarChatChannelInfo *channelInfo in channels) {
+            NSError *error = nil;
+            NSArray *users = [self.apiClient usersForChannel:channelInfo.name error:&error];
+            
+            if (error) {
+                NSLog(@"%@", [error localizedDescription]);
+                [self postErrorNotification:error];
+
+                return;
+            }
+            
+            [self.channelUsers setObject:users forKey:channelInfo.name];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:kSCOStarChatContextNotificationUpdateChannelUsers
+                                                                object:self
+                                                              userInfo:[NSDictionary dictionaryWithObject:channelInfo.name forKey:@"channelName"]];
+            
+            for (CLVStarChatUserInfo *user in users) {
+                if ([user.name isEqualToString:self.userName] && !self.userKeywords) {
+                    self.userKeywords = user.keywords;
+                }
+                
+                if (![self.userNickDictionary objectForKey:user.name]) {
+                    [self.userNickDictionary setObject:user.nick forKey:user.name];
+                }
+            }
+        }
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:kSCOStarChatContextNotificationUpdateNickDictionary
+                                                      object:self];
     }
                                failure:^(NSError *error){
                                    NSLog(@"%@", [error localizedDescription]);
@@ -147,6 +214,14 @@
     _currentChannelInfo = currentChannelInfo;
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kSCOStarChatContextNotificationChangeCurrentChannelInfo
+                                                        object:self];
+}
+
+- (void)setUserKeywords:(NSArray *)userKeywords
+{
+    _userKeywords = userKeywords;
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kSCOStarChatContextNotificationUpdateUserKeywords
                                                         object:self];
 }
 

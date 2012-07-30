@@ -22,6 +22,9 @@ enum TableViewSections {
 
 @interface SCOChannelInfoViewController ()
 
+- (void)didChangeCurrentChannelInfo:(NSNotification *)notification;
+- (void)didUpdateChannelUsers:(NSNotification *)notification;
+
 @end
 
 @implementation SCOChannelInfoViewController
@@ -33,16 +36,13 @@ enum TableViewSections {
 {
     self = [super init];
     if (self) {
-        NSString *jsonString = @"[{\"name\":\"hoge\",\"nick\":\"hoge\"},{\"name\":\"foo\",\"nick\":\"foo\",\"keywords\":[\"nununu\"]}]";
-        NSMutableArray *users = [NSMutableArray array];
-        for (NSDictionary *userInfo in [jsonString JSONValue]) {
-            [users addObject:[CLVStarChatUserInfo userInfoWithDictionary:userInfo]];
-        }
-        self.users = users;
-        
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(didChangeCurrentChannelInfo:)
                                                      name:kSCOStarChatContextNotificationChangeCurrentChannelInfo
+                                                   object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(didUpdateChannelUsers:)
+                                                     name:kSCOStarChatContextNotificationUpdateChannelUsers
                                                    object:nil];
     }
     return self;
@@ -86,6 +86,13 @@ enum TableViewSections {
     self.channelInfo = context.currentChannelInfo;
 }
 
+- (void)didUpdateChannelUsers:(NSNotification *)notification
+{
+    SCOStarChatContext *context = [SCOStarChatContext sharedContext];
+    
+    self.users = [context usersForChannelName:self.channelInfo.name];
+}
+
 - (void)setChannelInfo:(CLVStarChatChannelInfo *)channelInfo
 {
     _channelInfo = channelInfo;
@@ -93,9 +100,20 @@ enum TableViewSections {
     SCOChannelInfoView *channelInfoView = (SCOChannelInfoView *)self.view;
     channelInfoView.headerView.headerTitleLabel.text = channelInfo.name;
     
+    SCOStarChatContext *context = [SCOStarChatContext sharedContext];
+    
+    self.users = [context usersForChannelName:self.channelInfo.name];
+}
+
+- (void)setUsers:(NSArray *)users
+{
+    _users = users;
+    
+    SCOChannelInfoView *channelInfoView = (SCOChannelInfoView *)self.view;
+    
     [channelInfoView.tableView reloadData];
 }
-   
+
 #pragma mark -
 #pragma mark Table view data source
 
