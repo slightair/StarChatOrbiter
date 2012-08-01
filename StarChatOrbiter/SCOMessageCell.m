@@ -75,8 +75,10 @@
         
         NSRange dateRange = [[mutableAttributedString string] rangeOfString:dateString];
         NSRange nameRange = [[mutableAttributedString string] rangeOfString:nameString];
-        UIColor *dateColor = [UIColor colorWithRed:0.54 green:0.59 blue:0.67 alpha:1.0];
-        UIColor *nameColor = [UIColor colorWithRed:0.54 green:0.59 blue:0.67 alpha:1.0];
+        UIColor *defaultColor = [UIColor colorWithRed:0.54 green:0.59 blue:0.67 alpha:1.0];
+        UIColor *temporaryColor = [UIColor colorWithRed:0.82 green:0.59 blue:0.67 alpha:1.0];
+        UIColor *dateColor = defaultColor;
+        UIColor *nameColor = messageInfo.temporaryNick ? temporaryColor : defaultColor;
         UIFont *boldFont = [UIFont boldSystemFontOfSize:kMessageFontSize];
         CTFontRef boldFontRef = CTFontCreateWithName((__bridge CFStringRef)boldFont.fontName, boldFont.pointSize, NULL);
         
