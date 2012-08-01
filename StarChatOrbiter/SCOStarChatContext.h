@@ -24,7 +24,7 @@ enum SCOStarChatContextErrors {
     SCOStarChatContextErrorAPIClientNotReady = 1000,
 };
 
-@interface SCOStarChatContext : NSObject
+@interface SCOStarChatContext : NSObject <CLVStarChatAPIClientDelegate>
 
 + (id)sharedContext;
 - (void)loginUserName:(NSString *)userName

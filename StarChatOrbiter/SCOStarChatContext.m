@@ -82,6 +82,8 @@
                                  [[NSNotificationCenter defaultCenter] postNotificationName:kSCOStarChatContextNotificationLoggedIn
                                                                                      object:self];
                                  [self updateInformation];
+                                 [self.apiClient startUserStreamConnection];
+                                 
                                  completion();
                              }
                                 failure:^(NSError *error){
@@ -218,6 +220,7 @@
     _baseURL = baseURL;
     
     self.apiClient = [[CLVStarChatAPIClient alloc] initWithBaseURL:self.baseURL];
+    self.apiClient.delegate = self;
     [self resetContext];
 }
 
@@ -244,6 +247,121 @@
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kSCOStarChatContextNotificationUpdateUserKeywords
                                                         object:self];
+}
+
+#pragma mark -
+#pragma mark CLVStarChatAPIClientDelegate Methods
+
+- (void)userStreamClient:(CLVStarChatAPIClient *)client didReceivedPacket:(NSDictionary *)packet
+{
+    NSLog(@"%@", packet);
+    NSString *packetType = [packet objectForKey:@"type"];
+    
+    if ([packetType isEqualToString:@"message"]) {
+        CLVStarChatMessageInfo *message = [CLVStarChatMessageInfo messageInfoWithDictionary:[packet objectForKey:@"message"]];
+        
+        NSArray *messages = [self.channelMessages objectForKey:message.channelName];
+        if (messages) {
+            [self.channelMessages setObject:[messages arrayByAddingObject:message] forKey:message.channelName];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:kSCOStarChatContextNotificationUpdateChannelMessages
+                                                                object:nil
+                                                              userInfo:[NSDictionary dictionaryWithObject:message.channelName forKey:@"channelName"]];
+        }
+    }
+    else if ([packetType isEqualToString:@"subscribing"]) {
+        NSString *channelName = [packet objectForKey:@"channel_name"];
+        NSString *userName = [packet objectForKey:@"user_name"];
+        
+        if ([userName isEqualToString:self.userName]) {
+            [self.apiClient usersForChannel:channelName
+                                 completion:^(NSArray *users){
+                                     for (CLVStarChatUserInfo *user in users) {
+                                         if (![self.userNickDictionary objectForKey:user.name]) {
+                                             [self.userNickDictionary setObject:user.nick forKey:user.name];
+                                         }
+                                     }
+                                     [[NSNotificationCenter defaultCenter] postNotificationName:kSCOStarChatContextNotificationUpdateNickDictionary
+                                                                                         object:self];
+                                 }
+                                    failure:^(NSError *error){
+                                        NSLog(@"%@", [error localizedDescription]);
+                                        [self postErrorNotification:error];
+                                    }];
+            
+            [self.apiClient channelInfoForName:channelName
+                                    completion:^(CLVStarChatChannelInfo *channelInfo){
+                                        self.subscribedChannels = [self.subscribedChannels arrayByAddingObject:channelInfo];
+                                    }
+                                       failure:^(NSError *error){
+                                           NSLog(@"%@", [error localizedDescription]);
+                                           [self postErrorNotification:error];
+                                       }];
+        }
+        else {
+            if (![self.userNickDictionary objectForKey:userName]) {
+                [self.apiClient userInfoForName:userName
+                                     completion:^(CLVStarChatUserInfo *user){
+                                         [self.userNickDictionary setObject:user.nick forKey:user.name];
+                                         
+                                         [[NSNotificationCenter defaultCenter] postNotificationName:kSCOStarChatContextNotificationUpdateNickDictionary
+                                                                                             object:self];
+                                     }
+                                        failure:^(NSError *error){
+                                            NSLog(@"%@", [error localizedDescription]);
+                                            [self postErrorNotification:error];
+                                        }];
+            }
+        }
+    }
+    else if ([packetType isEqualToString:@"user"]) {
+        CLVStarChatUserInfo *updatedUser = [CLVStarChatUserInfo userInfoWithDictionary:[packet objectForKey:@"user"]];
+        
+        if (![self.userNickDictionary objectForKey:updatedUser.name]) {
+            [self.userNickDictionary setObject:updatedUser.nick forKey:updatedUser.name];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kSCOStarChatContextNotificationUpdateNickDictionary
+                                                                object:self];
+        }
+    }
+    else if ([packetType isEqualToString:@"channel"]) {
+        CLVStarChatChannelInfo *updatedChannel = [CLVStarChatChannelInfo channelInfoWithDictionary:[packet objectForKey:@"channel"]];
+        
+        NSUInteger index = [self.subscribedChannels indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop){
+            CLVStarChatChannelInfo *channel = (CLVStarChatChannelInfo *)obj;
+            return [channel.name isEqualToString:updatedChannel.name];
+        }];
+        
+        if (index != NSNotFound) {
+            NSMutableArray *channels = [self.subscribedChannels mutableCopy];
+            [channels replaceObjectAtIndex:index withObject:updatedChannel];
+            self.subscribedChannels = [NSArray arrayWithArray:channels];
+        }
+    }
+}
+
+- (void)userStreamClientWillConnect:(CLVStarChatAPIClient *)client
+{
+    NSLog(@"%@", NSStringFromSelector(_cmd));
+}
+
+- (void)userStreamClientDidConnected:(CLVStarChatAPIClient *)client
+{
+    NSLog(@"%@", NSStringFromSelector(_cmd));
+}
+
+- (void)userStreamClientDidDisconnected:(CLVStarChatAPIClient *)client
+{
+    NSLog(@"%@", NSStringFromSelector(_cmd));
+}
+
+- (void)userStreamClient:(CLVStarChatAPIClient *)client didFailWithError:(NSError *)error
+{
+    NSLog(@"%@", NSStringFromSelector(_cmd));
+}
+
+- (void)userStreamClientDidAutoConnect:(CLVStarChatAPIClient *)client
+{
+    NSLog(@"%@", NSStringFromSelector(_cmd));
 }
 
 @end
