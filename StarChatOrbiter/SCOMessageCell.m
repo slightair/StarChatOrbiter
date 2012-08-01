@@ -36,7 +36,7 @@
         // Initialization code
         self.messageLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectZero];
         self.messageLabel.textColor = [UIColor darkGrayColor];
-        self.messageLabel.lineBreakMode = UILineBreakModeCharacterWrap;
+        self.messageLabel.lineBreakMode = UILineBreakModeWordWrap;
         self.messageLabel.numberOfLines = 0;
         self.messageLabel.font = [UIFont systemFontOfSize:kMessageFontSize];
         
@@ -77,6 +77,16 @@
         UIFont *boldFont = [UIFont boldSystemFontOfSize:kMessageFontSize];
         CTFontRef boldFontRef = CTFontCreateWithName((__bridge CFStringRef)boldFont.fontName, boldFont.pointSize, NULL);
         
+        double lineHeight = 0.0;
+        CTParagraphStyleSetting settings[] = {
+            {kCTParagraphStyleSpecifierMaximumLineSpacing, sizeof(lineHeight), &lineHeight},
+            {kCTParagraphStyleSpecifierMinimumLineHeight, sizeof(lineHeight), &lineHeight},
+            {kCTParagraphStyleSpecifierMaximumLineHeight, sizeof(lineHeight), &lineHeight},
+        };
+        
+        CTParagraphStyleRef paragraphStyle = CTParagraphStyleCreate(settings, sizeof(settings) / sizeof(settings[0]));
+        
+        [mutableAttributedString addAttribute:(NSString *)kCTParagraphStyleAttributeName value:(__bridge id)paragraphStyle range:NSMakeRange(0, [[mutableAttributedString string] length])];
         [mutableAttributedString addAttribute:(NSString *)kCTForegroundColorAttributeName value:(id)[dateColor CGColor] range:dateRange];
         [mutableAttributedString addAttribute:(NSString *)kCTForegroundColorAttributeName value:(id)[nameColor CGColor] range:nameRange];
         if (boldFontRef) {
@@ -96,10 +106,8 @@
     CGFloat baseHeight = kCellPaddingVertical * 2;
     CGFloat messageHeight = [text sizeWithFont:[UIFont systemFontOfSize:kMessageFontSize]
                              constrainedToSize:CGSizeMake(kCellWidth - kCellPaddingHorizontal * 2, kMessageLabelHeightMax)
-                                 lineBreakMode:UILineBreakModeCharacterWrap].height;
-    CGFloat newLineBonus = ([[text componentsSeparatedByString:@"\n"] count] - 1) * kMessageFontSize;
-    
-    return baseHeight + messageHeight + newLineBonus;
+                                 lineBreakMode:UILineBreakModeWordWrap].height;
+    return baseHeight + messageHeight;
 }
 
 @end
