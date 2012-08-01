@@ -317,11 +317,9 @@
     else if ([packetType isEqualToString:@"user"]) {
         CLVStarChatUserInfo *updatedUser = [CLVStarChatUserInfo userInfoWithDictionary:[packet objectForKey:@"user"]];
         
-        if (![self.userNickDictionary objectForKey:updatedUser.name]) {
-            [self.userNickDictionary setObject:updatedUser.nick forKey:updatedUser.name];
-            [[NSNotificationCenter defaultCenter] postNotificationName:kSCOStarChatContextNotificationUpdateNickDictionary
-                                                                object:self];
-        }
+        [self.userNickDictionary setObject:updatedUser.nick forKey:updatedUser.name];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kSCOStarChatContextNotificationUpdateNickDictionary
+                                                            object:self];
     }
     else if ([packetType isEqualToString:@"channel"]) {
         CLVStarChatChannelInfo *updatedChannel = [CLVStarChatChannelInfo channelInfoWithDictionary:[packet objectForKey:@"channel"]];
