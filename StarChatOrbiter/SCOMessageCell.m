@@ -10,7 +10,7 @@
 #import "TTTAttributedLabel.h"
 
 #define kMessageFormat @"%@ %@: %@"
-#define kCellPaddingHorizontal 12
+#define kCellPaddingHorizontal 8
 #define kCellPaddingVertical 2
 
 #define kMessageFontSize 12
@@ -63,7 +63,7 @@
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
-    [dateFormatter setDateFormat:@"HH:mm:ss"];
+    [dateFormatter setDateFormat:@"HH:mm"];
     
     NSString *nameString = messageInfo.userName;
     NSString *dateString = [dateFormatter stringFromDate:messageInfo.createdAt];
@@ -101,7 +101,7 @@
 + (CGFloat)heightWithMessageInfo:(CLVStarChatMessageInfo *)messageInfo
 {
     NSString *nameString = messageInfo.userName;
-    NSString *text = [NSString stringWithFormat:kMessageFormat, @"XX:XX:XX", nameString, messageInfo.body];
+    NSString *text = [NSString stringWithFormat:kMessageFormat, @"XX:XX", nameString, messageInfo.body];
     
     CGFloat baseHeight = kCellPaddingVertical * 2;
     CGFloat messageHeight = [text sizeWithFont:[UIFont systemFontOfSize:kMessageFontSize]
