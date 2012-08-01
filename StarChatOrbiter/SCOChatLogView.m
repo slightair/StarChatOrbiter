@@ -45,4 +45,30 @@
     self.postMessageInputView.frame = CGRectMake(0, self.tableView.bounds.size.height, viewSize.width, kPostMessageInputViewHeight);
 }
 
+- (BOOL)isShowLastLine
+{
+    NSInteger rows = [self.tableView.dataSource tableView:self.tableView numberOfRowsInSection:0];
+    if (rows <= 0) {
+        return YES;
+    }
+    
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:rows - 1 inSection:0];
+    UITableViewCell *lastCell = [self.tableView cellForRowAtIndexPath:indexPath];
+    
+    return [[self.tableView visibleCells] containsObject:lastCell];
+}
+
+- (void)scrollsToBottom
+{
+    NSInteger rows = [self.tableView.dataSource tableView:self.tableView numberOfRowsInSection:0];
+    if (rows <= 0) {
+        return;
+    }
+    
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:rows - 1 inSection:0];
+    [self.tableView scrollToRowAtIndexPath:indexPath
+                                 atScrollPosition:UITableViewScrollPositionBottom
+                                         animated:YES];
+}
+
 @end

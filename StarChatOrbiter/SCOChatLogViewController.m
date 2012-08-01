@@ -125,10 +125,15 @@
 
 - (void)setMessages:(NSArray *)messages
 {
+    SCOChatLogView *chatLogView = (SCOChatLogView *)self.view;
+    BOOL isShowLastLine = [chatLogView isShowLastLine];
+    
     _messages = messages;
     
-    SCOChatLogView *chatLogView = (SCOChatLogView *)self.view;
     [chatLogView.tableView reloadData];
+    if (isShowLastLine) {
+        [chatLogView scrollsToBottom];
+    }
 }
 
 - (void)setChannelInfo:(CLVStarChatChannelInfo *)channelInfo

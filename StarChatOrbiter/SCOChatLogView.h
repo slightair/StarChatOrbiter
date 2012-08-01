@@ -11,6 +11,9 @@
 
 @interface SCOChatLogView : UIView
 
+- (BOOL)isShowLastLine;
+- (void)scrollsToBottom;
+
 @property (strong, nonatomic, readonly) UITableView *tableView;
 @property (strong, nonatomic, readonly) SCOPostMessageInputView *postMessageInputView;
 
