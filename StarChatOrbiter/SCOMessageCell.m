@@ -8,6 +8,7 @@
 
 #import "SCOMessageCell.h"
 #import "TTTAttributedLabel.h"
+#import "SCOStarChatContext.h"
 
 #define kMessageFormat @"%@ %@: %@"
 #define kCellPaddingHorizontal 8
@@ -39,6 +40,7 @@
         self.messageLabel.lineBreakMode = UILineBreakModeWordWrap;
         self.messageLabel.numberOfLines = 0;
         self.messageLabel.font = [UIFont systemFontOfSize:kMessageFontSize];
+        self.messageLabel.verticalAlignment = TTTAttributedLabelVerticalAlignmentTop;
         
         [self.contentView addSubview:self.messageLabel];
     }
@@ -65,7 +67,8 @@
     [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
     [dateFormatter setDateFormat:@"HH:mm"];
     
-    NSString *nameString = messageInfo.userName;
+    SCOStarChatContext *context = [SCOStarChatContext sharedContext];
+    NSString *nameString = messageInfo.temporaryNick ? messageInfo.temporaryNick : [context nickForUserName:messageInfo.userName];
     NSString *dateString = [dateFormatter stringFromDate:messageInfo.createdAt];
     
     [self.messageLabel setText:[NSString stringWithFormat:kMessageFormat, dateString, nameString, messageInfo.body] afterInheritingLabelAttributesAndConfiguringWithBlock:^NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString){
@@ -100,7 +103,8 @@
 
 + (CGFloat)heightWithMessageInfo:(CLVStarChatMessageInfo *)messageInfo
 {
-    NSString *nameString = messageInfo.userName;
+    SCOStarChatContext *context = [SCOStarChatContext sharedContext];
+    NSString *nameString = messageInfo.temporaryNick ? messageInfo.temporaryNick : [context nickForUserName:messageInfo.userName];
     NSString *text = [NSString stringWithFormat:kMessageFormat, @"XX:XX", nameString, messageInfo.body];
     
     CGFloat baseHeight = kCellPaddingVertical * 2;
