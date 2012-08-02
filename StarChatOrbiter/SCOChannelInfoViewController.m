@@ -66,6 +66,7 @@ enum TableViewSections {
     SCOStarChatContext *context = [SCOStarChatContext sharedContext];
     
     self.channelInfo = context.currentChannelInfo;
+    self.users = [context usersForChannelName:self.channelInfo.name];
 }
 
 - (void)viewDidUnload
@@ -88,6 +89,10 @@ enum TableViewSections {
 
 - (void)didUpdateChannelUsers:(NSNotification *)notification
 {
+    if (![[notification.userInfo objectForKey:@"channelName"] isEqualToString:self.channelInfo.name]) {
+        return;
+    }
+    
     SCOStarChatContext *context = [SCOStarChatContext sharedContext];
     
     self.users = [context usersForChannelName:self.channelInfo.name];

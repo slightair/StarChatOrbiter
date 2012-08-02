@@ -22,6 +22,7 @@
 - (void)revealLeftSidebar:(id)sender;
 - (void)revealRightSidebar:(id)sender;
 - (void)didChangeCurrentChannelInfo:(NSNotification *)notification;
+- (void)didUpdateChannelMessages:(NSNotification *)notification;
 
 @property (strong, nonatomic) UIViewController *leftSidebarViewController;
 @property (strong, nonatomic) UIViewController *rightSidebarViewController;
@@ -39,17 +40,13 @@
 {
     self = [super init];
     if (self) {
-#warning debug
-        NSString *jsonString = @"[{\"id\":461,\"user_name\":\"foo\",\"body\":\"あいうえお\",\"created_at\":1340372159,\"channel_name\":\"てすと\",\"notice\":false},{\"id\":462,\"user_name\":\"foo\",\"body\":\"かきくけこ\",\"created_at\":1340372162,\"channel_name\":\"てすと\",\"notice\":false},{\"id\":463,\"user_name\":\"foo\",\"body\":\"0.1.6 / 2012.07.13\\n30分おきに WebView をリロードするようにした（長時間起動しているとメモリ使用量が大変なことになる問題の対策です。ウインドウが表示されていない時、または1分間操作をしていない時に自動的にリロードします。）\\nメッセージのnickを解決できなかった時、再取得を試みるようにした\\nログアウトボタンが押された時の処理を修正した\",\"created_at\":1340372165,\"channel_name\":\"てすと\",\"notice\":false},{\"id\":464,\"user_name\":\"foo\",\"body\":\"ニャーン\",\"created_at\":1340372169,\"channel_name\":\"てすと\",\"notice\":false},{\"id\":465,\"user_name\":\"foo\",\"body\":\"ひろし\",\"created_at\":1340372199,\"channel_name\":\"てすと\",\"notice\":true}]";
-        NSMutableArray *messageInfoList = [NSMutableArray array];
-        for (NSDictionary *messageInfo in [jsonString JSONValue]) {
-            [messageInfoList addObject:[CLVStarChatMessageInfo messageInfoWithDictionary:messageInfo]];
-        }
-        self.messages = messageInfoList;
-        
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(didChangeCurrentChannelInfo:)
                                                      name:kSCOStarChatContextNotificationChangeCurrentChannelInfo
+                                                   object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(didUpdateChannelMessages:)
+                                                     name:kSCOStarChatContextNotificationUpdateChannelMessages
                                                    object:nil];
     }
     return self;
@@ -72,6 +69,11 @@
     SCOChatLogView *chatLogView = (SCOChatLogView *)self.view;
     chatLogView.tableView.dataSource = self;
     chatLogView.tableView.delegate = self;
+    
+    SCOStarChatContext *context = [SCOStarChatContext sharedContext];
+    
+    self.channelInfo = context.currentChannelInfo;
+    self.messages = [context messagesForChannelName:self.channelInfo.name];
 }
 
 - (void)viewDidUnload
@@ -110,12 +112,28 @@
     self.channelInfo = context.currentChannelInfo;
 }
 
+- (void)didUpdateChannelMessages:(NSNotification *)notification
+{
+    if (![[notification.userInfo objectForKey:@"channelName"] isEqualToString:self.channelInfo.name]) {
+        return;
+    }
+    
+    SCOStarChatContext *context = [SCOStarChatContext sharedContext];
+    
+    self.messages = [context messagesForChannelName:self.channelInfo.name];
+}
+
 - (void)setMessages:(NSArray *)messages
 {
+    SCOChatLogView *chatLogView = (SCOChatLogView *)self.view;
+    BOOL isShowLastLine = [chatLogView isShowLastLine];
+    
     _messages = messages;
     
-    SCOChatLogView *chatLogView = (SCOChatLogView *)self.view;
     [chatLogView.tableView reloadData];
+    if (isShowLastLine) {
+        [chatLogView scrollsToBottom];
+    }
 }
 
 - (void)setChannelInfo:(CLVStarChatChannelInfo *)channelInfo
@@ -123,6 +141,10 @@
     _channelInfo = channelInfo;
     
     self.title = channelInfo.name;
+    
+    SCOStarChatContext *context = [SCOStarChatContext sharedContext];
+    
+    self.messages = [context messagesForChannelName:self.channelInfo.name];
 }
 
 #pragma mark -

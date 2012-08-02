@@ -8,9 +8,10 @@
 
 #import "SCOMessageCell.h"
 #import "TTTAttributedLabel.h"
+#import "SCOStarChatContext.h"
 
 #define kMessageFormat @"%@ %@: %@"
-#define kCellPaddingHorizontal 12
+#define kCellPaddingHorizontal 8
 #define kCellPaddingVertical 2
 
 #define kMessageFontSize 12
@@ -36,9 +37,10 @@
         // Initialization code
         self.messageLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectZero];
         self.messageLabel.textColor = [UIColor darkGrayColor];
-        self.messageLabel.lineBreakMode = UILineBreakModeCharacterWrap;
+        self.messageLabel.lineBreakMode = UILineBreakModeWordWrap;
         self.messageLabel.numberOfLines = 0;
         self.messageLabel.font = [UIFont systemFontOfSize:kMessageFontSize];
+        self.messageLabel.verticalAlignment = TTTAttributedLabelVerticalAlignmentTop;
         
         [self.contentView addSubview:self.messageLabel];
     }
@@ -63,20 +65,33 @@
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
-    [dateFormatter setDateFormat:@"HH:mm:ss"];
+    [dateFormatter setDateFormat:@"HH:mm"];
     
-    NSString *nameString = messageInfo.userName;
+    SCOStarChatContext *context = [SCOStarChatContext sharedContext];
+    NSString *nameString = messageInfo.temporaryNick ? messageInfo.temporaryNick : [context nickForUserName:messageInfo.userName];
     NSString *dateString = [dateFormatter stringFromDate:messageInfo.createdAt];
     
     [self.messageLabel setText:[NSString stringWithFormat:kMessageFormat, dateString, nameString, messageInfo.body] afterInheritingLabelAttributesAndConfiguringWithBlock:^NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString){
         
         NSRange dateRange = [[mutableAttributedString string] rangeOfString:dateString];
         NSRange nameRange = [[mutableAttributedString string] rangeOfString:nameString];
-        UIColor *dateColor = [UIColor colorWithRed:0.54 green:0.59 blue:0.67 alpha:1.0];
-        UIColor *nameColor = [UIColor colorWithRed:0.54 green:0.59 blue:0.67 alpha:1.0];
+        UIColor *defaultColor = [UIColor colorWithRed:0.54 green:0.59 blue:0.67 alpha:1.0];
+        UIColor *temporaryColor = [UIColor colorWithRed:0.82 green:0.59 blue:0.67 alpha:1.0];
+        UIColor *dateColor = defaultColor;
+        UIColor *nameColor = messageInfo.temporaryNick ? temporaryColor : defaultColor;
         UIFont *boldFont = [UIFont boldSystemFontOfSize:kMessageFontSize];
         CTFontRef boldFontRef = CTFontCreateWithName((__bridge CFStringRef)boldFont.fontName, boldFont.pointSize, NULL);
         
+        double lineHeight = 0.0;
+        CTParagraphStyleSetting settings[] = {
+            {kCTParagraphStyleSpecifierMaximumLineSpacing, sizeof(lineHeight), &lineHeight},
+            {kCTParagraphStyleSpecifierMinimumLineHeight, sizeof(lineHeight), &lineHeight},
+            {kCTParagraphStyleSpecifierMaximumLineHeight, sizeof(lineHeight), &lineHeight},
+        };
+        
+        CTParagraphStyleRef paragraphStyle = CTParagraphStyleCreate(settings, sizeof(settings) / sizeof(settings[0]));
+        
+        [mutableAttributedString addAttribute:(NSString *)kCTParagraphStyleAttributeName value:(__bridge id)paragraphStyle range:NSMakeRange(0, [[mutableAttributedString string] length])];
         [mutableAttributedString addAttribute:(NSString *)kCTForegroundColorAttributeName value:(id)[dateColor CGColor] range:dateRange];
         [mutableAttributedString addAttribute:(NSString *)kCTForegroundColorAttributeName value:(id)[nameColor CGColor] range:nameRange];
         if (boldFontRef) {
@@ -90,16 +105,15 @@
 
 + (CGFloat)heightWithMessageInfo:(CLVStarChatMessageInfo *)messageInfo
 {
-    NSString *nameString = messageInfo.userName;
-    NSString *text = [NSString stringWithFormat:kMessageFormat, @"XX:XX:XX", nameString, messageInfo.body];
+    SCOStarChatContext *context = [SCOStarChatContext sharedContext];
+    NSString *nameString = messageInfo.temporaryNick ? messageInfo.temporaryNick : [context nickForUserName:messageInfo.userName];
+    NSString *text = [NSString stringWithFormat:kMessageFormat, @"XX:XX", nameString, messageInfo.body];
     
     CGFloat baseHeight = kCellPaddingVertical * 2;
     CGFloat messageHeight = [text sizeWithFont:[UIFont systemFontOfSize:kMessageFontSize]
                              constrainedToSize:CGSizeMake(kCellWidth - kCellPaddingHorizontal * 2, kMessageLabelHeightMax)
-                                 lineBreakMode:UILineBreakModeCharacterWrap].height;
-    CGFloat newLineBonus = ([[text componentsSeparatedByString:@"\n"] count] - 1) * kMessageFontSize;
-    
-    return baseHeight + messageHeight + newLineBonus;
+                                 lineBreakMode:UILineBreakModeWordWrap].height;
+    return baseHeight + messageHeight;
 }
 
 @end

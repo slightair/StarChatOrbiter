@@ -16,6 +16,7 @@
 #define kSCOStarChatContextNotificationUpdateSubscribedChannels @"SCOStarChatContextNotificationUpdateSubscribedChannels"
 #define kSCOStarChatContextNotificationChangeCurrentChannelInfo @"SCOStarChatContextNotificationChangeCurrentChannelInfo"
 #define kSCOStarChatContextNotificationUpdateChannelUsers @"SCOStarChatContextNotificationUpdateChannelUsers"
+#define kSCOStarChatContextNotificationUpdateChannelMessages @"SCOStarChatContextNotificationUpdateChannelMessages"
 #define kSCOStarChatContextNotificationUpdateNickDictionary @"SCOStarChatContextNotificationUpdateNickDictionary"
 #define kSCOStarChatContextNotificationUpdateUserKeywords @"SCOStarChatContextNotificationUpdateUserKeywords"
 
@@ -23,7 +24,7 @@ enum SCOStarChatContextErrors {
     SCOStarChatContextErrorAPIClientNotReady = 1000,
 };
 
-@interface SCOStarChatContext : NSObject
+@interface SCOStarChatContext : NSObject <CLVStarChatAPIClientDelegate>
 
 + (id)sharedContext;
 - (void)loginUserName:(NSString *)userName
@@ -32,6 +33,7 @@ enum SCOStarChatContextErrors {
               failure:(void (^)(NSError *error))failure;
 - (void)selectChannel:(NSString *)channelName;
 - (NSArray *)usersForChannelName:(NSString *)channelName;
+- (NSArray *)messagesForChannelName:(NSString *)channelName;
 - (NSString *)nickForUserName:(NSString *)userName;
 
 @property (strong, nonatomic) NSURL *baseURL;
