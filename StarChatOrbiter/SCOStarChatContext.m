@@ -299,18 +299,47 @@
                                        }];
         }
         else {
-            if (![self.userNickDictionary objectForKey:userName]) {
-                [self.apiClient userInfoForName:userName
-                                     completion:^(CLVStarChatUserInfo *user){
-                                         [self.userNickDictionary setObject:user.nick forKey:user.name];
+            [self.apiClient userInfoForName:userName
+                                 completion:^(CLVStarChatUserInfo *user){
+                                     [self.userNickDictionary setObject:user.nick forKey:user.name];
+                                     
+                                     [[NSNotificationCenter defaultCenter] postNotificationName:kSCOStarChatContextNotificationUpdateNickDictionary
+                                                                                         object:self];
+                                     
+                                     NSArray *users = [self.channelUsers objectForKey:channelName];
+                                     if (users) {
+                                         [self.channelUsers setObject:[users arrayByAddingObject:user] forKey:channelName];
                                          
-                                         [[NSNotificationCenter defaultCenter] postNotificationName:kSCOStarChatContextNotificationUpdateNickDictionary
-                                                                                             object:self];
+                                         [[NSNotificationCenter defaultCenter] postNotificationName:kSCOStarChatContextNotificationUpdateChannelUsers
+                                                                                             object:self
+                                                                                           userInfo:[NSDictionary dictionaryWithObject:channelName forKey:@"channelName"]];
                                      }
-                                        failure:^(NSError *error){
-                                            NSLog(@"%@", [error localizedDescription]);
-                                            [self postErrorNotification:error];
-                                        }];
+                                 }
+                                    failure:^(NSError *error){
+                                        NSLog(@"%@", [error localizedDescription]);
+                                        [self postErrorNotification:error];
+                                    }];
+        }
+    }
+    else if ([packetType isEqualToString:@"delete_subscribing"]) {
+        NSString *channelName = [packet objectForKey:@"channel_name"];
+        NSString *userName = [packet objectForKey:@"user_name"];
+        
+        NSArray *users = [self.channelUsers objectForKey:channelName];
+        if (users) {
+            NSUInteger index = [users indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop){
+                CLVStarChatUserInfo *user = (CLVStarChatUserInfo *)obj;
+                return [user.name isEqualToString:userName];
+            }];
+            
+            if (index != NSNotFound) {
+                NSMutableArray *updateUsers = [users mutableCopy];
+                [updateUsers removeObjectAtIndex:index];
+                [self.channelUsers setObject:updateUsers forKey:channelName];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:kSCOStarChatContextNotificationUpdateChannelUsers
+                                                                    object:self
+                                                                  userInfo:[NSDictionary dictionaryWithObject:channelName forKey:@"channelName"]];
             }
         }
     }
