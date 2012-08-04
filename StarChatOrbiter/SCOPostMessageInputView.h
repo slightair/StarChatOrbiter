@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-#define kPostMessageInputViewHeight 36
+#define kPostMessageInputViewHeight 32
 
 @interface SCOPostMessageInputView : UIView
 

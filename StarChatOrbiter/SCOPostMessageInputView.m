@@ -8,18 +8,22 @@
 
 #import "SCOPostMessageInputView.h"
 
-#define kPostMessageTextFieldMarginLeft 36
-#define kPostMessageTextFieldMarginRight 36
-#define kPostMessageInputViewTopBorderWidth 1.0
+#define kPostMessageTextFieldMarginLeft 32
+#define kPostMessageTextFieldMarginRight 32
+#define kPostMessageTextFieldHeight 24
+#define kPostMessageInputViewTopBorderWidth 1
+#define kMessageInputFontSize 14
 
 @interface SCOPostMessageInputView ()
 
+@property (strong, nonatomic) UIView *underlayView;
 @property (strong, nonatomic, readwrite) UITextField *postMessageTextField;
 
 @end
 
 @implementation SCOPostMessageInputView
 
+@synthesize underlayView = _underlayView;
 @synthesize postMessageTextField = _postMessageTextField;
 
 - (id)initWithFrame:(CGRect)frame
@@ -29,10 +33,16 @@
         // Initialization code
         self.backgroundColor = [UIColor grayColor];
         
+        self.underlayView = [[UIView alloc] initWithFrame:CGRectZero];
+        self.underlayView.backgroundColor = [UIColor lightGrayColor];
+        
         self.postMessageTextField = [[UITextField alloc] initWithFrame:CGRectZero];
         self.postMessageTextField.backgroundColor = [UIColor whiteColor];
+        self.postMessageTextField.font = [UIFont systemFontOfSize:kMessageInputFontSize];
+        self.postMessageTextField.borderStyle = UITextBorderStyleRoundedRect;
         
-        [self addSubview:self.postMessageTextField];
+        [self.underlayView addSubview:self.postMessageTextField];
+        [self addSubview:self.underlayView];
     }
     return self;
 }
@@ -43,10 +53,11 @@
     
     CGSize viewSize = self.bounds.size;
     
+    self.underlayView.frame = CGRectMake(0, kPostMessageInputViewTopBorderWidth, viewSize.width, viewSize.height - kPostMessageInputViewTopBorderWidth);
     self.postMessageTextField.frame = CGRectMake(kPostMessageTextFieldMarginLeft,
-                                                 kPostMessageInputViewTopBorderWidth,
+                                                 (viewSize.height - kPostMessageTextFieldHeight) / 2,
                                                  viewSize.width - (kPostMessageTextFieldMarginLeft + kPostMessageTextFieldMarginRight + kPostMessageInputViewTopBorderWidth),
-                                                 viewSize.height);
+                                                 kPostMessageTextFieldHeight);
 }
 
 @end

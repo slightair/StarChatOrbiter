@@ -23,6 +23,7 @@
 - (void)revealRightSidebar:(id)sender;
 - (void)didChangeCurrentChannelInfo:(NSNotification *)notification;
 - (void)didUpdateChannelMessages:(NSNotification *)notification;
+- (void)didTappedLogView:(UIGestureRecognizer *)gestureRecognizer;
 
 @property (strong, nonatomic) UIViewController *leftSidebarViewController;
 @property (strong, nonatomic) UIViewController *rightSidebarViewController;
@@ -69,6 +70,10 @@
     SCOChatLogView *chatLogView = (SCOChatLogView *)self.view;
     chatLogView.tableView.dataSource = self;
     chatLogView.tableView.delegate = self;
+    chatLogView.postMessageInputView.postMessageTextField.delegate = self;
+    
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTappedLogView:)];
+    [chatLogView.tableView addGestureRecognizer:tapGestureRecognizer];
     
     SCOStarChatContext *context = [SCOStarChatContext sharedContext];
     
@@ -121,6 +126,16 @@
     SCOStarChatContext *context = [SCOStarChatContext sharedContext];
     
     self.messages = [context messagesForChannelName:self.channelInfo.name];
+}
+
+- (void)didTappedLogView:(UIGestureRecognizer *)gestureRecognizer
+{
+    SCOChatLogView *chatLogView = (SCOChatLogView *)self.view;
+    
+    UITextField *textField = chatLogView.postMessageInputView.postMessageTextField;
+    if ([textField isFirstResponder]) {
+        [textField resignFirstResponder];
+    }
 }
 
 - (void)setMessages:(NSArray *)messages
@@ -228,6 +243,26 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return [SCOMessageCell heightWithMessageInfo:[self.messages objectAtIndex:indexPath.row]];
+}
+
+#pragma mark -
+#pragma mark UITextFieldDelegate
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    
+    return YES;
 }
 
 #pragma mark -
