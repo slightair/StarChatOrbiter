@@ -14,6 +14,8 @@
 - (void)resetContext;
 - (void)updateInformation;
 - (void)postErrorNotification:(NSError *)error;
+- (void)addMessage:(CLVStarChatMessageInfo *)message;
+- (void)replacePseudoMessageWithMessage:(CLVStarChatMessageInfo *)message;
 
 @property (strong, nonatomic, readwrite) CLVStarChatUserInfo *userInfo;
 @property (strong, nonatomic, readwrite) NSArray *subscribedChannels;
@@ -25,6 +27,7 @@
 @property (strong, nonatomic) NSMutableDictionary *channelUsers;
 @property (strong, nonatomic) NSMutableDictionary *channelMessages;
 @property (strong, nonatomic) NSMutableDictionary *userNickDictionary;
+@property (strong, nonatomic) NSMutableArray *pseudoMessages;
 
 @end
 
@@ -41,6 +44,7 @@
 @synthesize channelUsers = _channelUsers;
 @synthesize channelMessages = _channelMessages;
 @synthesize userNickDictionary = _userNickDictionary;
+@synthesize pseudoMessages = _pseudoMessages;
 
 + (id)sharedContext
 {
@@ -57,6 +61,7 @@
     self.channelMessages = [NSMutableDictionary dictionary];
     self.userNickDictionary = [NSMutableDictionary dictionary];
     self.userKeywords = [NSArray array];
+    self.pseudoMessages = [NSMutableArray array];
 }
 
 - (void)loginUserName:(NSString *)userName
@@ -143,6 +148,39 @@
     return nick;
 }
 
+- (void)postMessageToCurrentChannel:(NSString *)message completion:(void (^)(void))completion failure:(void (^)(NSError *))failure
+{
+    NSString *channelName = self.currentChannelInfo.name;
+    BOOL isNotice = NO;
+    
+    NSDictionary *pseudoMessageInfo = [NSDictionary dictionaryWithObjectsAndKeys:
+                                       message, @"body",
+                                       channelName, @"channel_name",
+                                       [NSNumber numberWithInteger:time(NULL)], @"created_at",
+                                       [NSNumber numberWithInteger:-1], @"id",
+                                       [NSNumber numberWithBool:isNotice], @"notice",
+                                       self.userName, @"user_name",
+                                       nil];
+    CLVStarChatMessageInfo *pseudoMessage = [CLVStarChatMessageInfo messageInfoWithDictionary:pseudoMessageInfo];
+    [self.pseudoMessages addObject:pseudoMessage];
+    
+    [self.apiClient postMessage:message
+                        channel:channelName
+                         notice:isNotice
+                  temporaryNick:nil
+                     completion:^{
+                         completion();
+                     }
+                        failure:^(NSError *error){
+                            [self.pseudoMessages removeObject:pseudoMessage];
+                            
+                            [self postErrorNotification:error];
+                            failure(error);
+                        }];
+    
+    [self addMessage:pseudoMessage];
+}
+
 - (void)updateInformation
 {
     if (!self.apiClient) {
@@ -212,6 +250,54 @@
                                                       userInfo:[NSDictionary dictionaryWithObject:error forKey:@"error"]];
 }
 
+- (void)addMessage:(CLVStarChatMessageInfo *)message
+{
+    NSArray *messages = [self.channelMessages objectForKey:message.channelName];
+    if (messages) {
+        [self.channelMessages setObject:[messages arrayByAddingObject:message] forKey:message.channelName];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:kSCOStarChatContextNotificationUpdateChannelMessages
+                                                            object:nil
+                                                          userInfo:[NSDictionary dictionaryWithObject:message.channelName forKey:@"channelName"]];
+    }
+}
+
+- (void)replacePseudoMessageWithMessage:(CLVStarChatMessageInfo *)message
+{
+    __block CLVStarChatMessageInfo *pseudoMessage = nil;
+    
+    [self.pseudoMessages enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop){
+        CLVStarChatMessageInfo *tempMessage = obj;
+        
+        if ([message.userName isEqualToString:tempMessage.userName] &&
+            [message.channelName isEqualToString:tempMessage.channelName] &&
+            [message.body isEqualToString:tempMessage.body]) {
+            pseudoMessage = tempMessage;
+            *stop = YES;
+        }
+    }];
+    
+    if (pseudoMessage) {
+        NSMutableArray *messages = [[self.channelMessages objectForKey:message.channelName] mutableCopy];
+        
+        NSUInteger index = [messages indexOfObject:pseudoMessage];
+        if (index != NSNotFound) {
+            [messages replaceObjectAtIndex:index withObject:message];
+            [self.channelMessages setObject:[NSArray arrayWithArray:messages] forKey:message.channelName];
+            
+            [self.pseudoMessages removeObject:pseudoMessage];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:kSCOStarChatContextNotificationUpdateChannelMessages
+                                                                object:nil
+                                                              userInfo:[NSDictionary dictionaryWithObject:message.channelName
+                                                                                                   forKey:@"channelName"]];
+        }
+    }
+    else {
+        [self addMessage:message];
+    }
+}
+
 - (void)setBaseURL:(NSURL *)baseURL
 {
     if ([_baseURL isEqual:baseURL]) {
@@ -260,13 +346,11 @@
     if ([packetType isEqualToString:@"message"]) {
         CLVStarChatMessageInfo *message = [CLVStarChatMessageInfo messageInfoWithDictionary:[packet objectForKey:@"message"]];
         
-        NSArray *messages = [self.channelMessages objectForKey:message.channelName];
-        if (messages) {
-            [self.channelMessages setObject:[messages arrayByAddingObject:message] forKey:message.channelName];
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:kSCOStarChatContextNotificationUpdateChannelMessages
-                                                                object:nil
-                                                              userInfo:[NSDictionary dictionaryWithObject:message.channelName forKey:@"channelName"]];
+        if ([message.userName isEqualToString:self.userName]) {
+            [self replacePseudoMessageWithMessage:message];
+        }
+        else {
+            [self addMessage:message];
         }
     }
     else if ([packetType isEqualToString:@"subscribing"]) {

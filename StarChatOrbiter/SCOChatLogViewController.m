@@ -248,19 +248,18 @@
 #pragma mark -
 #pragma mark UITextFieldDelegate
 
-- (void)textFieldDidBeginEditing:(UITextField *)textField
-{
-    
-}
-
-- (void)textFieldDidEndEditing:(UITextField *)textField
-{
-    
-}
-
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
+    
+    NSString *message = textField.text;
+    SCOStarChatContext *context = [SCOStarChatContext sharedContext];
+    [context postMessageToCurrentChannel:message
+                              completion:^{
+                              }
+                                 failure:^(NSError *error){
+                                 }];
+    textField.text = @"";
     
     return YES;
 }

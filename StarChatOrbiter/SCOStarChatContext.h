@@ -35,6 +35,7 @@ enum SCOStarChatContextErrors {
 - (NSArray *)usersForChannelName:(NSString *)channelName;
 - (NSArray *)messagesForChannelName:(NSString *)channelName;
 - (NSString *)nickForUserName:(NSString *)userName;
+- (void)postMessageToCurrentChannel:(NSString *)message completion:(void (^)(void))completion failure:(void (^)(NSError *))failure;
 
 @property (strong, nonatomic) NSURL *baseURL;
 @property (strong, nonatomic, readonly) CLVStarChatUserInfo *userInfo;
