@@ -7,18 +7,47 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		576E369415A92E01003D255D /* SCOChatLogView.m in Sources */ = {isa = PBXBuildFile; fileRef = 576E369315A92E01003D255D /* SCOChatLogView.m */; };
+		576E369A15A9E310003D255D /* SCOChannelListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 576E369915A9E310003D255D /* SCOChannelListViewController.m */; };
+		576E369D15AA7A6A003D255D /* SCOChannelListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 576E369C15AA7A6A003D255D /* SCOChannelListView.m */; };
+		576E36A015AA7B35003D255D /* SCOChannelInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 576E369F15AA7B35003D255D /* SCOChannelInfoViewController.m */; };
+		576E36A315AA7B68003D255D /* SCOChannelInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 576E36A215AA7B68003D255D /* SCOChannelInfoView.m */; };
 		578BE6C415A69AFE008DB764 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 578BE6C315A69AFE008DB764 /* UIKit.framework */; };
 		578BE6C615A69AFE008DB764 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 578BE6C515A69AFE008DB764 /* Foundation.framework */; };
 		578BE6C815A69AFE008DB764 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 578BE6C715A69AFE008DB764 /* CoreGraphics.framework */; };
 		578BE6CE15A69AFE008DB764 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 578BE6CC15A69AFE008DB764 /* InfoPlist.strings */; };
 		578BE6D015A69AFE008DB764 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 578BE6CF15A69AFE008DB764 /* main.m */; };
 		578BE6D415A69AFE008DB764 /* SCOAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 578BE6D315A69AFE008DB764 /* SCOAppDelegate.m */; };
-		578BE6E915A6A1FC008DB764 /* applicationIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 578BE6E715A6A1FC008DB764 /* applicationIcon.png */; };
-		578BE6EA15A6A1FC008DB764 /* applicationIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 578BE6E815A6A1FC008DB764 /* applicationIcon@2x.png */; };
+		578BE78C15A925E2008DB764 /* SCOChatLogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 578BE78B15A925E2008DB764 /* SCOChatLogViewController.m */; };
+		5796B12715B15F8A00D694B3 /* SCOSidebarHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5796B12615B15F8A00D694B3 /* SCOSidebarHeaderView.m */; };
+		5796B13A15B2F32F00D694B3 /* SCORootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5796B13915B2F32E00D694B3 /* SCORootViewController.m */; };
+		5796B15215B310AC00D694B3 /* SCOPreferencesRootView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5796B14F15B310AC00D694B3 /* SCOPreferencesRootView.m */; };
+		5796B15315B310AC00D694B3 /* SCOPreferencesRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5796B15115B310AC00D694B3 /* SCOPreferencesRootViewController.m */; };
+		5796B15615B310E300D694B3 /* SCOPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5796B15515B310E300D694B3 /* SCOPreferencesViewController.m */; };
+		5796B16815B338BC00D694B3 /* SCOChannelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5796B16715B338BC00D694B3 /* SCOChannelCell.m */; };
+		5796B16D15B3FFB600D694B3 /* applicationIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 5796B16A15B3FFB600D694B3 /* applicationIcon.png */; };
+		5796B16E15B3FFB600D694B3 /* applicationIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5796B16B15B3FFB600D694B3 /* applicationIcon@2x.png */; };
+		5796B17115B40B1F00D694B3 /* SCOPostMessageInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5796B17015B40B1F00D694B3 /* SCOPostMessageInputView.m */; };
+		5796B17415B4202900D694B3 /* SCOMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5796B17315B4202900D694B3 /* SCOMessageCell.m */; };
+		57AD743F15B591B9007CB536 /* SCOTopicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 57AD743E15B591B9007CB536 /* SCOTopicCell.m */; };
+		57AD744315B591D5007CB536 /* SCOUserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 57AD744215B591D5007CB536 /* SCOUserCell.m */; };
+		57AD744A15B65831007CB536 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 57AD744815B65831007CB536 /* libTestFlight.a */; };
+		57AD744D15B65868007CB536 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 57AD744C15B65868007CB536 /* libz.dylib */; };
+		57AD745515B66101007CB536 /* SCOStarChatContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 57AD745415B66101007CB536 /* SCOStarChatContext.m */; };
 		9BE21ACD076A4ECDB9B8F2D9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 95DE5E342AC34892BE65E85C /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		576E369215A92E01003D255D /* SCOChatLogView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCOChatLogView.h; sourceTree = "<group>"; };
+		576E369315A92E01003D255D /* SCOChatLogView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCOChatLogView.m; sourceTree = "<group>"; };
+		576E369815A9E310003D255D /* SCOChannelListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCOChannelListViewController.h; sourceTree = "<group>"; };
+		576E369915A9E310003D255D /* SCOChannelListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCOChannelListViewController.m; sourceTree = "<group>"; };
+		576E369B15AA7A6A003D255D /* SCOChannelListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCOChannelListView.h; sourceTree = "<group>"; };
+		576E369C15AA7A6A003D255D /* SCOChannelListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCOChannelListView.m; sourceTree = "<group>"; };
+		576E369E15AA7B35003D255D /* SCOChannelInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCOChannelInfoViewController.h; sourceTree = "<group>"; };
+		576E369F15AA7B35003D255D /* SCOChannelInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCOChannelInfoViewController.m; sourceTree = "<group>"; };
+		576E36A115AA7B68003D255D /* SCOChannelInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCOChannelInfoView.h; sourceTree = "<group>"; };
+		576E36A215AA7B68003D255D /* SCOChannelInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCOChannelInfoView.m; sourceTree = "<group>"; };
 		578BE6BF15A69AFE008DB764 /* StarChatOrbiter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StarChatOrbiter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		578BE6C315A69AFE008DB764 /* UIKit.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		578BE6C515A69AFE008DB764 /* Foundation.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -29,8 +58,37 @@
 		578BE6D115A69AFE008DB764 /* StarChatOrbiter-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "StarChatOrbiter-Prefix.pch"; sourceTree = "<group>"; };
 		578BE6D215A69AFE008DB764 /* SCOAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SCOAppDelegate.h; sourceTree = "<group>"; };
 		578BE6D315A69AFE008DB764 /* SCOAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SCOAppDelegate.m; sourceTree = "<group>"; };
-		578BE6E715A6A1FC008DB764 /* applicationIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = applicationIcon.png; sourceTree = "<group>"; };
-		578BE6E815A6A1FC008DB764 /* applicationIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "applicationIcon@2x.png"; sourceTree = "<group>"; };
+		578BE78A15A925E2008DB764 /* SCOChatLogViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCOChatLogViewController.h; sourceTree = "<group>"; };
+		578BE78B15A925E2008DB764 /* SCOChatLogViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCOChatLogViewController.m; sourceTree = "<group>"; };
+		5796B12515B15F8A00D694B3 /* SCOSidebarHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCOSidebarHeaderView.h; sourceTree = "<group>"; };
+		5796B12615B15F8A00D694B3 /* SCOSidebarHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCOSidebarHeaderView.m; sourceTree = "<group>"; };
+		5796B13015B28B6100D694B3 /* GCDSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GCDSingleton.h; path = Frameworks/GCDSingleton.h; sourceTree = "<group>"; };
+		5796B13815B2F32E00D694B3 /* SCORootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCORootViewController.h; sourceTree = "<group>"; };
+		5796B13915B2F32E00D694B3 /* SCORootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCORootViewController.m; sourceTree = "<group>"; };
+		5796B14E15B310AC00D694B3 /* SCOPreferencesRootView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCOPreferencesRootView.h; sourceTree = "<group>"; };
+		5796B14F15B310AC00D694B3 /* SCOPreferencesRootView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCOPreferencesRootView.m; sourceTree = "<group>"; };
+		5796B15015B310AC00D694B3 /* SCOPreferencesRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCOPreferencesRootViewController.h; sourceTree = "<group>"; };
+		5796B15115B310AC00D694B3 /* SCOPreferencesRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCOPreferencesRootViewController.m; sourceTree = "<group>"; };
+		5796B15415B310E300D694B3 /* SCOPreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCOPreferencesViewController.h; sourceTree = "<group>"; };
+		5796B15515B310E300D694B3 /* SCOPreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCOPreferencesViewController.m; sourceTree = "<group>"; };
+		5796B16615B338BC00D694B3 /* SCOChannelCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCOChannelCell.h; sourceTree = "<group>"; };
+		5796B16715B338BC00D694B3 /* SCOChannelCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCOChannelCell.m; sourceTree = "<group>"; };
+		5796B16A15B3FFB600D694B3 /* applicationIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = applicationIcon.png; path = Resources/applicationIcon.png; sourceTree = "<group>"; };
+		5796B16B15B3FFB600D694B3 /* applicationIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "applicationIcon@2x.png"; path = "Resources/applicationIcon@2x.png"; sourceTree = "<group>"; };
+		5796B16F15B40B1E00D694B3 /* SCOPostMessageInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCOPostMessageInputView.h; sourceTree = "<group>"; };
+		5796B17015B40B1F00D694B3 /* SCOPostMessageInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCOPostMessageInputView.m; sourceTree = "<group>"; };
+		5796B17215B4202900D694B3 /* SCOMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCOMessageCell.h; sourceTree = "<group>"; };
+		5796B17315B4202900D694B3 /* SCOMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCOMessageCell.m; sourceTree = "<group>"; };
+		57AD743D15B591B9007CB536 /* SCOTopicCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCOTopicCell.h; sourceTree = "<group>"; };
+		57AD743E15B591B9007CB536 /* SCOTopicCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCOTopicCell.m; sourceTree = "<group>"; };
+		57AD744115B591D5007CB536 /* SCOUserCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCOUserCell.h; sourceTree = "<group>"; };
+		57AD744215B591D5007CB536 /* SCOUserCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCOUserCell.m; sourceTree = "<group>"; };
+		57AD744815B65831007CB536 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTestFlight.a; path = Frameworks/libTestFlight.a; sourceTree = "<group>"; };
+		57AD744915B65831007CB536 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestFlight.h; path = Frameworks/TestFlight.h; sourceTree = "<group>"; };
+		57AD744C15B65868007CB536 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		57AD744E15B65A37007CB536 /* SCOTestFlightTeamToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCOTestFlightTeamToken.h; sourceTree = "<group>"; };
+		57AD745315B66101007CB536 /* SCOStarChatContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCOStarChatContext.h; sourceTree = "<group>"; };
+		57AD745415B66101007CB536 /* SCOStarChatContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCOStarChatContext.m; sourceTree = "<group>"; };
 		95DE5E342AC34892BE65E85C /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB30AD68934F43CC8D641CAF /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -40,10 +98,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				57AD744D15B65868007CB536 /* libz.dylib in Frameworks */,
 				578BE6C415A69AFE008DB764 /* UIKit.framework in Frameworks */,
 				578BE6C615A69AFE008DB764 /* Foundation.framework in Frameworks */,
 				578BE6C815A69AFE008DB764 /* CoreGraphics.framework in Frameworks */,
 				9BE21ACD076A4ECDB9B8F2D9 /* libPods.a in Frameworks */,
+				57AD744A15B65831007CB536 /* libTestFlight.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -54,6 +114,8 @@
 			isa = PBXGroup;
 			children = (
 				578BE6C915A69AFE008DB764 /* StarChatOrbiter */,
+				578BE6E515A6A1E7008DB764 /* Resources */,
+				578BE6CA15A69AFE008DB764 /* Supporting Files */,
 				578BE6C215A69AFE008DB764 /* Frameworks */,
 				578BE6C015A69AFE008DB764 /* Products */,
 				DB30AD68934F43CC8D641CAF /* Pods.xcconfig */,
@@ -71,10 +133,14 @@
 		578BE6C215A69AFE008DB764 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5796B13015B28B6100D694B3 /* GCDSingleton.h */,
+				57AD744915B65831007CB536 /* TestFlight.h */,
 				578BE6C315A69AFE008DB764 /* UIKit.framework */,
 				578BE6C515A69AFE008DB764 /* Foundation.framework */,
 				578BE6C715A69AFE008DB764 /* CoreGraphics.framework */,
 				95DE5E342AC34892BE65E85C /* libPods.a */,
+				57AD744815B65831007CB536 /* libTestFlight.a */,
+				57AD744C15B65868007CB536 /* libz.dylib */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -84,8 +150,12 @@
 			children = (
 				578BE6D215A69AFE008DB764 /* SCOAppDelegate.h */,
 				578BE6D315A69AFE008DB764 /* SCOAppDelegate.m */,
-				578BE6E515A6A1E7008DB764 /* Resources */,
-				578BE6CA15A69AFE008DB764 /* Supporting Files */,
+				57AD744E15B65A37007CB536 /* SCOTestFlightTeamToken.h */,
+				5796B16515B3385C00D694B3 /* Cells */,
+				5796B16415B3385300D694B3 /* Views */,
+				5796B16215B3384600D694B3 /* ViewControllers */,
+				57AD745315B66101007CB536 /* SCOStarChatContext.h */,
+				57AD745415B66101007CB536 /* SCOStarChatContext.m */,
 			);
 			path = StarChatOrbiter;
 			sourceTree = "<group>";
@@ -99,15 +169,70 @@
 				578BE6D115A69AFE008DB764 /* StarChatOrbiter-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			path = StarChatOrbiter;
 			sourceTree = "<group>";
 		};
 		578BE6E515A6A1E7008DB764 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				578BE6E715A6A1FC008DB764 /* applicationIcon.png */,
-				578BE6E815A6A1FC008DB764 /* applicationIcon@2x.png */,
+				5796B16A15B3FFB600D694B3 /* applicationIcon.png */,
+				5796B16B15B3FFB600D694B3 /* applicationIcon@2x.png */,
 			);
 			name = Resources;
+			path = StarChatOrbiter;
+			sourceTree = "<group>";
+		};
+		5796B16215B3384600D694B3 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				5796B13815B2F32E00D694B3 /* SCORootViewController.h */,
+				5796B13915B2F32E00D694B3 /* SCORootViewController.m */,
+				578BE78A15A925E2008DB764 /* SCOChatLogViewController.h */,
+				578BE78B15A925E2008DB764 /* SCOChatLogViewController.m */,
+				576E369815A9E310003D255D /* SCOChannelListViewController.h */,
+				576E369915A9E310003D255D /* SCOChannelListViewController.m */,
+				576E369E15AA7B35003D255D /* SCOChannelInfoViewController.h */,
+				576E369F15AA7B35003D255D /* SCOChannelInfoViewController.m */,
+				5796B15015B310AC00D694B3 /* SCOPreferencesRootViewController.h */,
+				5796B15115B310AC00D694B3 /* SCOPreferencesRootViewController.m */,
+				5796B15415B310E300D694B3 /* SCOPreferencesViewController.h */,
+				5796B15515B310E300D694B3 /* SCOPreferencesViewController.m */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		5796B16415B3385300D694B3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				5796B12515B15F8A00D694B3 /* SCOSidebarHeaderView.h */,
+				5796B12615B15F8A00D694B3 /* SCOSidebarHeaderView.m */,
+				576E369215A92E01003D255D /* SCOChatLogView.h */,
+				576E369315A92E01003D255D /* SCOChatLogView.m */,
+				576E369B15AA7A6A003D255D /* SCOChannelListView.h */,
+				576E369C15AA7A6A003D255D /* SCOChannelListView.m */,
+				576E36A115AA7B68003D255D /* SCOChannelInfoView.h */,
+				576E36A215AA7B68003D255D /* SCOChannelInfoView.m */,
+				5796B14E15B310AC00D694B3 /* SCOPreferencesRootView.h */,
+				5796B14F15B310AC00D694B3 /* SCOPreferencesRootView.m */,
+				5796B16F15B40B1E00D694B3 /* SCOPostMessageInputView.h */,
+				5796B17015B40B1F00D694B3 /* SCOPostMessageInputView.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		5796B16515B3385C00D694B3 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				5796B16615B338BC00D694B3 /* SCOChannelCell.h */,
+				5796B16715B338BC00D694B3 /* SCOChannelCell.m */,
+				5796B17215B4202900D694B3 /* SCOMessageCell.h */,
+				5796B17315B4202900D694B3 /* SCOMessageCell.m */,
+				57AD743D15B591B9007CB536 /* SCOTopicCell.h */,
+				57AD743E15B591B9007CB536 /* SCOTopicCell.m */,
+				57AD744115B591D5007CB536 /* SCOUserCell.h */,
+				57AD744215B591D5007CB536 /* SCOUserCell.m */,
+			);
+			name = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -164,8 +289,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				578BE6CE15A69AFE008DB764 /* InfoPlist.strings in Resources */,
-				578BE6E915A6A1FC008DB764 /* applicationIcon.png in Resources */,
-				578BE6EA15A6A1FC008DB764 /* applicationIcon@2x.png in Resources */,
+				5796B16D15B3FFB600D694B3 /* applicationIcon.png in Resources */,
+				5796B16E15B3FFB600D694B3 /* applicationIcon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -195,6 +320,23 @@
 			files = (
 				578BE6D015A69AFE008DB764 /* main.m in Sources */,
 				578BE6D415A69AFE008DB764 /* SCOAppDelegate.m in Sources */,
+				578BE78C15A925E2008DB764 /* SCOChatLogViewController.m in Sources */,
+				576E369415A92E01003D255D /* SCOChatLogView.m in Sources */,
+				576E369A15A9E310003D255D /* SCOChannelListViewController.m in Sources */,
+				576E369D15AA7A6A003D255D /* SCOChannelListView.m in Sources */,
+				576E36A015AA7B35003D255D /* SCOChannelInfoViewController.m in Sources */,
+				576E36A315AA7B68003D255D /* SCOChannelInfoView.m in Sources */,
+				5796B12715B15F8A00D694B3 /* SCOSidebarHeaderView.m in Sources */,
+				5796B13A15B2F32F00D694B3 /* SCORootViewController.m in Sources */,
+				5796B15215B310AC00D694B3 /* SCOPreferencesRootView.m in Sources */,
+				5796B15315B310AC00D694B3 /* SCOPreferencesRootViewController.m in Sources */,
+				5796B15615B310E300D694B3 /* SCOPreferencesViewController.m in Sources */,
+				5796B16815B338BC00D694B3 /* SCOChannelCell.m in Sources */,
+				5796B17115B40B1F00D694B3 /* SCOPostMessageInputView.m in Sources */,
+				5796B17415B4202900D694B3 /* SCOMessageCell.m in Sources */,
+				57AD743F15B591B9007CB536 /* SCOTopicCell.m in Sources */,
+				57AD744315B591D5007CB536 /* SCOUserCell.m in Sources */,
+				57AD745515B66101007CB536 /* SCOStarChatContext.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -218,6 +360,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -233,6 +376,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -244,6 +388,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -253,6 +398,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -263,10 +409,31 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DB30AD68934F43CC8D641CAF /* Pods.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "StarChatOrbiter/StarChatOrbiter-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"\"${PODS_ROOT}/Headers\"",
+					"\"${PODS_ROOT}/Headers/AFNetworking\"",
+					"\"${PODS_ROOT}/Headers/CLVStarChatAPIClient\"",
+					"\"${PODS_ROOT}/Headers/GHUnitIOS\"",
+					"\"${PODS_ROOT}/Headers/JTRevealSidebarDemo\"",
+					"\"${PODS_ROOT}/Headers/SBJson\"",
+					"\"${PODS_ROOT}/Headers/QuickDialog\"",
+					"\"${PODS_ROOT}/Headers/TTTAttributedLabel\"",
+					"\"${PODS_ROOT}/Headers/SSKeychain\"",
+					"\"$(SRCROOT)/Frameworks\"",
+				);
 				INFOPLIST_FILE = "StarChatOrbiter/StarChatOrbiter-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Frameworks\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -275,13 +442,96 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DB30AD68934F43CC8D641CAF /* Pods.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "StarChatOrbiter/StarChatOrbiter-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"\"${PODS_ROOT}/Headers\"",
+					"\"${PODS_ROOT}/Headers/AFNetworking\"",
+					"\"${PODS_ROOT}/Headers/CLVStarChatAPIClient\"",
+					"\"${PODS_ROOT}/Headers/GHUnitIOS\"",
+					"\"${PODS_ROOT}/Headers/JTRevealSidebarDemo\"",
+					"\"${PODS_ROOT}/Headers/SBJson\"",
+					"\"${PODS_ROOT}/Headers/QuickDialog\"",
+					"\"${PODS_ROOT}/Headers/TTTAttributedLabel\"",
+					"\"${PODS_ROOT}/Headers/SSKeychain\"",
+					"\"$(SRCROOT)/Frameworks\"",
+				);
 				INFOPLIST_FILE = "StarChatOrbiter/StarChatOrbiter-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Frameworks\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
+		};
+		57AD745B15B707D8007CB536 /* TestFlight */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+					"TESTFLIGHT=1",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				PROVISIONING_PROFILE = "";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = TestFlight;
+		};
+		57AD745C15B707D8007CB536 /* TestFlight */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DB30AD68934F43CC8D641CAF /* Pods.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "StarChatOrbiter/StarChatOrbiter-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"\"${PODS_ROOT}/Headers\"",
+					"\"${PODS_ROOT}/Headers/AFNetworking\"",
+					"\"${PODS_ROOT}/Headers/CLVStarChatAPIClient\"",
+					"\"${PODS_ROOT}/Headers/GHUnitIOS\"",
+					"\"${PODS_ROOT}/Headers/JTRevealSidebarDemo\"",
+					"\"${PODS_ROOT}/Headers/SBJson\"",
+					"\"${PODS_ROOT}/Headers/QuickDialog\"",
+					"\"${PODS_ROOT}/Headers/TTTAttributedLabel\"",
+					"\"${PODS_ROOT}/Headers/SSKeychain\"",
+					"\"$(SRCROOT)/Frameworks\"",
+				);
+				INFOPLIST_FILE = "StarChatOrbiter/StarChatOrbiter-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Frameworks\"",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				TARGETED_DEVICE_FAMILY = 1;
+				WRAPPER_EXTENSION = app;
+			};
+			name = TestFlight;
 		};
 /* End XCBuildConfiguration section */
 
@@ -290,6 +540,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				578BE6D515A69AFE008DB764 /* Debug */,
+				57AD745B15B707D8007CB536 /* TestFlight */,
 				578BE6D615A69AFE008DB764 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -299,6 +550,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				578BE6D815A69AFE008DB764 /* Debug */,
+				57AD745C15B707D8007CB536 /* TestFlight */,
 				578BE6D915A69AFE008DB764 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;

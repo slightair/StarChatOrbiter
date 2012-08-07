@@ -1,7 +1,10 @@
 platform :ios
 
-dependency 'SBJson'
-dependency 'AFNetworking'
-dependency 'CLVStarChatAPIClient', :git => 'git://github.com/slightair/CLVStarChatAPIClient.git'
-dependency 'GHUnitIOS'
-dependency 'JTRevealSidebarDemo'
+pod 'SBJson'
+pod 'AFNetworking'
+pod 'CLVStarChatAPIClient', :git => 'git://github.com/slightair/CLVStarChatAPIClient.git'
+pod 'GHUnitIOS'
+pod 'JTRevealSidebarDemo'
+pod 'QuickDialog'
+pod 'TTTAttributedLabel'
+pod 'SSKeychain'

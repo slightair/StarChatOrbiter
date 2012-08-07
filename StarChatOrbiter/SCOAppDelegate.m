@@ -8,16 +8,38 @@
 
 #import "SCOAppDelegate.h"
 
+#ifdef TESTFLIGHT
+#import "TestFlight.h"
+#import "SCOTestFlightTeamToken.h"
+#endif
+
+@interface SCOAppDelegate ()
+
+@property (strong, nonatomic, readwrite) SCORootViewController *rootViewController;
+
+@end
+
 @implementation SCOAppDelegate
 
 @synthesize window = _window;
+@synthesize rootViewController = _rootViewController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
+#ifdef TESTFLIGHT
+    [TestFlight takeOff:kTestFlightTeamToken];
+#endif
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
     // Override point for customization after application launch.
-    self.window.backgroundColor = [UIColor whiteColor];
+    self.rootViewController = [[SCORootViewController alloc] init];
+    self.window.rootViewController = self.rootViewController;
+    
     [self.window makeKeyAndVisible];
+    [self.rootViewController performSelectorInBackground:@selector(prepareApplication) withObject:nil];
+    
     return YES;
 }
 
