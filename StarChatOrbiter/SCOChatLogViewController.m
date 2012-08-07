@@ -62,8 +62,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"aaa" style:UIBarButtonItemStyleBordered target:self action:@selector(revealLeftSidebar:)];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"bbb" style:UIBarButtonItemStyleBordered target:self action:@selector(revealRightSidebar:)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"channels" style:UIBarButtonItemStyleBordered target:self action:@selector(revealLeftSidebar:)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"info" style:UIBarButtonItemStyleBordered target:self action:@selector(revealRightSidebar:)];
     
     self.navigationItem.revealSidebarDelegate = self;
     
