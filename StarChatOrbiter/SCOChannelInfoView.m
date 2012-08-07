@@ -26,6 +26,7 @@
     if (self) {
         // Initialization code
         self.headerView = [[SCOSidebarHeaderView alloc] initWithFrame:CGRectZero];
+        self.headerView.preferencesButton.hidden = YES;
         
         self.tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         
