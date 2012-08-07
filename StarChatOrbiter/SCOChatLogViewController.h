@@ -18,6 +18,7 @@
     JTRevealSidebarV2Delegate,
     UITableViewDataSource,
     UITableViewDelegate,
+    UITextFieldDelegate,
     SCOChannelListViewControllerSidebarDelegate
 >
 

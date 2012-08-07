@@ -23,6 +23,7 @@
 - (void)revealRightSidebar:(id)sender;
 - (void)didChangeCurrentChannelInfo:(NSNotification *)notification;
 - (void)didUpdateChannelMessages:(NSNotification *)notification;
+- (void)didTappedLogView:(UIGestureRecognizer *)gestureRecognizer;
 
 @property (strong, nonatomic) UIViewController *leftSidebarViewController;
 @property (strong, nonatomic) UIViewController *rightSidebarViewController;
@@ -61,14 +62,18 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"aaa" style:UIBarButtonItemStyleBordered target:self action:@selector(revealLeftSidebar:)];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"bbb" style:UIBarButtonItemStyleBordered target:self action:@selector(revealRightSidebar:)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"channels" style:UIBarButtonItemStyleBordered target:self action:@selector(revealLeftSidebar:)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"info" style:UIBarButtonItemStyleBordered target:self action:@selector(revealRightSidebar:)];
     
     self.navigationItem.revealSidebarDelegate = self;
     
     SCOChatLogView *chatLogView = (SCOChatLogView *)self.view;
     chatLogView.tableView.dataSource = self;
     chatLogView.tableView.delegate = self;
+    chatLogView.postMessageInputView.postMessageTextField.delegate = self;
+    
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTappedLogView:)];
+    [chatLogView.tableView addGestureRecognizer:tapGestureRecognizer];
     
     SCOStarChatContext *context = [SCOStarChatContext sharedContext];
     
@@ -121,6 +126,16 @@
     SCOStarChatContext *context = [SCOStarChatContext sharedContext];
     
     self.messages = [context messagesForChannelName:self.channelInfo.name];
+}
+
+- (void)didTappedLogView:(UIGestureRecognizer *)gestureRecognizer
+{
+    SCOChatLogView *chatLogView = (SCOChatLogView *)self.view;
+    
+    UITextField *textField = chatLogView.postMessageInputView.postMessageTextField;
+    if ([textField isFirstResponder]) {
+        [textField resignFirstResponder];
+    }
 }
 
 - (void)setMessages:(NSArray *)messages
@@ -228,6 +243,25 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return [SCOMessageCell heightWithMessageInfo:[self.messages objectAtIndex:indexPath.row]];
+}
+
+#pragma mark -
+#pragma mark UITextFieldDelegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    
+    NSString *message = textField.text;
+    SCOStarChatContext *context = [SCOStarChatContext sharedContext];
+    [context postMessageToCurrentChannel:message
+                              completion:^{
+                              }
+                                 failure:^(NSError *error){
+                                 }];
+    textField.text = @"";
+    
+    return YES;
 }
 
 #pragma mark -
