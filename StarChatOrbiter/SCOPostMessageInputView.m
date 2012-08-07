@@ -43,6 +43,8 @@
         self.postMessageTextField.backgroundColor = [UIColor whiteColor];
         self.postMessageTextField.font = [UIFont systemFontOfSize:kMessageInputFontSize];
         self.postMessageTextField.borderStyle = UITextBorderStyleRoundedRect;
+        self.postMessageTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+        self.postMessageTextField.returnKeyType = UIReturnKeySend;
         
         self.gradientLayer = [CAGradientLayer layer];
         self.gradientLayer.frame = CGRectZero;
