@@ -19,6 +19,13 @@ StarChatOrbiter とは、 StarChat (https://github.com/hajimehoshi/star-chat) �
 * デザインなんとかする
 * 未読管理
 
+スクリーンショット
+----
+![チャンネルログ](http://slightair.github.com/images/etc/sco_channel_log.png)
+![チャンネルリスト](http://slightair.github.com/images/etc/sco_channel_list.png)
+![メッセージ投稿](http://slightair.github.com/images/etc/sco_post_message.png)
+開発中のものです。
+
 開発者向け
 ----
 CocoaPods を使っているのでビルドする前に以下のコマンドを叩きましょう。CocoaPods が入っていなかったらまずはそのインストールからはじめましょう。
