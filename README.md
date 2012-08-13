@@ -21,10 +21,7 @@ StarChatOrbiter とは、 StarChat (https://github.com/hajimehoshi/star-chat) �
 
 スクリーンショット
 ----
-![チャンネルログ](http://slightair.github.com/images/etc/sco_channel_log.png)
-![チャンネルリスト](http://slightair.github.com/images/etc/sco_channel_list.png)
-![メッセージ投稿](http://slightair.github.com/images/etc/sco_post_message.png)
-開発中のものです。
+https://github.com/slightair/StarChatOrbiter/wiki/screenshots
 
 開発者向け
 ----
