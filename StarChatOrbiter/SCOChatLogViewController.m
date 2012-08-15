@@ -24,6 +24,8 @@
 - (void)didChangeCurrentChannelInfo:(NSNotification *)notification;
 - (void)didUpdateChannelMessages:(NSNotification *)notification;
 - (void)didTappedLogView:(UIGestureRecognizer *)gestureRecognizer;
+- (void)didRightSwipedLogView:(UIGestureRecognizer *)gestureRecognizer;
+- (void)didLeftSwipedLogView:(UIGestureRecognizer *)gestureRecognizer;
 
 @property (strong, nonatomic) UIViewController *leftSidebarViewController;
 @property (strong, nonatomic) UIViewController *rightSidebarViewController;
@@ -74,6 +76,14 @@
     
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTappedLogView:)];
     [chatLogView.tableView addGestureRecognizer:tapGestureRecognizer];
+    
+    UISwipeGestureRecognizer *rightSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(didRightSwipedLogView:)];
+    rightSwipeGestureRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
+    [self.view addGestureRecognizer:rightSwipeGestureRecognizer];
+    
+    UISwipeGestureRecognizer *leftSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(didLeftSwipedLogView:)];
+    leftSwipeGestureRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
+    [self.view addGestureRecognizer:leftSwipeGestureRecognizer];
     
     SCOStarChatContext *context = [SCOStarChatContext sharedContext];
     
@@ -138,6 +148,16 @@
     }
 }
 
+- (void)didRightSwipedLogView:(UIGestureRecognizer *)gestureRecognizer
+{
+    [self revealLeftSidebar:nil];
+}
+
+- (void)didLeftSwipedLogView:(UIGestureRecognizer *)gestureRecognizer
+{
+    [self revealRightSidebar:nil];
+}
+
 - (void)setMessages:(NSArray *)messages
 {
     SCOChatLogView *chatLogView = (SCOChatLogView *)self.view;
@@ -186,6 +206,7 @@
     SCOChannelInfoViewController *viewController = (SCOChannelInfoViewController *)self.rightSidebarViewController;
     if (!viewController) {
         viewController = [[SCOChannelInfoViewController alloc] init];
+        viewController.sidebarDelegate = self;
         self.rightSidebarViewController = viewController;
     }
     viewController.view.frame = CGRectMake(self.navigationController.view.frame.size.width - kSideBarWidth,
@@ -268,6 +289,19 @@
 #pragma mark SCOChannelListViewControllerSidebarDelegate
 
 - (void)channelListViewController:(SCOChannelListViewController *)viewController didSelectChannelName:(NSString *)channelName
+{
+    [self.navigationController setRevealedState:JTRevealedStateNo];
+}
+
+- (void)channelListViewController:(SCOChannelListViewController *)viewController didLeftSwipedChannelListView:(UIGestureRecognizer *)gestureRecognizer
+{
+    [self.navigationController setRevealedState:JTRevealedStateNo];
+}
+
+#pragma mark -
+#pragma mark SCOChannelInfoViewControllerSidebarDelegate
+
+- (void)channelInfoViewController:(SCOChannelInfoViewController *)viewController didRightSwipedChannelInfoView:(UIGestureRecognizer *)gestureRecognizer
 {
     [self.navigationController setRevealedState:JTRevealedStateNo];
 }

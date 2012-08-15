@@ -19,6 +19,7 @@
 - (void)didUpdateSubscribedChannels:(NSNotification *)notification;
 - (void)didChangeCurrentChannelInfo:(NSNotification *)notification;
 - (void)didPushedPreferencesButton:(id)sender;
+- (void)didLeftSwipedChannelListView:(UIGestureRecognizer *)gestureRecognizer;
 
 @end
 
@@ -66,6 +67,10 @@
     
     channelListView.tableView.dataSource = self;
     channelListView.tableView.delegate = self;
+    
+    UISwipeGestureRecognizer *leftSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(didLeftSwipedChannelListView:)];
+    leftSwipeGestureRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
+    [self.view addGestureRecognizer:leftSwipeGestureRecognizer];
     
     SCOStarChatContext *context = [SCOStarChatContext sharedContext];
     
@@ -124,6 +129,13 @@
                                      animated:YES
                                    completion:^{
                                    }];
+}
+
+- (void)didLeftSwipedChannelListView:(UIGestureRecognizer *)gestureRecognizer
+{
+    if ([self.sidebarDelegate respondsToSelector:@selector(channelListViewController:didLeftSwipedChannelListView:)]) {
+        [self.sidebarDelegate channelListViewController:self didLeftSwipedChannelListView:gestureRecognizer];
+    }
 }
 
 - (void)setChannels:(NSArray *)channels

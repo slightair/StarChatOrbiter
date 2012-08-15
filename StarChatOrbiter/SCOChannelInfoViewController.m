@@ -24,6 +24,7 @@ enum TableViewSections {
 
 - (void)didChangeCurrentChannelInfo:(NSNotification *)notification;
 - (void)didUpdateChannelUsers:(NSNotification *)notification;
+- (void)didRightSwipedChannelInfoView:(UIGestureRecognizer *)gestureRecognizer;
 
 @end
 
@@ -31,6 +32,7 @@ enum TableViewSections {
 
 @synthesize users = _users;
 @synthesize channelInfo = _channelInfo;
+@synthesize sidebarDelegate = _sidebarDelegate;
 
 - (id)init
 {
@@ -62,6 +64,10 @@ enum TableViewSections {
     
     channelInfoView.tableView.dataSource = self;
     channelInfoView.tableView.delegate = self;
+    
+    UISwipeGestureRecognizer *rightSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(didRightSwipedChannelInfoView:)];
+    rightSwipeGestureRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
+    [self.view addGestureRecognizer:rightSwipeGestureRecognizer];
     
     SCOStarChatContext *context = [SCOStarChatContext sharedContext];
     
@@ -96,6 +102,13 @@ enum TableViewSections {
     SCOStarChatContext *context = [SCOStarChatContext sharedContext];
     
     self.users = [context usersForChannelName:self.channelInfo.name];
+}
+
+- (void)didRightSwipedChannelInfoView:(UIGestureRecognizer *)gestureRecognizer
+{
+    if ([self.sidebarDelegate respondsToSelector:@selector(channelInfoViewController:didRightSwipedChannelInfoView:)]) {
+        [self.sidebarDelegate channelInfoViewController:self didRightSwipedChannelInfoView:gestureRecognizer];
+    }
 }
 
 - (void)setChannelInfo:(CLVStarChatChannelInfo *)channelInfo

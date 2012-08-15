@@ -13,6 +13,7 @@
 @protocol SCOChannelListViewControllerSidebarDelegate <NSObject>
 
 - (void)channelListViewController:(SCOChannelListViewController *)viewController didSelectChannelName:(NSString *)channelName;
+- (void)channelListViewController:(SCOChannelListViewController *)viewController didLeftSwipedChannelListView:(UIGestureRecognizer *)gestureRecognizer;
 
 @end
 

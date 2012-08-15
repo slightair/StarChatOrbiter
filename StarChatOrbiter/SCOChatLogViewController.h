@@ -19,7 +19,8 @@
     UITableViewDataSource,
     UITableViewDelegate,
     UITextFieldDelegate,
-    SCOChannelListViewControllerSidebarDelegate
+    SCOChannelListViewControllerSidebarDelegate,
+    SCOChannelInfoViewControllerSidebarDelegate
 >
 
 @property (strong, nonatomic) CLVStarChatChannelInfo *channelInfo;
